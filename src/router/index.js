@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter)
 
@@ -7,7 +8,7 @@ const routes = [
   {
     path: '*',
     name: 'not-found',
-    component: ''
+    component: NotFound
   }
 ]
 

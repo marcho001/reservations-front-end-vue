@@ -1,5 +1,5 @@
 <template>
-<div id="reservation">
+<div class="reservation">
   <main>
     <router-view />
   </main>
@@ -7,4 +7,12 @@
 </template>
 
 <style lang="scss">
+@import './assets/css/reset.scss';
+.reservation {
+    height: 100%;
+    main {
+      height: 100%;
+    }
+  }
 </style>
+
