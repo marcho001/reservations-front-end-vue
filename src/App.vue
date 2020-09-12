@@ -7,7 +7,7 @@
 </template>
 
 <style lang="scss">
-@import './assets/css/reset.scss';
+@import './assets/css/_reset.scss';
 .reservation {
     height: 100%;
     main {

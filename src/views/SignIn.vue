@@ -3,7 +3,7 @@
     class="container d-flex justify-content-center align-items-center">
     <div class="form-section p-4">
       <form>
-        <div class="form-section_title mt-3">
+        <div class="form-section_title mt-3 text-center">
           <h1>登入</h1>
         </div>
         <div class="form-section_group mt-5">
@@ -41,13 +41,14 @@
     background-image: url("../assets/image/signin.jpg");
     background-size: cover;
     height: 100%;
-    .form-section {
-      // height: 60%;
-      width: 80%;
-      border: 1px solid #000;
-      background: rgba(255, 255, 255, 0.856);
-    }
   }
+
+  .form-section {
+    width: 80%;
+    background: rgba(255, 255, 255, 0.856);
+    border-radius: 10px;
+    @extend %shadow;
+    }
   @media screen and (min-width: 768px) {
     .container {
       align-items: flex-start;
