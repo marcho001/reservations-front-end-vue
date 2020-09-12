@@ -1,10 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import NotFound from '../views/NotFound'
+import SignIn from '../views/SignIn'
 
 Vue.use(VueRouter)
 
 const routes = [
+  {
+    path: '/signin',
+    name: 'signin',
+    component: SignIn
+  },
   {
     path: '*',
     name: 'not-found',
