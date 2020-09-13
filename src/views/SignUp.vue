@@ -10,6 +10,7 @@
         <div class="form-section_group-input d-flex flex-column">
             <label for="name">Name :</label>
             <input 
+              v-model="name"
               class="mt-2 px-2" 
               type="text" 
               name="name" 
@@ -19,6 +20,7 @@
           <div class="form-section_group-input mt-3 d-flex flex-column">
             <label for="email">Email :</label>
             <input 
+              v-model="email"
               class="mt-2 px-2" 
               type="email" 
               name="email" 
@@ -28,6 +30,7 @@
           <div class="form-section_group-input mt-3 d-flex flex-column">
             <label for="password">Password :</label>
             <input 
+              v-model="password"
               class="mt-2 px-2" 
               type="password" 
               name="Password" 
@@ -37,6 +40,7 @@
           <div class="form-section_group-input mt-3 d-flex flex-column">
             <label for="checkPassword">確認密碼 :</label>
             <input 
+              v-model="checkPassword"
               class="mt-2 px-2" 
               type="password" 
               name="checkPassword" 
@@ -48,7 +52,7 @@
           </div>
         </div>
       </form>
-      <div class="footer-section mt-5">
+      <div class="footer-section mt-5 text-right">
         <p>
           已經註冊了？
           <router-link 
@@ -58,6 +62,21 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default {
+    // 向 api post 註冊資訊
+    // 轉跳到登入頁
+    data () {
+      return {
+        email: '',
+        name: '',
+        password: '',
+        checkPassword: ''
+      }
+    }
+  }
+</script>
 
 <style lang="scss" scoped>
   @import '../assets/css/pages/SignIn';

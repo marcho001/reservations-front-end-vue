@@ -30,7 +30,7 @@
           </div>
         </div>
       </form>
-      <div class="footer-section mt-5">
+      <div class="footer-section mt-5 text-right">
         <p>
           尚未註冊嗎？
           <router-link 
