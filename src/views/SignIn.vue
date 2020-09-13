@@ -33,7 +33,8 @@
       <div class="footer-section mt-5">
         <p>
           尚未註冊嗎？
-          <a href="#">立即註冊</a>
+          <router-link 
+            to="/signup">立即註冊</router-link>
         </p>
       </div>
     </div>
