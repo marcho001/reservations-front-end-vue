@@ -7,15 +7,15 @@
         </div>
         <div class="form-section_group mt-5">
           <div class="form-section_group-input d-flex flex-column">
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" />
+            <label for="email">Email :</label>
+            <input class="mt-2 px-2" type="email" name="email" id="email" required/>
           </div>
           <div class="form-section_group-input mt-3 d-flex flex-column">
-            <label for="password">Password</label>
-            <input type="password" name="Password" id="Password" />
+            <label for="password">Password :</label>
+            <input class="mt-2 px-2" type="password" name="Password" id="Password" required/>
           </div>
-          <div class="form-section_group-button mt-3">
-            <button type="submit">立即登入</button>
+          <div class="form-section_group-button mt-5 d-flex flex-column align-items-center">
+            <button class="p-1" type="submit">立即登入</button>
           </div>
         </div>
       </form>
@@ -28,22 +28,11 @@
     </div>
   </div>
 </template>
-<style lang="scss" scoped>
-.container {
-  background-image: url('../assets/image/signin.jpg');
-  background-size: cover;
-  height: 100%;
-}
 
-.form-section {
-  width: 80%;
-  background: rgba(255, 255, 255, 0.856);
-  border-radius: 10px;
-  @extend %shadow;
-}
-@media screen and (min-width: 768px) {
-  .container {
-    align-items: flex-start;
-  }
-}
+<script>
+
+</script>
+
+<style lang="scss" scoped>
+  @import '../assets/css/pages/SignIn';
 </style>
