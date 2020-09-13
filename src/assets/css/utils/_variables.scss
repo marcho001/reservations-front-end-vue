@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap");
+%shadow {
+  box-shadow: 3px 0 13px 0 rgba(100, 112, 134, 0.3);
+}
+%radius {
+  border-radius: 5px;
+}
+// 字型
+%ENfont {
+  font-family: 'Ubuntu', sans-serif;
+}
+%CNfont {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+
+// 變數
+$white: white;
+$mainColor: rgba(226, 10, 2, 0.911);
