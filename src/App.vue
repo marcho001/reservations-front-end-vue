@@ -1,6 +1,6 @@
 <template>
   <div class="reservation">
-  <NavBar />
+    <NavBar />
     <main>
       <router-view />
     </main>
