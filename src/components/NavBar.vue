@@ -1,43 +1,30 @@
 <template>
-  <nav class="d-flex justify-content-between p-3">
-    <div class="nav_brand">S.T.</div>
-    <!--
-    all
-    2. 登入
-    1. 加入我們
-    normal user
-    3. 訂單行事利
-    4. 通知
-    owner
-    5. 編輯餐廳
-    6. 編輯菜單
-    -->
-    <div class="nav_wrapper d-flex">
-      <div v-if="!user.id" class="nav_wrapper--signin">
-        <a href="#">登入</a>
-      </div>
+  <nav class="d-flex justify-content-between p-3 position-fixed">
+    <div class="nav_brand">
+      <h1>S.W.</h1>
+    </div>
+    <div class="nav_wrapper d-flex align-items-center">
+        <a 
+          v-if="!user.id" 
+          href="#"
+          >登入</a>
       <template v-else>
         <template v-if="user.role === 'user'">
-          <div class="nav_wrapper--calendar">
             <a href="#">訂單行事曆</a>
-          </div>
         </template>
 
         <template v-if="user.role === 'owner'">
-          <div class="nav_wrapper--edit-rest">
-            <a href="#">我的餐廳</a>
-          </div>
-          <div class="nav_wrapper--edit-menu">
-            <a href="#">我的菜單</a>
-          </div>
+            <a 
+              href="#">我的餐廳</a>
+            <a 
+            href="#">我的菜單</a>
         </template>
-        <div class="nav_wrapper--notification">
-          <a href="#">通知</a>
-        </div>
+          <a 
+          v-else 
+          href="#">加入我們</a>
+          <a 
+          href="#">通知</a>
       </template>
-      <div v-else class="nav_wrapper--join">
-        <a href="#">加入我們</a>
-      </div>
     </div>
   </nav>
 </template>
@@ -76,7 +63,24 @@ export default {
 
 <style lang="scss" scoped>
 nav {
-  height: 60px;
+  right: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.692);
+}
+.nav_brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: $white;
+}
+.nav_wrapper {
+  a {
+    font-weight: bold;
+    color: darken($white, $linkBeforeHoverAmount);
+    margin: 0 5px;
+    &:hover {
+      color: $white;
+    }
+  }
 }
 
 </style>
