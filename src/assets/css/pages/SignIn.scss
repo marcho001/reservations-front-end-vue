@@ -9,12 +9,9 @@
   background: rgba(255, 255, 255, 0.856);
   border-radius: 10px;
   @extend %shadow;
-  &_title {
-    @extend %CNfont;
-  }
+  @extend %font;
   &_group {
     label {
-      @extend %ENfont;
       font-weight: bold;
     }
     input {
