@@ -62,25 +62,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-nav {
-  right: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.692);
-}
-.nav_brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: $white;
-}
-.nav_wrapper {
-  a {
-    font-weight: bold;
-    color: darken($white, $linkBeforeHoverAmount);
-    margin: 0 5px;
-    &:hover {
-      color: $white;
-    }
-  }
-}
-
+@import '../assets/css/components/NavBar'
 </style>
