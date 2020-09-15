@@ -4,7 +4,15 @@
   box-shadow: 3px 0 10px 0 rgba(100, 112, 134, 0.418);
 }
 %radius {
-  border-radius: 5px;
+  border-radius: 8px;
+}
+%textInput {
+  @extend %shadow, %radius;
+  border: 2px inset white;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  height: 2rem;
+  font-size: 1rem;
 }
 // 字型
 %font {

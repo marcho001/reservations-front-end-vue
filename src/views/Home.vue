@@ -44,21 +44,24 @@
         <h3>選出最有興趣的餐廳吧！</h3>
       </div>
       <hr>
-      <div class="restaurant_search d-flex justify-content-between">
+      <div class="restaurant_search d-flex justify-content-between mt-5">
         <div class="restaurant_search_filter">
           <button 
           @click="showCategoryList()"
-          class="restaurant_search_filter--hamburger ml-3">三</button>
+          class="restaurant_search_filter--hamburger ml-3 mt-1">
+           <p></p>
+          </button>
           <ul 
           v-show="categoryList"
-          class="restaurant_search_filter--list">   
-            <li>hi</li>
-            <li>yiyi</li>     
+          class="restaurant_search_filter--list p-3 mt-1">   
+            <li class="list-item p-1">日式料理</li>
+            <li class="list-item p-1">燒烤</li>
+            <li class="list-item p-1">酒霸</li>     
           </ul>
         </div>
         <div class="restaurant_search_form">
-        <form action="">
-          <input type="text" name="" placeholder="請輸入餐廳名稱...">
+        <form class="restaurant_search_form--group" action="">
+          <input class="item" type="text" name="" placeholder="請輸入餐廳名稱...">
           <button type="submit">search</button>
         </form>
         </div>
@@ -120,6 +123,7 @@ export default {
     }
   }
 
+
   .step {
     &_ques {
       @extend %shadow;
@@ -162,6 +166,7 @@ export default {
       position: relative;
       flex-wrap: wrap;
       height: 0;
+      z-index: -99;
 
       &_wrapper {
         opacity: 0;
@@ -170,7 +175,7 @@ export default {
         background: $mainColor;
         color: $textColor;
         position: relative;
-        z-index: -999;
+        z-index: -9;
         border-radius: 50%;
         display: flex;
         justify-content: center;
@@ -184,9 +189,7 @@ export default {
           text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.534);
         }
       h3 {
-        @extend %shadow;
-        @extend %radius;
-        @extend %lobster;
+        @extend %shadow ,%radius, %lobster;
         background: $white;
         padding: 0.5rem;
         font-size: 1.8rem;
@@ -200,6 +203,7 @@ export default {
     }
   }
 
+
   .restaurant {
     &_title {
       @extend %font;
@@ -210,8 +214,56 @@ export default {
     }
   }
   .restaurant_search {
-    &-filter {
-      
+    &_filter--hamburger {
+      width: 30px;
+      height: 30px;
+      p {
+        @extend %radius;
+        position: relative;
+        width: 10px;
+        height: 3px;
+        background: $textColor;
+        &::after, &::before {
+          content: '';
+          position: absolute;
+          height: 3px;
+          background: $textColor;
+        }
+        &::after {
+          bottom: 8px;
+          width: 20px;
+          left: 0;
+        }
+        &::before {
+          width: 30px;
+          bottom: 16px;
+          left: 0;
+        }
+      }
+      &:hover {
+        p {
+          width: 30px;
+          transition: width .3s;
+          &::after {
+            transition: width .3s;
+            width: 30px;
+          }
+        }
+      }
+    }
+    &_filter--list {
+      border: 1px solid $mask;
+      @extend %radius, %shadow;
+      // width: 200px;
+      .list-item {
+        border-bottom: 1px solid darken($white, 10%);
+      }
+    }
+    
+  }
+  .restaurant_search_form {
+    .item {
+      @extend %textInput;
     }
   }
   @media screen and (min-width: 768px) {
