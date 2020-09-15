@@ -12,11 +12,12 @@
         
       </div>
     </section>
+
     <section class="step">
-      <label for="toggle" class="step_ques d-flex flex-column  align-items-center cursor-pointer py-2">
-        <p>該如何使用？</p>
-      </label>
       <input type="checkbox" id="toggle" class="step_toggle d-none">
+      <label for="toggle" class="step_ques d-flex flex-column  align-items-center cursor-pointer py-2">
+        <p>第一次進來，該如何使用？</p>
+      </label>
       <div class="step_ans d-flex justify-content-around">
         <div class="step_ans_wrapper">
           <h3>STEP.1</h3>
@@ -35,15 +36,63 @@
           <div class="step_ans_wrapper--item p-2 text-center">準備用餐！</div>
         </div>
       </div>
-      <h1>yayayayaay</h1>
     </section>
-    <section>
-    <h1>jijiji</h1>
-    <h1>ijijiji</h1>
+
+    <section class="restaurant wrapper pt-5">
+      <div class="restaurant_title d-flex flex-column align-items-center">
+        <h1>想吃什麼？</h1>
+        <h3>選出最有興趣的餐廳吧！</h3>
+      </div>
+      <hr>
+      <div class="restaurant_search d-flex justify-content-between">
+        <div class="restaurant_search_filter">
+          <button 
+          @click="showCategoryList()"
+          class="restaurant_search_filter--hamburger ml-3">三</button>
+          <ul 
+          v-show="categoryList"
+          class="restaurant_search_filter--list">   
+            <li>hi</li>
+            <li>yiyi</li>     
+          </ul>
+        </div>
+        <div class="restaurant_search_form">
+        <form action="">
+          <input type="text" name="" placeholder="請輸入餐廳名稱...">
+          <button type="submit">search</button>
+        </form>
+        </div>
+      </div>
+      <div class="restaurant_card">
+        <a href="#" class="restaurant_card--item">
+          <div class="card-header">
+            <img src="" alt="">
+          </div>
+          <div class="card-body">
+            <h1 class="card-title"></h1>
+            <p class="card-detail"></p>
+            <p class="card-description"></p>
+          </div>
+        </a>
+      </div>
     </section>
   </div>
 </template>
+
 <script>
+export default {
+  data () {
+    return {
+      categoryList: false
+    }
+  },
+  methods: {
+    showCategoryList () {
+      console.log('click')
+      this.categoryList = !this.categoryList
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -70,16 +119,17 @@
 
     }
   }
+
   .step {
     &_ques {
       @extend %shadow;
-      border-bottom: 2px solid darken($white, 15%);
-      height: 60px;
+      height: 80px;
+      color: $textColor;
       font-weight: bold;
       font-size: 1.2rem;
       &::after {
         content: '';
-        margin-top: 4px;
+        margin-top: 0.5rem;
         width: 10px;
         height: 10px;
         border-left: 3px solid #000;
@@ -87,39 +137,46 @@
         transform: rotate(-45deg);
       }
     }
-    &_toggle:checked + &_ans {
-      height: 100%;
-      padding-top: 0.5rem;
-      padding-botton: 0,5rem;
-      &_wrapper {
-        opacity: 1;
-        transform: opacity .2s .5s;
-      }
+
+    &_toggle:checked ~ &_ques::after {
+      content: '';
+      transform: rotate(135deg);
     }
-    &_toggle:checked + &_ans &_ans_wrapper {
+    
+    &_toggle:checked ~ &_ans {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 4px solid darken($white, 15%);
+      border-top: 4px solid darken($white, 10%);
+      height: 100%;
+    }
+    &_toggle:checked ~ &_ans &_ans_wrapper {
         opacity: 1;
-        transition: opacity .1s .2s;
+        transition: opacity .2s .2s;
       }
     
   
     &_ans {
       transform-origin: top;
-      transition: height .2s;
-      height: 0;
       background: darken($white, 5%);
+      position: relative;
       flex-wrap: wrap;
+      height: 0;
+
       &_wrapper {
+        opacity: 0;
         @extend %shadow;
         margin: 0.5rem;
         background: $mainColor;
+        color: $textColor;
         position: relative;
+        z-index: -999;
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 200px;
         width: 200px;
-        opacity: 0;
         &--item {
           font-size: 2rem;
           color: $white;
@@ -140,6 +197,21 @@
       }
       }
 
+    }
+  }
+
+  .restaurant {
+    &_title {
+      @extend %font;
+      color: $textColor;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+  .restaurant_search {
+    &-filter {
+      
     }
   }
   @media screen and (min-width: 768px) {
