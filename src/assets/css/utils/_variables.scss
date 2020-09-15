@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
 %shadow {
-  box-shadow: 3px 0 13px 0 rgba(100, 112, 134, 0.3);
+  box-shadow: 3px 0 10px 0 rgba(100, 112, 134, 0.418);
 }
 %radius {
   border-radius: 5px;
@@ -9,10 +10,13 @@
 %font {
   font-family: 'Noto Sans TC', sans-serif;
 }
+%lobster {
+  font-family: 'Lobster', cursive;
+}
 
 // 變數
 $white: white;
-$mainColor: rgba(226, 10, 2, 0.911);
-$mask: rgba(0, 0, 0, 0.267);
+$mainColor: rgba(247, 59, 12, 0.911);
+$mask: rgba(0, 0, 0, 0.432);
 $navBar: black;
 $linkBeforeHoverAmount: 20%;
