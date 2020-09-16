@@ -1,29 +1,23 @@
 <template>
-  <nav class="d-flex justify-content-between p-3 align-items-center position-fixed">
+  <nav
+    class="d-flex justify-content-between p-3 align-items-center position-fixed"
+  >
     <div class="nav_brand d-flex align-items-center">
       <h1 class="">S.W.</h1>
     </div>
     <div class="nav_wrapper">
-        <a 
-          v-if="!user.id" 
-          href="#"
-          >登入</a>
+      <a v-if="!user.id" href="#">登入</a>
       <template v-else>
         <template v-if="user.role === 'user'">
-            <a href="#">訂單行事曆</a>
+          <a href="#">訂單行事曆</a>
         </template>
 
         <template v-if="user.role === 'owner'">
-            <a 
-              href="#">我的餐廳</a>
-            <a 
-            href="#">我的菜單</a>
+          <a href="#">我的餐廳</a>
+          <a href="#">我的菜單</a>
         </template>
-          <a 
-          v-else 
-          href="#">加入我們</a>
-          <a 
-          href="#">通知</a>
+        <a v-else href="#">加入我們</a>
+        <a href="#">通知</a>
       </template>
     </div>
   </nav>
@@ -62,5 +56,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/css/components/NavBar'
+@import '../assets/css/components/NavBar';
 </style>

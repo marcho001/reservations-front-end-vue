@@ -1,5 +1,5 @@
 // 引入jest 方法
-import { shallowMount } from '@vue/test-utils'
+// import { shallowMount } from '@vue/test-utils'
 
 // 引入要測試的檔案
 
