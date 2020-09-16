@@ -1,0 +1,48 @@
+.container {
+  background-image: url('../assets/image/signin.jpg');
+  background-size: cover;
+  height: 100%;
+}
+
+.form-section {
+  width: 80%;
+  background: rgba(255, 255, 255, 0.856);
+  border-radius: 10px;
+  @extend %shadow;
+  @extend %font;
+  &_group {
+    label {
+      font-weight: bold;
+    }
+    input {
+      @extend %textInput;  
+    }
+    &-button {
+      width: 100%;
+      button {
+        @extend %radius;
+        color: $white;
+        font-size: 1rem;
+        font-weight: bold;
+        background: $mainColor;
+        width: 40%;
+        margin: 0 auto;
+        transition: .1s;
+        &:hover {
+          transform: scale(1.2, 1.2);
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    justify-content: flex-end;
+  }
+  .form-section {
+    width: 50%;
+    height: 100%;
+    border-radius: 0;
+  }
+}

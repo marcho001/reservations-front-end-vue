@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Pacifico&display=swap");
+%shadow {
+  box-shadow: 3px 0 10px 0 rgba(100, 112, 134, 0.418);
+}
+%radius {
+  border-radius: 8px;
+}
+%textInput {
+  @extend %shadow, %radius;
+  border: 2px inset white;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  height: 2rem;
+  font-size: 1rem;
+}
+// 字型
+%font {
+  font-family: 'Noto Sans TC', sans-serif;
+}
+%lobster {
+  font-family: 'Lobster','Noto Sans TC', cursive;
+}
+%brandFont {
+  font-family: 'Pacifico','Noto Sans TC', cursive;
+}
+
+// 變數
+$white: white;
+$textColor: rgb(102, 96, 96);
+$mainColor: rgba(206, 3, 3, 0.911);
+$mask: rgba(0, 0, 0, 0.432);
+$navBar: black;
+$linkBeforeHoverAmount: 20%;
