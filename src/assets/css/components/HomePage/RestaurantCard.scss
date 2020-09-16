@@ -1,0 +1,100 @@
+.restaurant {
+    &_title {
+      @extend %font;
+      color: $textColor;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+  .restaurant_search {
+    &_filter--hamburger {
+      width: 30px;
+      height: 30px;
+      p {
+        @extend %radius;
+        position: relative;
+        width: 10px;
+        height: 3px;
+        background: $textColor;
+        &::after, &::before {
+          content: '';
+          position: absolute;
+          height: 3px;
+          background: $textColor;
+        }
+        &::after {
+          bottom: 8px;
+          width: 20px;
+          left: 0;
+        }
+        &::before {
+          width: 30px;
+          bottom: 16px;
+          left: 0;
+        }
+      }
+      &:hover {
+        p {
+          width: 30px;
+          transition: width .3s;
+          &::after {
+            transition: width .3s;
+            width: 30px;
+          }
+        }
+      }
+    }
+    &_filter--list {
+      border: 1px solid $mask;
+      @extend %radius, %shadow;
+      // width: 200px;
+      .list-item {
+        border-bottom: 1px solid darken($white, 10%);
+      }
+    }
+    
+  }
+  .restaurant_search_form {
+    .item-input {
+      @extend %textInput;
+    }
+    .item-btn {
+      font-size: 1.5rem;
+      color: $textColor;
+    }
+  }
+  .restaurant_card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1rem 1.5rem;
+    &--item {
+    overflow: hidden;
+    @extend %shadow, %radius;
+    .card {
+      color: $textColor;
+    }
+    .card_body {
+      &--detail {
+        span {
+          @extend %radius;
+        }
+        .rating {
+          color: darken($white, 5%);
+          background: rgba(255, 34, 89, 0.795);
+        }
+        .category {
+          color: darken($white, 5%);
+          background: rgba(1, 168, 9, 0.788);
+        }
+      }
+      &--description {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+      }
+    }
+    }
+  }

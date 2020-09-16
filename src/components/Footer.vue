@@ -18,5 +18,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import '../assets/css/components/Footer.scss'
+@import '../assets/css/components/Footer.scss';
 </style>
