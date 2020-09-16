@@ -60,33 +60,74 @@
           </ul>
         </div>
         <div class="restaurant_search_form">
-        <form class="restaurant_search_form--group" action="">
-          <input class="item" type="text" name="" placeholder="請輸入餐廳名稱...">
-          <button type="submit">search</button>
+        <form class="restaurant_search_form--group d-flex align-items-center" action="">
+          <input 
+            v-model="search"
+            class="item-input" 
+            type="text"
+            placeholder="請輸入餐廳名稱...">
+          <button class="item-btn pl-4" type="submit">
+            <font-awesome-icon :icon="icon.faSearch"/>
+          </button>
+          
         </form>
         </div>
       </div>
-      <div class="restaurant_card">
-        <a href="#" class="restaurant_card--item">
-          <div class="card-header">
-            <img src="" alt="">
+      <div class="restaurant_card mt-5">
+
+        <div class="restaurant_card--item">
+        <a class="card" href="#">
+          <div class="card_header">
+            <img src="https://images.unsplash.com/photo-1593661982469-ff1e1bbbc88d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1494&q=80" alt="">
           </div>
-          <div class="card-body">
-            <h1 class="card-title"></h1>
-            <p class="card-detail"></p>
-            <p class="card-description"></p>
+          <div class="card_body p-2">
+            <h1 class="card_body--title">龍蝦吃到吐</h1>
+            <div class="card_body--detail d-flex mt-1">
+            <div>
+              <span class="rating mr-2 px-1">
+              <font-awesome-icon :icon="icon.faStar"/>
+              5.0
+              </span>
+              <span class="category px-1">海鮮料理</span>
+            </div>
+            <p class="ml-2">
+              <span>台北市</span> |
+              <span>中山區</span>
+            </p>
+            </div>
+            <hr>
+            <p class="card_body--description mt-1">aps  dfjoi   jfaojfaso fjajsojn vaoi vinve inapif ninanasna anvosa enei fnaof naeaon avoas vja eofsaif adsjvas af apvjasif aiofnas aivjaivjai a aijvasvna vajapi coia caoid cdiao caiocjaidcj aoicsdij sopi sdic aoic aioc aiocj adcadj caiods caoisdcj sdaicj asoic asiod jcadcj asiocd
+            </p>
           </div>
         </a>
+        </div>
+
       </div>
     </section>
+
+    <footer>
+
+    </footer>
   </div>
 </template>
 
 <script>
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
+
+
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   data () {
     return {
-      categoryList: false
+      categoryList: false,
+      search: '',
+      icon: { 
+        faSearch, 
+        faStar 
+        }
     }
   },
   methods: {
@@ -117,6 +158,7 @@ export default {
         font-size: 1.5rem;
       }
       h1 {
+        @extend %brandFont;
         font-size: 2rem;
       }
 
@@ -262,8 +304,46 @@ export default {
     
   }
   .restaurant_search_form {
-    .item {
+    .item-input {
       @extend %textInput;
+    }
+    .item-btn {
+      font-size: 1.5rem;
+      color: $textColor;
+    }
+  }
+  .restaurant_card {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 1rem 1.5rem;
+    &--item {
+    overflow: hidden;
+    @extend %shadow, %radius;
+    .card {
+      color: $textColor;
+    }
+    .card_body {
+      &--detail {
+        span {
+          @extend %radius;
+        }
+        .rating {
+          color: darken($white, 5%);
+          background: rgba(255, 34, 89, 0.795);
+        }
+        .category {
+          color: darken($white, 5%);
+          background: rgba(1, 168, 9, 0.788);
+        }
+      }
+      &--description {
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+      }
+    }
     }
   }
   @media screen and (min-width: 768px) {

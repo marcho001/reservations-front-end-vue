@@ -1,10 +1,14 @@
 nav {
   right: 0;
   left: 0;
+  top: 0;
+  height: 3.5rem;
   z-index: 999;
   background: rgba(0, 0, 0, 0.877);
 }
 .nav_brand {
+  @extend %brandFont;
+  height: 100%;
   font-size: 1.5rem;
   font-weight: bold;
   color: $white;

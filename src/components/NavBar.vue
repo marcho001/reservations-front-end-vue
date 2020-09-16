@@ -1,9 +1,9 @@
 <template>
-  <nav class="d-flex justify-content-between p-3 position-fixed">
-    <div class="nav_brand">
-      <h1>S.W.</h1>
+  <nav class="d-flex justify-content-between p-3 align-items-center position-fixed">
+    <div class="nav_brand d-flex align-items-center">
+      <h1 class="">S.W.</h1>
     </div>
-    <div class="nav_wrapper d-flex align-items-center">
+    <div class="nav_wrapper">
         <a 
           v-if="!user.id" 
           href="#"
