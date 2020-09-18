@@ -41,8 +41,12 @@
         wrap="hard"
       ></textarea>
       <div class="d-flex">
-        <button class="submit m-3 px-2" type="submit">新增</button>
-        <button class="cancel m-3 px-2">取消</button>
+        <button 
+          class="submit m-3 px-2" 
+          type="submit">新增</button>
+        <button 
+          @click.prevent.stop="cancelComment"
+          class="cancel m-3 px-2">取消</button>
       </div>
     </div>
   </form>
@@ -62,6 +66,12 @@ export default {
         comment: ''
       }
     }
+  },
+  methods: {
+    cancelComment () {
+      this.newComment.rating = 0
+    },
+    
   }
 }
 </script>
