@@ -13,7 +13,6 @@
         </div>
       </div>
     </section>
-
     <section class="step">
       <input type="checkbox" id="toggle" class="step_toggle d-none" />
       <label
@@ -47,7 +46,7 @@
     </section>
 
     <RestaurantCard />
-
+    
     <Footer />
   </div>
 </template>
