@@ -82,8 +82,7 @@
 import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
 
 export default {
-  components: {
-  },
+  components: {},
   data() {
     return {
       categoryList: false,

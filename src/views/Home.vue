@@ -46,7 +46,7 @@
     </section>
 
     <RestaurantCard />
-    
+
     <Footer />
   </div>
 </template>

@@ -1,22 +1,18 @@
 <template>
-  <div class="container pt-4"> 
+  <div class="container pt-4">
     <div class="restaurant wrapper">
-      
-      <RestaurantDetail
-        :font-awesome="icon"/>
-      <br>
+      <RestaurantDetail :font-awesome="icon" />
+      <br />
       <div class="restaurant_comments">
         <h1>評論</h1>
-        <hr>
-        <CreateCommentForm
-          :font-awesome="icon"/>   
-        <br>
-        <RestaurantComments
-          :font-awesome="icon"/>
+        <hr />
+        <CreateCommentForm :font-awesome="icon" />
+        <br />
+        <RestaurantComments :font-awesome="icon" />
       </div>
     </div>
-    <br>
-    <Footer/>
+    <br />
+    <Footer />
   </div>
 </template>
 
@@ -37,7 +33,7 @@ export default {
     RestaurantComments,
     Footer
   },
-  data () {
+  data() {
     return {
       icon: { faStar, farStar, faMapMarkedAlt }
     }
@@ -46,10 +42,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
 .restaurant_comments {
   color: $textColor;
 }
-
-  
 </style>
