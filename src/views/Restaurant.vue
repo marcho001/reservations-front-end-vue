@@ -7,10 +7,12 @@
         <h1>評論</h1>
         <hr />
         <CreateCommentForm 
+          @after-create-comment="afterCreateComment"
           :font-awesome="icon" 
           :restaurant-id="restaurant.id"/>
         <br />
-        <RestaurantComments :font-awesome="icon" />
+        <RestaurantComments 
+        :font-awesome="icon" />
       </div>
     </div>
     <br />
@@ -74,6 +76,9 @@ export default {
         ...this.restaurant,
         ...fakeRest
       }
+    },
+    afterCreateComment (data) {
+      console.log(data)
     }
   },
   created() {
