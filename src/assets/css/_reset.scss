@@ -47,6 +47,9 @@ input:required {
 input:invalid {
   box-shadow: none;
 }
+p {
+  word-break: break-all;
+}
 
 // basic setting
 

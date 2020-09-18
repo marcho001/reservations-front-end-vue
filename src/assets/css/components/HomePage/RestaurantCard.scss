@@ -81,11 +81,11 @@
         }
         .rating {
           color: darken($white, 5%);
-          background: rgba(255, 34, 89, 0.795);
+          background: $ratingTag;
         }
         .category {
           color: darken($white, 5%);
-          background: rgba(1, 168, 9, 0.788);
+          background: $categoryTag;
         }
       }
       &--description {
