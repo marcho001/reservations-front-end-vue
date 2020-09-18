@@ -251,3 +251,8 @@ body {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.scroll {
+  overflow: scroll;
+  scroll-behavior: smooth;
+}

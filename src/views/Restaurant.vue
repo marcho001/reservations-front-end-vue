@@ -1,6 +1,6 @@
 <template>
-  <div class="container wrapper pt-4"> 
-    <section class="restaurant">
+  <div class="container pt-4"> 
+    <section class="restaurant wrapper">
 
 
     <!--restaurantDetal-->
@@ -39,7 +39,8 @@
     <hr>
     <!--createCommentForm-->
   
-    <form class="restaurant_comments_newComment d-flex align-items-center" action="">
+    <form class="restaurant_comments_newComment" action="">
+    <div class="d-flex align-items-center">
       <h3>留下評論</h3>
       <div class="restaurant_comments_newComment--rating d-flex justify-content-around">
         <label 
@@ -60,10 +61,12 @@
             :value="num" 
             :id="`${num}-star`">
         </label>
-      </div>
+      </div>  
+    </div>
+      <br>
       <div 
         v-if="newComment.rating > 0"
-        class="restaurant_comment_newComment--comment w-100 mt-2 d-flex ">
+        class="restaurant_comments_newComment--comment w-100 ">
         <textarea 
           v-model.trim="newComment.comment"
           class="text" 
@@ -71,16 +74,16 @@
           rows="4"
           autofocus
           wrap="hard"></textarea>
-          <div class="d-flex flex-column align-item-center justify-content-around ml-2">
-            <button class="submit px-2" type="submit">新增</button>
-            <button class="cancel px-2">取消</button>
+          <div class="d-flex">
+            <button class="submit m-3 px-2" type="submit">新增</button>
+            <button class="cancel m-3 px-2">取消</button>
           </div>
       </div>
     </form>
     <br>
     <br>
     <!--restaurantComments-->
-    <div class="restaurant_comments_allComments">
+    <div class="restaurant_comments_allComments scroll">
     
       <div class="restaurant_comments_allComments--item d-flex align-items-center py-3">
         <img src="../assets/logo.png" alt="">
@@ -99,7 +102,7 @@
     </div>
     </div>
     </section>
-    
+    <Footer/>
   </div>
 </template>
 
@@ -107,10 +110,12 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faStar, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
+import Footer from '../components/Footer'
 
 export default {
   components: {
-    FontAwesomeIcon
+    FontAwesomeIcon,
+    Footer
   },
   data () {
     return {
@@ -165,12 +170,18 @@ export default {
   }
   &--comment {
     .text {
-      width: 80%;
+      width: 90%;
       resize: none;
     }
     button {
+      font-size: 1rem;
       @extend %radius, %shadow;
+      &:hover {
+        transform: scale(1.2, 1.2);
+        transition: transform .2s;
+      }
     }
+
     .submit {
       background: $buttonColor;
       color: $white;
@@ -182,7 +193,10 @@ export default {
   }
 }
 
-.restaurant_comments_allComments--item {
+
+.restaurant_comments_allComments {
+  height: 300px;
+  &--item {
   border-bottom: 1px solid darken($white, 10%);
   img {
     @extend %shadow;
@@ -193,6 +207,7 @@ export default {
   .rating {
     color: $star;
   }
+}
 }
   
 </style>
