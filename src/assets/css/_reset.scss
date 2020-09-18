@@ -47,6 +47,9 @@ input:required {
 input:invalid {
   box-shadow: none;
 }
+p {
+  word-break: break-all;
+}
 
 // basic setting
 
@@ -247,4 +250,9 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.scroll {
+  overflow: scroll;
+  scroll-behavior: smooth;
 }
