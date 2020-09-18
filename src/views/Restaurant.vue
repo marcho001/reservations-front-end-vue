@@ -6,13 +6,13 @@
       <div class="restaurant_comments">
         <h1>評論</h1>
         <hr />
-        <CreateCommentForm 
+        <CreateCommentForm
           @after-create-comment="afterCreateComment"
-          :font-awesome="icon" 
-          :restaurant-id="restaurant.id"/>
+          :font-awesome="icon"
+          :restaurant-id="restaurant.id"
+        />
         <br />
-        <RestaurantComments 
-        :font-awesome="icon" />
+        <RestaurantComments :font-awesome="icon" />
       </div>
     </div>
     <br />
@@ -31,19 +31,18 @@ import CreateCommentForm from '../components/RestaurantPage/CreateCommentForm'
 import RestaurantComments from '../components/RestaurantPage/RestraurantComments'
 
 const fakeRest = {
-    id: 3,
-    name: '龍蝦吃到吐',
-    rating: 4.2,
-    address: '台北市中山區明水路3000號',
-    image: '',
-    description: '',
-    Category: {
-      id: 1,
-      name: '海鮮料理'
-    },
-    Comments: {}
-  }
-
+  id: 3,
+  name: '龍蝦吃到吐',
+  rating: 4.2,
+  address: '台北市中山區明水路3000號',
+  image: '',
+  description: '',
+  Category: {
+    id: 1,
+    name: '海鮮料理'
+  },
+  Comments: {}
+}
 
 export default {
   components: {
@@ -77,7 +76,7 @@ export default {
         ...fakeRest
       }
     },
-    afterCreateComment (data) {
+    afterCreateComment(data) {
       console.log(data)
     }
   },

@@ -1,8 +1,8 @@
 <template>
   <form
-    @submit.prevent.stop="handleSubmit" 
-    class="restaurant_comments_newComment" 
-    >
+    @submit.prevent.stop="handleSubmit"
+    class="restaurant_comments_newComment"
+  >
     <div class="d-flex align-items-center">
       <h3>留下評論</h3>
       <div
@@ -14,10 +14,7 @@
           :key="`${num}star`"
           :for="`${num}-star`"
         >
-          <font-awesome-icon
-            v-if="rating >= num"
-            :icon="fontAwesome.faStar"
-          />
+          <font-awesome-icon v-if="rating >= num" :icon="fontAwesome.faStar" />
           <font-awesome-icon v-else :icon="fontAwesome.farStar" />
           <input
             class="radio"
@@ -45,9 +42,7 @@
       ></textarea>
       <div class="d-flex">
         <button class="submit m-3 px-2" type="submit">新增</button>
-        <button 
-        @click.prevent.stop="cancelComment" 
-        class="cancel m-3 px-2">
+        <button @click.prevent.stop="cancelComment" class="cancel m-3 px-2">
           取消
         </button>
       </div>
