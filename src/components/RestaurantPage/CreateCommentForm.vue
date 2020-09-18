@@ -41,22 +41,24 @@
         wrap="hard"
       ></textarea>
       <div class="d-flex">
-        <button 
-          class="submit m-3 px-2" 
-          type="submit">新增</button>
-        <button 
-          @click.prevent.stop="cancelComment"
-          class="cancel m-3 px-2">取消</button>
+        <button class="submit m-3 px-2" type="submit">新增</button>
+        <button @click.prevent.stop="cancelComment" class="cancel m-3 px-2">
+          取消
+        </button>
       </div>
     </div>
   </form>
 </template>
 
 <script>
+import { ConfirmCancel } from '../../utils/helpers'
 export default {
   props: {
     fontAwesome: {
       type: Object
+    },
+    restaurantId: {
+      type: Number
     }
   },
   data() {
@@ -68,10 +70,23 @@ export default {
     }
   },
   methods: {
-    cancelComment () {
-      this.newComment.rating = 0
+    cancelComment() {
+      ConfirmCancel.fire().then(res => {
+        if (res.isConfirmed === true) {
+          this.newComment.rating = 0
+        }
+      })
     },
-    
+    handleSubmit() {
+      this.$emit('after-create-comment', {
+        restaurantId: this.restaurantId,
+        comment: this.comment,
+        rating: this.rating,
+        createdAt: new Date()
+      })
+      this.rating = 0
+      this.comment = ''
+    }
   }
 }
 </script>
