@@ -79,12 +79,10 @@
 </template>
 
 <script>
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
 
 export default {
   components: {
-    FontAwesomeIcon
   },
   data() {
     return {

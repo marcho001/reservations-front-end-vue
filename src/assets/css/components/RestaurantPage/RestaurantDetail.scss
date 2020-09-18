@@ -1,0 +1,21 @@
+.restaurant_info {
+  &--title {
+    color: $textColor;
+    font-size: 2rem;
+  }
+  &_detail {
+    flex-wrap: wrap;
+    font-weight: bold;
+    span {
+      @extend %radius;
+    }
+    &--rating {
+      color: darken($white, 5%);
+      background: $ratingTag;
+    }
+    &--category {
+      color: darken($white, 5%);
+      background: $categoryTag;
+    }
+  }
+}

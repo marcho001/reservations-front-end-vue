@@ -1,0 +1,15 @@
+.restaurant_comments_allComments {
+  max-height: 300px;
+  &--item {
+  border-bottom: 1px solid darken($white, 10%);
+  img {
+    @extend %shadow;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+  }
+  .rating {
+    color: $star;
+  }
+}
+}
