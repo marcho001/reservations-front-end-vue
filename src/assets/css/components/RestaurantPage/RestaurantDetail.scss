@@ -28,6 +28,10 @@
   }
 }
 
+.info {
+  flex-wrap: wrap;
+}
+
 .btn {
   @extend %buttonStyle;
   padding: 0.5rem;
@@ -36,8 +40,12 @@
     color: $white;
   }
   &--add {
-    border: 2px solid $mainColor;
+    border: 1px solid $mainColor;
     color: $mainColor;
+    &:hover {
+      background: $mainColor;
+      color: $white;
+    }
   }
   &--remove {
     background: $mainColor;

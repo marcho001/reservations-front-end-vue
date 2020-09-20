@@ -23,11 +23,11 @@
           </p>
           <br/>
       <div class="restaurant_detail_info">
-        <div class="d-flex justify-content-between">
+        <div class="info d-flex justify-content-between">
           <h1>餐廳資訊</h1>
           <div class="mb-2 align-self-end">
             <button class="btn btn--blue mr-3">訂位點餐</button>
-            <button class="btn btn--add">加入蒐藏</button>
+            <button class="btn btn--add">加入收藏</button>
             <button class="btn btn--remove">取消蒐藏</button>
           </div>
         </div>
