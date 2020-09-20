@@ -3,6 +3,7 @@
     <div class="restaurant wrapper">
       <RestaurantDetail/>
       <br />
+      <br />
       <div class="restaurant_comments">
         <h1>評論</h1>
         <hr />
