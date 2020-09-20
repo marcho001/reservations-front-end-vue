@@ -58,9 +58,6 @@ export default {
     FontAwesomeIcon
   },
   props: {
-    // fontAwesome: {
-    //   type: Object
-    // },
     restaurantId: {
       type: Number
     }
