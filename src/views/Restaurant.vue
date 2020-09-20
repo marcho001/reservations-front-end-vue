@@ -32,6 +32,7 @@ const fakeRest = {
   name: '龍蝦吃到吐',
   rating: 4.2,
   address: '台北市中山區明水路3000號',
+  phone: '02-0000000',
   image: '',
   description: '',
   Category: {

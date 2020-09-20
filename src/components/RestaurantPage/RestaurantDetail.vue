@@ -45,6 +45,7 @@
 </template>
 <script>
 import { FontAwesomeIcon, solid } from '../../utils/icon'
+import { emptyImageFilter } from '../../utils/mixin'
 export default {
   components: {
     FontAwesomeIcon
@@ -53,7 +54,8 @@ export default {
     return {
       solidIcon: solid
     }
-  }
+  },
+  mixins: [emptyImageFilter]
 }
 </script>
 
