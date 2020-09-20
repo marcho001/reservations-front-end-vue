@@ -8,7 +8,7 @@
         <div class="user-info pl-3 mb-2 d-flex">
           <h3 class="mr-3">章魚哥</h3>
           <h3 class="rating">
-            4 <font-awesome-icon :icon="fontAwesome.faStar" />
+            4 <font-awesome-icon :icon="solidIcon.faStar" />
           </h3>
         </div>
         <p class="comment pl-3">efefeefefefef</p>
@@ -18,10 +18,14 @@
 </template>
 
 <script>
+import { FontAwesomeIcon, solid } from '../../utils/icon'
 export default {
-  props: {
-    fontAwesome: {
-      type: Object
+  components: {
+    FontAwesomeIcon
+  },
+  data () {
+    return {
+      solidIcon: solid
     }
   }
 }

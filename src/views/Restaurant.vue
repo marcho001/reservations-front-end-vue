@@ -1,18 +1,17 @@
 <template>
   <div class="container pt-4">
     <div class="restaurant wrapper">
-      <RestaurantDetail :font-awesome="icon" />
+      <RestaurantDetail/>
       <br />
       <div class="restaurant_comments">
         <h1>評論</h1>
         <hr />
         <CreateCommentForm
-          @after-create-comment="afterCreateComment"
-          :font-awesome="icon"
+          @after-create-comment="afterCreateComment"         
           :restaurant-id="restaurant.id"
         />
         <br />
-        <RestaurantComments :font-awesome="icon" />
+        <RestaurantComments/>
       </div>
     </div>
     <br />
@@ -21,9 +20,6 @@
 </template>
 
 <script>
-import { faStar, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
-
 //components
 import Footer from '../components/Footer'
 import RestaurantDetail from '../components/RestaurantPage/RestaurantDetail'
@@ -53,7 +49,6 @@ export default {
   },
   data() {
     return {
-      icon: { faStar, farStar, faMapMarkedAlt },
       restaurant: {
         id: 0,
         name: '',

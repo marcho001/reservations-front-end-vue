@@ -14,8 +14,8 @@
           :key="`${num}star`"
           :for="`${num}-star`"
         >
-          <font-awesome-icon v-if="rating >= num" :icon="fontAwesome.faStar" />
-          <font-awesome-icon v-else :icon="fontAwesome.farStar" />
+          <font-awesome-icon v-if="rating >= num" :icon="solidIcon.faStar" />
+          <font-awesome-icon v-else :icon="regularIcon.farStar" />
           <input
             class="radio"
             type="radio"
@@ -52,11 +52,12 @@
 
 <script>
 import { ConfirmCancel } from '../../utils/helpers'
+import { FontAwesomeIcon, solid, regular } from '../../utils/icon'
 export default {
+  components: {
+    FontAwesomeIcon
+  },
   props: {
-    fontAwesome: {
-      type: Object
-    },
     restaurantId: {
       type: Number
     }
@@ -64,7 +65,9 @@ export default {
   data() {
     return {
       rating: 0,
-      comment: ''
+      comment: '',
+      solidIcon: solid,
+      regularIcon: regular
     }
   },
   methods: {
