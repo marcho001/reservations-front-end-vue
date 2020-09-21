@@ -46,9 +46,11 @@
       }
     }
     &_filter--list {
+      z-index: 1000;
       border: 1px solid $mask;
       @extend %radius, %shadow;
-      // width: 200px;
+      background: $white;
+      width: 200px;
       .list-item {
         border-bottom: 1px solid darken($white, 10%);
       }
@@ -81,11 +83,11 @@
         }
         .rating {
           color: darken($white, 5%);
-          background: rgba(255, 34, 89, 0.795);
+          background: $ratingTag;
         }
         .category {
           color: darken($white, 5%);
-          background: rgba(1, 168, 9, 0.788);
+          background: $categoryTag;
         }
       }
       &--description {

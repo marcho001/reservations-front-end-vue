@@ -1,0 +1,33 @@
+.restaurant_comments_newComment {
+  flex-wrap: wrap;
+  color: $textColor;
+  &--rating {
+    width: 50%;
+    margin: 0 auto;
+    .radio {
+      display: none;
+    }
+    label {
+      font-size: 1.5rem;
+      color: $star;
+    }
+  }
+  &--comment {
+    .text {
+      width: 90%;
+      resize: none;
+    }
+    button {
+      @extend %buttonStyle;
+    }
+
+    .submit {
+      background: $buttonColor;
+      color: $white;
+    }
+    .cancel {
+      border: 1px solid darken($white, 15%);
+      color: $buttonColor;
+    }
+  }
+}

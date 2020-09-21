@@ -13,7 +13,6 @@
         </div>
       </div>
     </section>
-
     <section class="step">
       <input type="checkbox" id="toggle" class="step_toggle d-none" />
       <label
@@ -63,12 +62,6 @@ export default {
   },
   data() {
     return {}
-  },
-  methods: {
-    showCategoryList() {
-      console.log('click')
-      this.categoryList = !this.categoryList
-    }
   }
 }
 </script>

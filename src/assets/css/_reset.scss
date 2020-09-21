@@ -47,6 +47,9 @@ input:required {
 input:invalid {
   box-shadow: none;
 }
+p {
+  word-break: break-all;
+}
 
 // basic setting
 
@@ -233,6 +236,18 @@ body {
   align-items: center;
 }
 
+.align-self-start {
+  align-self: flex-start;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
 .text-center {
   text-align: center;
 }
@@ -247,4 +262,9 @@ body {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.scroll {
+  overflow: scroll;
+  scroll-behavior: smooth;
 }
