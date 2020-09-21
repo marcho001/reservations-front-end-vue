@@ -18,12 +18,7 @@
       resize: none;
     }
     button {
-      font-size: 1rem;
-      @extend %radius, %shadow;
-      &:hover {
-        transform: scale(1.2, 1.2);
-        transition: transform .2s;
-      }
+      @extend %buttonStyle;
     }
 
     .submit {

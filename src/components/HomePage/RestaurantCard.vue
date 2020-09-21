@@ -6,7 +6,7 @@
     </div>
     <hr />
     <div class="restaurant_search d-flex justify-content-between mt-5">
-      <div class="restaurant_search_filter">
+      <div class="restaurant_search_filter position-relative">
         <button
           @click="showCategoryList()"
           class="restaurant_search_filter--hamburger ml-3 mt-1"
@@ -15,7 +15,7 @@
         </button>
         <ul
           v-show="categoryList"
-          class="restaurant_search_filter--list p-3 mt-1"
+          class="restaurant_search_filter--list p-3 mt-1 position-absolute"
         >
           <li class="list-item p-1">日式料理</li>
           <li class="list-item p-1">燒烤</li>
@@ -91,6 +91,12 @@ export default {
         faSearch,
         faStar
       }
+    }
+  },
+  methods: {
+    showCategoryList() {
+      console.log('click')
+      this.categoryList = !this.categoryList
     }
   }
 }

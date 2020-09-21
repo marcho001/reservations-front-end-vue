@@ -62,12 +62,6 @@ export default {
   },
   data() {
     return {}
-  },
-  methods: {
-    showCategoryList() {
-      console.log('click')
-      this.categoryList = !this.categoryList
-    }
   }
 }
 </script>

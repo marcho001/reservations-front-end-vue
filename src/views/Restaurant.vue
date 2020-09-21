@@ -1,7 +1,10 @@
 <template>
   <div class="container pt-4">
     <div class="restaurant wrapper">
-      <RestaurantDetail/>
+      <RestaurantDetail 
+        :restaurant="restaurant"
+        :init-is-favorited="isFavorited"/>
+      <br />
       <br />
       <div class="restaurant_comments">
         <h1>評論</h1>
@@ -27,17 +30,21 @@ import CreateCommentForm from '../components/RestaurantPage/CreateCommentForm'
 import RestaurantComments from '../components/RestaurantPage/RestraurantComments'
 
 const fakeRest = {
-  id: 3,
-  name: '龍蝦吃到吐',
-  rating: 4.2,
-  address: '台北市中山區明水路3000號',
-  image: '',
-  description: '',
-  Category: {
-    id: 1,
-    name: '海鮮料理'
+  restaurant: {
+    id: 3,
+    name: '龍蝦吃到吐',
+    rating: 4.2,
+    address: '台北市中山區明水路3000號',
+    phone: '02-0000000',
+    image: '',
+    description: 'asfasdfasfasdfasdfa',
+    Category: {
+      id: 1,
+      name: '海鮮料理'
+    },
+    Comments: {}
   },
-  Comments: {}
+  isFavorited: false
 }
 
 export default {
@@ -60,15 +67,16 @@ export default {
           id: 0,
           name: ''
         },
-        Comments: {}
-      }
+        Comments: {},
+      },
+      isFavorited: false
     }
   },
   methods: {
     fetchRestaurant() {
       this.restaurant = {
         ...this.restaurant,
-        ...fakeRest
+        ...fakeRest.restaurant
       }
     },
     afterCreateComment(data) {
