@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lobster&family=Open+Sans&family=Pacifico&display=swap");
 %shadow {
-  box-shadow: 3px 0 10px 0 rgba(100, 112, 134, 0.418);
+  box-shadow: 3px 2px 6px 0 rgba(100, 112, 134, 0.418);
 }
 %radius {
   border-radius: 8px;
@@ -23,6 +23,15 @@
     transition: transform .2s;
   }
 }
+
+%tagStyle {
+  @extend %radius, %shadow;
+  border-radius: 0 50% 50% 0;
+  font-size: 1rem;
+  right: -30px;
+  top: 50%;
+  transform: translate(0, -50%);
+}
 // 字型
 %font {
   font-family: 'Noto Sans TC', sans-serif;
@@ -35,6 +44,7 @@
 }
 
 // 變數
+$background: rgb(255, 253, 248);
 $white: white;
 $textColor: rgb(80, 74, 74);
 $mainColor: rgba(206, 3, 3, 0.911);

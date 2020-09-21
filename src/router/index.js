@@ -22,6 +22,11 @@ const routes = [
     component: () => import('../views/Restaurant')
   },
   {
+    path: '/reservation',
+    name: 'reservation',
+    component: () => import('../views/Reservation')
+  },
+  {
     path: '/signin',
     name: 'signin',
     component: SignIn
