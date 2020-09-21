@@ -46,9 +46,11 @@
       }
     }
     &_filter--list {
+      z-index: 1000;
       border: 1px solid $mask;
       @extend %radius, %shadow;
-      // width: 200px;
+      background: $white;
+      width: 200px;
       .list-item {
         border-bottom: 1px solid darken($white, 10%);
       }
