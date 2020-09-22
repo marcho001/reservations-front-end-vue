@@ -3,7 +3,8 @@ import {
   faStar,
   faMapMarkedAlt,
   faPhone,
-  faEdit
+  faEdit,
+  faListUl
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 
@@ -11,7 +12,8 @@ const solid = {
   faStar,
   faMapMarkedAlt,
   faPhone,
-  faEdit
+  faEdit,
+  faListUl
 }
 
 const regular = {

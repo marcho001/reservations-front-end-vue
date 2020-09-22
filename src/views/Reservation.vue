@@ -44,11 +44,12 @@
       <div class="navTab position-absolute m-2">
       <button 
         @click="toggleReservationCategory"
-        class="navTab_button position-absolute p-1">
-            <font-awesome-icon :icon="solidIcon.faEdit"/>
+        class="navTab_button position-absolute p-1 text-center">
+            <font-awesome-icon :icon="solidIcon.faListUl"/>
           </button>
         <div class="group d-flex justify-content-around p-2">
-          <a href="#" class="group_item active m-1">牛肉</a>
+        <a href="#" class="group_item active m-1">全部</a>
+          <a href="#" class="group_item m-1">牛肉</a>
           <a href="#" class="group_item m-1">豬肉</a>
           <a href="#" class="group_item m-1">羊肉</a>
           <a href="#" class="group_item m-1">肌肉</a>   
