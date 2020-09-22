@@ -1,67 +1,76 @@
 <template>
   <div class="container">
-      <h1 class="text-center">點餐定位</h1>
-      
-      <div class="reservation_info">
-        <input class="info--toggle d-none" type="checkbox" :checked="toggle.info">
-        <div class="info m-2 position-absolute">   
-          <button 
-            @click="toggleReservationInfo"
-            class="info_button position-absolute p-1">
-            <font-awesome-icon :icon="solidIcon.faEdit"/>
-          </button>
-          <form class="form info_form d-flex flex-column">
-            <div class="info_form_item m-2">
-              <label for="tel">電話：</label>
-              <input type="tel" name="tel" id="tel" required>
-            </div>
-            <div class="info_form_item m-2">
-              <label for="seat">人數：</label>
-              <select name="seat" id="seat">
-                <option value="" disabled selected>請選擇人數</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-              </select>
-            </div>
-            <div class="info_form_item m-2">
-              <label for="date">訂位日期：</label>
-              <input type="date" name="date" id="date">
-            </div>
-            <div class="info_form_item m-2">
-              <label for="time">訂位時間：</label>
-              <!--可選時間-->
-              <input type="time" name="time" id="time">
-            </div>
-            <button class="info_form_save align-self-end m-2 p-1">儲存定位資訊</button>
-          </form>
-        </div>      
-      </div>
-      <br>
+    <h1 class="text-center">點餐定位</h1>
 
- <div class="reservation_navTab">
-          <input type="checkbox" class="navTab--toggle d-none" :checked="toggle.category">
-      <div class="navTab position-absolute m-2">
-      <button 
-        @click="toggleReservationCategory"
-        class="navTab_button position-absolute p-1 text-center">
-            <font-awesome-icon :icon="solidIcon.faListUl"/>
+    <div class="reservation_info">
+      <input
+        class="info--toggle d-none"
+        type="checkbox"
+        :checked="toggle.info"
+      />
+      <div class="info m-2 position-absolute">
+        <button
+          @click="toggleReservationInfo"
+          class="info_button position-absolute p-1"
+        >
+          <font-awesome-icon :icon="solidIcon.faEdit" />
+        </button>
+        <form class="form info_form d-flex flex-column">
+          <div class="info_form_item m-2">
+            <label for="tel">電話：</label>
+            <input type="tel" name="tel" id="tel" required />
+          </div>
+          <div class="info_form_item m-2">
+            <label for="seat">人數：</label>
+            <select name="seat" id="seat">
+              <option value="" disabled selected>請選擇人數</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <div class="info_form_item m-2">
+            <label for="date">訂位日期：</label>
+            <input type="date" name="date" id="date" />
+          </div>
+          <div class="info_form_item m-2">
+            <label for="time">訂位時間：</label>
+            <!--可選時間-->
+            <input type="time" name="time" id="time" />
+          </div>
+          <button class="info_form_save align-self-end m-2 p-1">
+            儲存定位資訊
           </button>
+        </form>
+      </div>
+    </div>
+    <br />
+
+    <div class="reservation_navTab">
+      <input
+        type="checkbox"
+        class="navTab--toggle d-none"
+        :checked="toggle.category"
+      />
+      <div class="navTab position-absolute m-2">
+        <button
+          @click="toggleReservationCategory"
+          class="navTab_button position-absolute p-1 text-center"
+        >
+          <font-awesome-icon :icon="solidIcon.faListUl" />
+        </button>
         <div class="group d-flex justify-content-around p-2">
-        <a href="#" class="group_item active m-1">全部</a>
+          <a href="#" class="group_item active m-1">全部</a>
           <a href="#" class="group_item m-1">牛肉</a>
           <a href="#" class="group_item m-1">豬肉</a>
           <a href="#" class="group_item m-1">羊肉</a>
-          <a href="#" class="group_item m-1">肌肉</a>   
+          <a href="#" class="group_item m-1">肌肉</a>
         </div>
       </div>
- 
- </div>     
+    </div>
 
-      <div class="reservation_menu wrapper">
+    <div class="reservation_menu wrapper"></div>
 
-      </div>
-    
     <div class="bill"></div>
   </div>
 </template>
@@ -76,7 +85,7 @@ export default {
   components: {
     FontAwesomeIcon
   },
-  data () {
+  data() {
     return {
       solidIcon: solid,
       toggle: {
@@ -86,17 +95,16 @@ export default {
     }
   },
   methods: {
-    toggleReservationInfo () {
+    toggleReservationInfo() {
       this.toggle.category = true
       this.toggle.info = !this.toggle.info
     },
-    toggleReservationCategory () {
+    toggleReservationCategory() {
       this.toggle.info = true
       this.toggle.category = !this.toggle.category
     }
   }
 }
-
 
 // 存入localStorage
 // 離開頁面清除
@@ -104,16 +112,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .info {
-    width: 300px;
-    height: 200px;
-    transition: width .2s;
-    z-index: 100;
+  width: 300px;
+  height: 200px;
+  transition: width 0.2s;
+  z-index: 100;
   &_form {
     border: 1px solid $mask;
     background: $background;
     @extend %shadow, %radius;
     opacity: 1;
-    transition: opacity .1s .2s;
+    transition: opacity 0.1s 0.2s;
     &_item {
       label {
         font-weight: bold;
@@ -137,19 +145,19 @@ export default {
     background: $mainColor;
   }
 }
-  .info--toggle:checked + .info {
-    width: 0;
-    z-index: 0;
-  }
-  .info--toggle:checked + .info > .info_form {
-    transform: scale(0, 0);
-    opacity: 0;
-  }
+.info--toggle:checked + .info {
+  width: 0;
+  z-index: 0;
+}
+.info--toggle:checked + .info > .info_form {
+  transform: scale(0, 0);
+  opacity: 0;
+}
 
 .navTab {
   width: 85%;
   height: 50px;
-  transition: width .2s;
+  transition: width 0.2s;
   z-index: 100;
   &_button {
     @extend %tagStyle;
@@ -162,7 +170,7 @@ export default {
   @extend %shadow, %radius;
   flex-wrap: wrap;
   opacity: 1;
-  transition: opacity .2s .2s;
+  transition: opacity 0.2s 0.2s;
 
   .active {
     color: $buttonColor;
@@ -185,5 +193,4 @@ export default {
   width: 0;
   z-index: 1;
 }
-  
 </style>

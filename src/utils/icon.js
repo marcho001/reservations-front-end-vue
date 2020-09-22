@@ -20,8 +20,4 @@ const regular = {
   farStar
 }
 
-export {
-  FontAwesomeIcon,
-  solid,
-  regular
-}
+export { FontAwesomeIcon, solid, regular }

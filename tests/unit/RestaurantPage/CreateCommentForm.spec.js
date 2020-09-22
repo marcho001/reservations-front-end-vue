@@ -2,7 +2,6 @@ import { shallowMount } from '@vue/test-utils'
 import CreateCommentForm from '@/components/RestaurantPage/CreateCommentForm'
 
 describe('CreateCommentForm test', () => {
-
   it('should exist', () => {
     const wrapper = shallowMount(CreateCommentForm)
     expect(wrapper.exists()).toBe(true)
@@ -18,5 +17,4 @@ describe('CreateCommentForm test', () => {
       expect(wrapper.props().restaurantId).toBe(3)
     })
   })
-  
 })

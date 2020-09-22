@@ -12,40 +12,35 @@
     </div>
     <hr />
     <br />
-      <div class="restaurant_detail_album">
-        <img 
-          :src="restaurant.image | emptyImage" />
-      </div>
-        <br />
-          <p class="restaurant_detail_description">
-            {{ restaurant.description }}
-          </p>
-          <br/>
-      <div class="restaurant_detail_info">
-        <div class="info d-flex justify-content-between">
-          <h1>餐廳資訊</h1>
-          <div class="mb-2 align-self-end">
-            <button class="btn btn--blue mr-3">訂位點餐</button>
-            <button 
-              v-if="isFavorited === true"
-              class="btn btn--remove"
-              >取消蒐藏</button>
-            <button 
-              v-else
-              class="btn btn--add"
-              >加入收藏</button>
-          </div>
+    <div class="restaurant_detail_album">
+      <img :src="restaurant.image | emptyImage" />
+    </div>
+    <br />
+    <p class="restaurant_detail_description">
+      {{ restaurant.description }}
+    </p>
+    <br />
+    <div class="restaurant_detail_info">
+      <div class="info d-flex justify-content-between">
+        <h1>餐廳資訊</h1>
+        <div class="mb-2 align-self-end">
+          <button class="btn btn--blue mr-3">訂位點餐</button>
+          <button v-if="isFavorited === true" class="btn btn--remove">
+            取消蒐藏
+          </button>
+          <button v-else class="btn btn--add">加入收藏</button>
         </div>
-        <hr>
-          <p class="m-1">
-            <font-awesome-icon :icon="solidIcon.faMapMarkedAlt" />
-            {{ restaurant.address }}
-          </p>
-          <p class="m-1">
-            <font-awesome-icon :icon="solidIcon.faPhone" />
-            {{ restaurant.phone }}
-          </p>
       </div>
+      <hr />
+      <p class="m-1">
+        <font-awesome-icon :icon="solidIcon.faMapMarkedAlt" />
+        {{ restaurant.address }}
+      </p>
+      <p class="m-1">
+        <font-awesome-icon :icon="solidIcon.faPhone" />
+        {{ restaurant.phone }}
+      </p>
+    </div>
   </div>
 </template>
 <script>
@@ -63,14 +58,13 @@ export default {
       type: Boolean
     }
   },
-  data () {
+  data() {
     return {
       solidIcon: solid,
       isFavorited: this.initIsFavorited
     }
   },
-  mixins: [emptyImageFilter],
-  
+  mixins: [emptyImageFilter]
 }
 </script>
 

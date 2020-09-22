@@ -23,7 +23,7 @@ export default {
   components: {
     FontAwesomeIcon
   },
-  data () {
+  data() {
     return {
       solidIcon: solid
     }
