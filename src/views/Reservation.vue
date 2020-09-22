@@ -8,7 +8,7 @@
         type="checkbox"
         :checked="toggle.info"
       />
-      <div class="info m-2 position-absolute">
+      <div class="info m-0 position-absolute">
         <button
           @click="toggleReservationInfo"
           class="info_button position-absolute p-1"
@@ -46,21 +46,28 @@
     </div>
     <br />
 
-    <div class="reservation_navTab">
+
+<div class="wrapper">
+<hr>
+    <div class="reservation_navTab my-4">
       <input
         type="checkbox"
         class="navTab--toggle d-none"
         :checked="toggle.category"
       />
-      <div class="navTab position-absolute m-2">
+      <div class="navTab position-relative">
         <button
           @click="toggleReservationCategory"
-          class="navTab_button position-absolute p-1 text-center"
+          class="navTab_button position-absolute p-2 text-center"
         >
           <font-awesome-icon :icon="solidIcon.faListUl" />
         </button>
         <div class="group d-flex justify-content-around p-2">
           <a href="#" class="group_item active m-1">全部</a>
+          <a href="#" class="group_item m-1">牛肉</a>
+          <a href="#" class="group_item m-1">牛肉</a>
+          <a href="#" class="group_item m-1">牛肉</a>
+          <a href="#" class="group_item m-1">牛肉</a>
           <a href="#" class="group_item m-1">牛肉</a>
           <a href="#" class="group_item m-1">豬肉</a>
           <a href="#" class="group_item m-1">羊肉</a>
@@ -69,7 +76,29 @@
       </div>
     </div>
 
-    <div class="reservation_menu wrapper"></div>
+    <br>
+    <div class="menu d-grid">
+      <div class="menu_item">
+        <img src="@/assets/image/background.jpeg" alt="">
+        <div class="menu_item_body">
+          <h1 class="text-center">滷肉飯</h1>
+          <p class="description text-center px-2">
+            很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif
+          </p>  
+        </div>
+        <div class="menu_item_footer d-flex justify-content-end align-items-center my-3">
+        <h3 class="mr-3">NT$ 50</h3>
+        <div class="count mx-2 d-flex">
+          <button class="count_button minus">-</button>
+          <input class="count_input text-center m-0" type="number" disabled>
+          <button class="count_button plus">+</button>
+        </div>
+        </div>
+      </div>
+
+
+    </div>
+</div>
 
     <div class="bill"></div>
   </div>
@@ -154,20 +183,25 @@ export default {
   opacity: 0;
 }
 
+
 .navTab {
+  @extend %shadow, %radius;
   width: 85%;
-  height: 50px;
-  transition: width 0.2s;
-  z-index: 100;
+  height: 100%;
+  margin-left: 2rem;
+  background: $white;
+  transition: width .2s, height 0s .2s;
   &_button {
-    @extend %tagStyle;
+    @extend %shadow, %radius;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
     background: $categoryTag;
     color: $white;
   }
 }
-
 .group {
-  @extend %shadow, %radius;
   flex-wrap: wrap;
   opacity: 1;
   transition: opacity 0.2s 0.2s;
@@ -184,13 +218,56 @@ export default {
     }
   }
 }
-
 .navTab--toggle:checked ~ .navTab > .group {
   transform: scale(0, 0);
   opacity: 0;
 }
 .navTab--toggle:checked ~ .navTab {
+  height: 20px;
   width: 0;
-  z-index: 1;
+  transition: width .2s .2s, height .2s;
+}
+
+
+
+.menu {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1.5rem;
+}
+.menu_item {
+  @extend %shadow, %radius;
+  overflow: hidden;
+  &_body {
+    border-bottom: 1px solid $mask;
+    .description {
+      @include textWrap(2);
+    }
+  }
+}
+.count {
+  &_button {
+    @extend %tagStyle;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: $white;
+    transform: translate(0, 0);
+  }
+  .plus {
+    background: $buttonColor;
+  }
+  .minus {
+    background: $mainColor;
+    transform: rotate(180deg);
+  }
+  &_input {
+    width: 2rem;
+    height: 1.5rem;
+    border: 0;
+    border-top: 1px solid $mask;
+    border-bottom: 1px solid $mask;
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+      appearance: none;
+    }
+  }
 }
 </style>

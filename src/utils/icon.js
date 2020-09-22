@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faStar,
+  faSearch,
   faMapMarkedAlt,
   faPhone,
   faEdit,
@@ -10,6 +11,7 @@ import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
 
 const solid = {
   faStar,
+  faSearch,
   faMapMarkedAlt,
   faPhone,
   faEdit,
