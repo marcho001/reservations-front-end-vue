@@ -8,20 +8,11 @@
 }
 %textInput {
   @extend %shadow, %radius;
-  border: 2px inset white;
+  border: 1px inset white;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
-  height: 2rem;
+  height: 1.5rem;
   font-size: 1rem;
-}
-
-%buttonStyle {
-  font-size: 1rem;
-  @extend %radius, %shadow;
-  &:hover {
-    transform: scale(1.2, 1.2);
-    transition: transform .2s;
-  }
 }
 
 %tagStyle {
