@@ -1,30 +1,22 @@
 <template>
   <div class="container">
-      <input
-      class="cart--toggle d-none"
-      type="checkbox" 
-      :checked="showCart"
-    /> 
+    <input class="cart--toggle d-none" type="checkbox" :checked="showCart" />
     <div class="cart position-fixed scroll">
       <CartBill />
-      <CartInfo 
-        @after-toggle-cart="afterToggleCart"
-      />
+      <CartInfo @after-toggle-cart="afterToggleCart" />
     </div>
-    
+
     <div class="wrapper">
-        <div class="position-relative">
-          <h1 class="text-center">點餐定位</h1>
-          <button
-            @click="toggleCart"
-            class="cart_button position-absolute p-1">
-            <font-awesome-icon :icon="solidIcon.faShoppingCart" />
-          </button>
-        </div>
-        <hr>
-        <CategoryNavTab />
-        <br>
-        <MenuCard />
+      <div class="position-relative">
+        <h1 class="text-center">點餐定位</h1>
+        <button @click="toggleCart" class="cart_button position-absolute p-1">
+          <font-awesome-icon :icon="solidIcon.faShoppingCart" />
+        </button>
+      </div>
+      <hr />
+      <CategoryNavTab />
+      <br />
+      <MenuCard />
     </div>
   </div>
 </template>
@@ -54,10 +46,10 @@ export default {
     }
   },
   methods: {
-    toggleCart () {
+    toggleCart() {
       this.showCart = !this.showCart
     },
-    afterToggleCart () {
+    afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = true
     }
@@ -79,11 +71,12 @@ export default {
   z-index: 100;
   transform: scale(1, 1);
   transform-origin: left;
-  transition: transform .2s .1s;
+  transition: transform 0.2s 0.1s;
 }
 .cart--toggle:checked + .cart {
   transform: scale(0, 1);
-  .info, .bill {
+  .info,
+  .bill {
     opacity: 0;
   }
 }

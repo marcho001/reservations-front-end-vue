@@ -24,11 +24,18 @@
       <div class="info d-flex justify-content-between">
         <h1>餐廳資訊</h1>
         <div class="button_wrapper mb-2 align-self-end">
-          <button class="button_wrapper--reservation btn btn--blue mr-3">訂位點餐</button>
-          <button v-if="isFavorited === true" class="button_wrapper--remove btn btn--remove">
+          <button class="button_wrapper--reservation btn btn--blue mr-3">
+            訂位點餐
+          </button>
+          <button
+            v-if="isFavorited === true"
+            class="button_wrapper--remove btn btn--remove"
+          >
             取消蒐藏
           </button>
-          <button v-else class="button_wrapper--add btn btn--add">加入收藏</button>
+          <button v-else class="button_wrapper--add btn btn--add">
+            加入收藏
+          </button>
         </div>
       </div>
       <hr />
