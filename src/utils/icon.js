@@ -4,7 +4,7 @@ import {
   faSearch,
   faMapMarkedAlt,
   faPhone,
-  faEdit,
+  faShoppingCart,
   faListUl
 } from '@fortawesome/free-solid-svg-icons'
 import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
@@ -14,7 +14,7 @@ const solid = {
   faSearch,
   faMapMarkedAlt,
   faPhone,
-  faEdit,
+  faShoppingCart,
   faListUl
 }
 
