@@ -34,7 +34,7 @@
             placeholder="請輸入餐廳名稱..."
           />
           <button class="item-btn pl-4" type="submit">
-            <font-awesome-icon :icon="icon.faSearch" />
+            <font-awesome-icon :icon="solidIcon.faSearch" />
           </button>
         </form>
       </div>
@@ -53,7 +53,7 @@
             <div class="card_body--detail d-flex mt-1">
               <div>
                 <span class="rating mr-2 px-1">
-                  <font-awesome-icon :icon="icon.faStar" />
+                  <font-awesome-icon :icon="solidIcon.faStar" />
                   5.0
                 </span>
                 <span class="category px-1">海鮮料理</span>
@@ -79,18 +79,17 @@
 </template>
 
 <script>
-import { faSearch, faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon, solid } from '../../utils/icon'
 
 export default {
-  components: {},
+  components: {
+    FontAwesomeIcon
+  },
   data() {
     return {
       categoryList: false,
       search: '',
-      icon: {
-        faSearch,
-        faStar
-      }
+      solidIcon: solid
     }
   },
   methods: {
