@@ -1,0 +1,44 @@
+.banner {
+  background-image: url('../assets/image/background.jpeg');
+  background-position: center;
+  background-size: cover;
+  top: 0;
+  right: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  @extend %font;
+  &_wrapper {
+    height: 100%;
+    background: $mask;
+    color: $white;
+    p {
+      font-size: 1.5rem;
+    }
+    h1 {
+      @extend %brandFont;
+      font-size: 2rem;
+    }
+  }
+}
+
+.restaurant {
+    &_title {
+      @extend %font;
+      color: $textColor;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
+
+@media screen and (min-width: 768px) {
+  .banner_wrapper {
+    p {
+      font-size: 2rem;
+    }
+    h1 {
+      font-size: 4rem;
+    }
+  }
+}
