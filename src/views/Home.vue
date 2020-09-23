@@ -45,20 +45,32 @@
       </div>
     </section>
 
+    <section class="restaurant wrapper pt-5">
+    <div class="restaurant_title d-flex flex-column align-items-center">
+      <h1>想吃什麼？</h1>
+      <h3>選出最有興趣的餐廳吧！</h3>
+    </div>
+    <hr />
+
+    <FilterAndSearch />
     <RestaurantCard />
+
+    </section>
 
     <Footer />
   </div>
 </template>
 
 <script>
-import Footer from '../components/Footer'
+import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
+import Footer from '../components/Footer'
 
 export default {
   components: {
-    Footer,
-    RestaurantCard
+    FilterAndSearch,
+    RestaurantCard,
+    Footer
   },
   data() {
     return {}
@@ -167,6 +179,16 @@ export default {
     }
   }
 }
+
+.restaurant {
+    &_title {
+      @extend %font;
+      color: $textColor;
+      h1 {
+        font-size: 2rem;
+      }
+    }
+  }
 
 @media screen and (min-width: 768px) {
   .banner_wrapper {
