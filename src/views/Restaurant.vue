@@ -1,20 +1,21 @@
 <template>
   <div class="container pt-4">
     <div class="restaurant wrapper">
-      <RestaurantDetail 
+      <RestaurantDetail
         :restaurant="restaurant"
-        :init-is-favorited="isFavorited"/>
+        :init-is-favorited="isFavorited"
+      />
       <br />
       <br />
       <div class="restaurant_comments">
         <h1>評論</h1>
         <hr />
         <CreateCommentForm
-          @after-create-comment="afterCreateComment"         
+          @after-create-comment="afterCreateComment"
           :restaurant-id="restaurant.id"
         />
         <br />
-        <RestaurantComments/>
+        <RestaurantComments />
       </div>
     </div>
     <br />
@@ -67,7 +68,7 @@ export default {
           id: 0,
           name: ''
         },
-        Comments: {},
+        Comments: {}
       },
       isFavorited: false
     }

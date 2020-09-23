@@ -1,0 +1,46 @@
+.navTab {
+  @extend %shadow, %radius;
+  width: 85%;
+  height: 100%;
+  margin-left: 2rem;
+  background: $white;
+  transition: width .2s, height 0s .2s;
+  &_button {
+    @extend %shadow, %radius;
+    left: -2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: $categoryTag;
+    color: $white;
+  }
+}
+
+.group {
+  flex-wrap: wrap;
+  opacity: 1;
+  transition: opacity 0.2s 0.2s;
+
+  .active {
+    color: $buttonColor;
+    border-bottom: 2px solid $buttonColor;
+  }
+  &_item {
+    color: $textColor;
+    font-weight: bold;
+    &:hover {
+      color: $buttonColor;
+    }
+  }
+}
+
+.navTab--toggle:checked ~ .navTab > .group {
+  transform: scale(0, 0);
+  opacity: 0;
+}
+
+.navTab--toggle:checked ~ .navTab {
+  height: 20px;
+  width: 0;
+  transition: width .2s .2s, height .2s;
+}

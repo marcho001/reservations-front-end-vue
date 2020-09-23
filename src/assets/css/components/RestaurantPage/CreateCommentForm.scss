@@ -17,17 +17,12 @@
       width: 90%;
       resize: none;
     }
-    button {
-      @extend %buttonStyle;
-    }
 
     .submit {
-      background: $buttonColor;
-      color: $white;
+      @include buttonStyle($buttonColor, $buttonColor, $white);
     }
     .cancel {
-      border: 1px solid darken($white, 15%);
-      color: $buttonColor;
+      @include buttonStyle($mainColor, transparent, $mainColor);
     }
   }
 }
