@@ -22,7 +22,7 @@ export default {
 .reservation {
   height: 100%;
   main {
-    margin-top: 3.5rem;
+    // margin-top: 3.5rem;
     height: 100%;
   }
 }
