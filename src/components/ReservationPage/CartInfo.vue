@@ -53,6 +53,9 @@ export default {
   methods: {
     toggleCart() {
       this.$emit('after-toggle-cart')
+    },
+    confirmToPay () {
+      
     }
   }
 }
