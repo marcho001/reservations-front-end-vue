@@ -27,6 +27,11 @@ const routes = [
     component: () => import('../views/Reservation')
   },
   {
+    path: '/join',
+    name: 'join-us',
+    component: () => import('../views/JoinUs')
+  },
+  {
     path: '/signin',
     name: 'signin',
     component: SignIn
