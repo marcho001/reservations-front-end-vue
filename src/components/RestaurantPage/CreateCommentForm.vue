@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { ConfirmCancel } from '../../utils/helpers'
+import { Confirm } from '../../utils/helpers'
 import { FontAwesomeIcon, solid, regular } from '../../utils/icon'
 export default {
   components: {
@@ -72,9 +72,14 @@ export default {
   },
   methods: {
     cancelComment() {
-      ConfirmCancel.fire().then(res => {
+      Confirm.fire({
+        title: '要取消編輯評論嗎？',
+        confirmButtonText: '我要取消!',
+        cancelButtonText: '不小心按錯了!'
+      }).then(res => {
         if (res.isConfirmed === true) {
           this.rating = 0
+          this.comment = ''
         }
       })
     },
