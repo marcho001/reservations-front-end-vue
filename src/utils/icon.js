@@ -5,9 +5,14 @@ import {
   faMapMarkedAlt,
   faPhone,
   faShoppingCart,
-  faListUl
+  faListUl,
+  faUtensils
 } from '@fortawesome/free-solid-svg-icons'
-import { faStar as farStar } from '@fortawesome/free-regular-svg-icons'
+import {
+  faStar as farStar,
+  faCalendarAlt as farCalendarAlt,
+  faNewspaper as farNewspaper
+} from '@fortawesome/free-regular-svg-icons'
 
 const solid = {
   faStar,
@@ -15,11 +20,14 @@ const solid = {
   faMapMarkedAlt,
   faPhone,
   faShoppingCart,
-  faListUl
+  faListUl,
+  faUtensils
 }
 
 const regular = {
-  farStar
+  farStar,
+  farCalendarAlt,
+  farNewspaper
 }
 
 export { FontAwesomeIcon, solid, regular }
