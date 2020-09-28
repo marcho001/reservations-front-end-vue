@@ -87,6 +87,13 @@ $spacers: (
   )
 );
 
+@each $prop, $abbrev in (width: w, height: h) {
+  @each $num, $val in $sizes {
+    .#{$abbrev}-#{$num} {
+      #{$prop}: $val;
+    }
+  }
+}
 
 @each $prop, $abbrev in (margin: m, padding: p) {
   @each $num, $val in $spacers {
