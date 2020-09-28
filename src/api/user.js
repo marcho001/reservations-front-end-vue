@@ -7,9 +7,7 @@ export default {
     const searchParams = new URLSearchParams(page, categoryId)
     // 會變成像 "page=1&categoryId=1"
     return apiHelper.get(`/home?${searchParams.toString()}`, {
-      header: {
-        Authorization: `Bearer ${getToken()}`
-      }
+      headers: { Authorization: `Bearer ${getToken()}` }
     })
   }
 }

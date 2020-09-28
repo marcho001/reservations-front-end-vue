@@ -23,9 +23,12 @@
       </div>
       <hr />
 
-      <FilterAndSearch />
+      <FilterAndSearch 
+        :categories="categories"
+        :cities="cities"/>
 
-      <RestaurantCard />
+      <RestaurantCard 
+        :restaurants="restaurants"/>
     </section>
 
     <Footer />
@@ -38,6 +41,7 @@ import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
 import Footer from '../components/Footer'
 import userAPI from '../api/user'
+import { Toast } from '../utils/helpers'
 
 export default {
   components: {
@@ -60,7 +64,46 @@ export default {
     }
   },
   methods: {
-    
+    async fetchHome ({ queryPage, queryCategoryId }) {
+      try {
+        // 向 api get 資料
+        const res = await userAPI.getHome({ 
+          page: queryPage, 
+          categoryId: queryCategoryId
+          })
+        // 驗證回應
+        if (res.status !== 200) throw new Error()
+        const {
+          restaurants,
+          categories,
+          cities,
+          cityId,
+          page,
+          totalPage,
+          prev,
+          next } = res.data
+        
+        this.restaurants = restaurants
+        this.categories = categories
+        this.cities = cities
+        this.cityId = cityId
+        this.page = page
+        this.totalPage = totalPage
+        this.prev = prev
+        this.next = next
+      } catch (err) {
+        Toast.fire({
+          icon: 'warning',
+          title: '無法取得資料，請稍後再試'
+        })
+      }
+
+    }
+  },
+  created () {
+    // 取得當前網址的 query, categoryId
+    const { page="", categoryId="" } = this.$route.query
+    this.fetchHome({queryPage: page, queryCategoryId: categoryId})
   }
 }
 </script>
