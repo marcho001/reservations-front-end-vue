@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
-const baseURL = 'https://eee1e89b162a.ngrok.io/api'
+const baseURL = 'https://5cf2e39c0c7f.ngrok.io/api'
 const apiHelper =  axios.create({ baseURL })
 
 const Toast = Swal.mixin({
