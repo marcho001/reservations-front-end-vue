@@ -25,11 +25,11 @@
           </div>
           <hr />
           <p class="card_body--description mt-1">
-            aps dfjoi jfaojfaso fjajsojn vaoi vinve inapif ninanasna anvosa
-            enei fnaof naeaon avoas vja eofsaif adsjvas af apvjasif aiofnas
-            aivjaivjai a aijvasvna vajapi coia caoid cdiao caiocjaidcj
-            aoicsdij sopi sdic aoic aioc aiocj adcadj caiods caoisdcj sdaicj
-            asoic asiod jcadcj asiocd
+            aps dfjoi jfaojfaso fjajsojn vaoi vinve inapif ninanasna anvosa enei
+            fnaof naeaon avoas vja eofsaif adsjvas af apvjasif aiofnas
+            aivjaivjai a aijvasvna vajapi coia caoid cdiao caiocjaidcj aoicsdij
+            sopi sdic aoic aioc aiocj adcadj caiods caoisdcj sdaicj asoic asiod
+            jcadcj asiocd
           </p>
         </div>
       </a>
@@ -44,7 +44,7 @@ export default {
   components: {
     FontAwesomeIcon
   },
-  data () {
+  data() {
     return {
       solidIcon: solid
     }
