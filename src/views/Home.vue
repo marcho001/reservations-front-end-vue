@@ -17,16 +17,15 @@
     <StepFollowing />
 
     <section class="restaurant wrapper pt-5">
-    <div class="restaurant_title d-flex flex-column align-items-center">
-      <h1>想吃什麼？</h1>
-      <h3>選出最有興趣的餐廳吧！</h3>
-    </div>
-    <hr />
+      <div class="restaurant_title d-flex flex-column align-items-center">
+        <h1>想吃什麼？</h1>
+        <h3>選出最有興趣的餐廳吧！</h3>
+      </div>
+      <hr />
 
-    <FilterAndSearch />
+      <FilterAndSearch />
 
-    <RestaurantCard />
-
+      <RestaurantCard />
     </section>
 
     <Footer />

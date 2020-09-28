@@ -11,7 +11,7 @@
           <a class="m-2" href="#">未付款訂單</a>
         </div>
       </div>
-      <hr>
+      <hr />
       <div class="order">
         <div class="item p-2 my-4">
           <div class="item_title d-flex justify-content-between">
@@ -21,7 +21,7 @@
             </div>
             <p class="align-self-end">已付款</p>
           </div>
-          <hr>
+          <hr />
           <div class="item_detail">
             <ul class="bill_list_item d-flex align-items-center my-2">
               <li class="name text-center m-1">秋刀魚抹鹽梯 黃金鱸魚</li>
@@ -31,7 +31,7 @@
             </ul>
             <h3 class="text-right">總計： $200</h3>
           </div>
-          <hr>
+          <hr />
           <div class="item_footer d-flex justify-content-around">
             <div class="m-2">預約日期：<span>9/11</span></div>
             <div class="m-2">預約時間：<span>18:30</span></div>
@@ -41,10 +41,6 @@
             <div class="m-2">預約日期：<span>9/11</span></div>
           </div>
         </div>
-
-
-
-
       </div>
     </div>
   </div>

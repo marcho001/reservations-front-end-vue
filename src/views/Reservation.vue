@@ -2,7 +2,7 @@
   <div class="container">
     <input class="cart--toggle d-none" type="checkbox" :checked="showCart" />
     <div class="cart position-fixed scroll">
-    <!--研究使用keep alive 儲存資訊 or localStorage-->
+      <!--研究使用keep alive 儲存資訊 or localStorage-->
       <CartBill />
       <CartInfo @after-toggle-cart="afterToggleCart" />
     </div>
