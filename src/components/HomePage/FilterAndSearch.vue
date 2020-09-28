@@ -52,7 +52,9 @@
         </ul>
       </div>
     </div>
-    <form class="search d-flex align-items-center" action="">
+    <form 
+      @submit.prevent="handleSubmit"
+      class="search d-flex align-items-center">
       <input
         v-model="search"
         class="search_input"
@@ -95,7 +97,12 @@ export default {
     }
   },
   methods: {
-    
+    handleSubmit () {
+      this.$emit('after-search', {
+        search: this.search
+      })
+      this.search = ''
+    }
   }
 }
 </script>

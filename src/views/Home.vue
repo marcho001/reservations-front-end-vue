@@ -27,7 +27,8 @@
         :categoryId="categoryId"
         :cityId="cityId"
         :categories="categories"
-        :cities="cities"/>
+        :cities="cities"
+        @after-search="handleAfterSearch"/>
 
       <RestaurantCard 
         :restaurants="restaurants"/>
@@ -99,7 +100,9 @@ export default {
           title: '無法取得資料，請稍後再試'
         })
       }
-
+    },
+    handleAfterSearch (search) {
+      console.log(search)
     }
   },
   created () {
