@@ -37,6 +37,7 @@ import StepFollowing from '../components/HomePage/StepFollowing'
 import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
 import Footer from '../components/Footer'
+import userAPI from '../api/user'
 
 export default {
   components: {
@@ -46,7 +47,20 @@ export default {
     Footer
   },
   data() {
-    return {}
+    return {
+      restaurants: [],
+      categories: [],
+      cities: [],
+      categoryId: "",
+      cityId: "",
+      page: -1,
+      totalPage: [],
+      prev: -1,
+      next: -1
+    }
+  },
+  methods: {
+    
   }
 }
 </script>

@@ -35,7 +35,7 @@
       }
     }
     &_list {
-      z-index: 1000;
+      z-index: 99;
       border: 1px solid $mask;
       @extend %radius, %shadow;
       background: $white;
