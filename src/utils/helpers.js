@@ -1,4 +1,8 @@
 import Swal from 'sweetalert2'
+import axios from 'axios'
+
+const baseURL = 'https://eee1e89b162a.ngrok.io/api'
+const apiHelper =  axios.create({ baseURL })
 
 const Toast = Swal.mixin({
   toast: true,
@@ -13,4 +17,4 @@ const Confirm = Swal.mixin({
   confirmButtonColor: '#3085d6'
 })
 
-export { Toast, Confirm }
+export { apiHelper, Toast, Confirm }
