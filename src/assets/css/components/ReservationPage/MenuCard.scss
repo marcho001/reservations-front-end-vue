@@ -1,0 +1,42 @@
+.menu {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 1.5rem;
+}
+
+.menu_item {
+  @extend %shadow, %radius;
+  overflow: hidden;
+  &_body {
+    border-bottom: 1px solid $mask;
+    .description {
+      @include textWrap(2);
+    }
+  }
+}
+
+.count {
+  &_button {
+    @extend %tagStyle;
+    width: 1.5rem;
+    height: 1.5rem;
+    color: $white;
+    transform: translate(0, 0);
+  }
+  .plus {
+    background: $buttonColor;
+  }
+  .minus {
+    background: $mainColor;
+    transform: rotate(180deg);
+  }
+  &_input {
+    width: 2rem;
+    height: 1.5rem;
+    border: 0;
+    border-top: 1px solid $mask;
+    border-bottom: 1px solid $mask;
+    &::-webkit-outer-spin-button, &::-webkit-inner-spin-button{
+      appearance: none;
+    }
+  }
+}

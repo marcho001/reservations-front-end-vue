@@ -87,13 +87,6 @@ $spacers: (
   )
 );
 
-@each $prop, $abbrev in (width: w, height: h) {
-  @each $num, $val in $sizes {
-    .#{$abbrev}-#{$num} {
-      #{$prop}: $val;
-    }
-  } 
-}
 
 @each $prop, $abbrev in (margin: m, padding: p) {
   @each $num, $val in $spacers {
@@ -122,6 +115,7 @@ $spacers: (
     }
   }
 }
+
 html {
   font-size: 16px;
   height: 100%;
@@ -267,4 +261,16 @@ body {
 .scroll {
   overflow: scroll;
   scroll-behavior: smooth;
+}
+
+.container {
+  margin-top: 3.5rem;
+}
+
+.space-40 {
+  height: 40px;
+}
+
+.space-80 {
+  height: 80px;
 }

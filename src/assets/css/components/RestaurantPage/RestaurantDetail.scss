@@ -32,23 +32,19 @@
   flex-wrap: wrap;
 }
 
-.btn {
-  @extend %buttonStyle;
+.button_wrapper {
   padding: 0.5rem;
-  &--blue {
-    background: $buttonColor;
-    color: $white;
+  &--reservation {
+    @include buttonStyle($buttonColor, $buttonColor, $white);
   }
   &--add {
-    border: 1px solid $mainColor;
-    color: $mainColor;
+    @include buttonStyle($mainColor, transparent, $mainColor);
     &:hover {
       background: $mainColor;
       color: $white;
     }
   }
   &--remove {
-    background: $mainColor;
-    color: $white;
+    @include buttonStyle($mainColor, $mainColor, $white);
   }
 }

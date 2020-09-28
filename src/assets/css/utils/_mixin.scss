@@ -1,0 +1,19 @@
+@mixin textWrap($line) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+}
+
+@mixin buttonStyle ($borderColor, $bgColor, $textColor) {
+  @extend %radius, %shadow;
+  font-size: 1rem;
+  background: $bgColor;
+  border: 2px solid $borderColor;
+  color: $textColor;
+  &:hover {
+    transform: scale(1.2, 1.2);
+    transition: transform .2s;
+  }
+}
