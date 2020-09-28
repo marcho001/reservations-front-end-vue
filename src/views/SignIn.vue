@@ -55,10 +55,6 @@
 <script>
 import { Toast } from '../utils/helpers'
 import authorization from '../api/authorization'
-// 向 api post 登入
-// 將token 存到 localstorage
-// 使用者資料存到 vuex
-// 轉跳到首頁
 export default {
   data() {
     return {
@@ -80,6 +76,7 @@ export default {
         }
         this.isProcessing = true
 
+        // 向 api post 登入
         const { data } = await authorization.signin({
             email: this.email,
             password: this.password
@@ -89,7 +86,11 @@ export default {
           throw new Error(data.message)
         }
 
+        // 將token 存到 localstorage
         localStorage.setItem('token', data.token)
+        // 使用者資料存到 vuex
+        this.$store.commit('setCurrentUser',data.user)
+        // 轉跳到首頁
         this.$router.push('/home')
 
       } catch (err) {
