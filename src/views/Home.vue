@@ -24,6 +24,8 @@
       <hr />
 
       <FilterAndSearch 
+        :categoryId="categoryId"
+        :cityId="cityId"
         :categories="categories"
         :cities="cities"/>
 

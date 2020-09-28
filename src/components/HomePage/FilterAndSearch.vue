@@ -1,14 +1,56 @@
 <template>
   <div class="d-flex justify-content-between mt-5">
     <div class="filter position-relative">
-      <button @click="showCategoryList()" class="filter_hamburger ml-3 mt-1">
+      <button 
+        @click="categoryList = !categoryList" 
+        class="filter_hamburger ml-3 mt-1">
         <p class="border"></p>
       </button>
-      <ul v-show="categoryList" class="filter_list p-3 mt-1 position-absolute">
-        <li class="filter_list_item p-1">日式料理</li>
-        <li class="filter_list_item p-1">燒烤</li>
-        <li class="filter_list_item p-1">酒霸</li>
-      </ul>
+      <div 
+        v-show="categoryList" 
+        @mouseleave="categoryList = !categoryList"
+        class="filter_list p-3 mt-1 position-absolute d-flex justify-content-around">
+        <ul>
+          <li class="filter_list_item p-1">
+            <router-link
+              class="filter_list_item--link"
+              :class="{ active: categoryId === ''}"
+              :to="{ name: 'home' }"
+              >全部</router-link>
+          </li>
+          <li 
+            v-for="category in categories" 
+            :key="category.id" 
+            class="filter_list_item p-1">
+            <router-link
+              class="filter_list_item--link"
+              :class="{ active: categoryId === category.id}"
+              :to="{ name: 'home', query: { categoryId: category.id }}"
+              >{{ category.name }}</router-link>
+          </li>
+        </ul>
+      
+      <ul>
+          <li class="filter_list_item p-1">
+            <router-link
+              class="filter_list_item--link"
+              :class="{ active: cityId === ''}"
+              :to="{ name: 'home' }"
+              >全部</router-link>
+          </li>
+          <li 
+            v-for="city in cities" 
+            :key="city.id" 
+            class="filter_list_item p-1">
+            <router-link
+              class="filter_list_item--link"
+              :class="{ active: cityId === city.id}"
+              :to="{ name: 'home', query: { cityId: city.id }}"
+              >{{ city.area }}</router-link>
+          </li>
+          
+        </ul>
+      </div>
     </div>
     <form class="search d-flex align-items-center" action="">
       <input
@@ -28,6 +70,20 @@
 import { FontAwesomeIcon, solid } from '../../utils/icon'
 
 export default {
+  props: {
+    categoryId: {
+      type: [String, Number]
+    },
+    cityId: {
+      type: [String, Number]
+    },
+    categories: {
+      type: Array
+    },
+    cities: {
+      type: Array
+    }
+  },
   components: {
     FontAwesomeIcon
   },
@@ -39,9 +95,7 @@ export default {
     }
   },
   methods: {
-    showCategoryList() {
-      this.categoryList = !this.categoryList
-    }
+    
   }
 }
 </script>
