@@ -43,7 +43,7 @@ import StepFollowing from '../components/HomePage/StepFollowing'
 import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
 import Footer from '../components/Footer'
-import userAPI from '../api/user'
+import restAPI from '../api/restAPI'
 import { Toast } from '../utils/helpers'
 
 export default {
@@ -70,7 +70,7 @@ export default {
     async fetchHome({ queryPage, queryCategoryId, queryCityId }) {
       try {
         // 向 api get 資料
-        const res = await userAPI.getHome({
+        const res = await restAPI.getHome({
           page: queryPage,
           CategoryId: queryCategoryId,
           CityId: queryCityId
