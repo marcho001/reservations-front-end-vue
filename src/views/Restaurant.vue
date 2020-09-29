@@ -2,6 +2,7 @@
   <div class="container pt-4">
     <div class="restaurant wrapper">
       <RestaurantDetail
+        :rating="ratingAve"
         :restaurant="restaurant"
         :init-is-favorited="isFavorited"
       />
@@ -15,7 +16,8 @@
           :restaurant-id="restaurant.id"
         />
         <br />
-        <RestaurantComments />
+        <RestaurantComments 
+          :comments="restaurant.Comments"/>
       </div>
     </div>
     <br />
@@ -29,24 +31,9 @@ import Footer from '../components/Footer'
 import RestaurantDetail from '../components/RestaurantPage/RestaurantDetail'
 import CreateCommentForm from '../components/RestaurantPage/CreateCommentForm'
 import RestaurantComments from '../components/RestaurantPage/RestraurantComments'
+import { Toast } from '../utils/helpers'
+import restAPI from '../api/restAPI'
 
-const fakeRest = {
-  restaurant: {
-    id: 3,
-    name: '龍蝦吃到吐',
-    rating: 4.2,
-    address: '台北市中山區明水路3000號',
-    phone: '02-0000000',
-    image: '',
-    description: 'asfasdfasfasdfasdfa',
-    Category: {
-      id: 1,
-      name: '海鮮料理'
-    },
-    Comments: {}
-  },
-  isFavorited: false
-}
 
 export default {
   components: {
@@ -57,27 +44,38 @@ export default {
   },
   data() {
     return {
+      ratingAve: -1,
       restaurant: {
         id: 0,
         name: '',
-        rating: 0,
         address: '',
         image: '',
         description: '',
-        Category: {
-          id: 0,
-          name: ''
-        },
-        Comments: {}
+        Category: {},
+        City: {},
+        Comments: [],
+        open_time: '',
+        price: ''
       },
       isFavorited: false
     }
   },
   methods: {
-    fetchRestaurant() {
-      this.restaurant = {
-        ...this.restaurant,
-        ...fakeRest.restaurant
+    async fetchRestaurant(id) {
+      try {
+        const res = await restAPI.getRest(id)
+        const { ratingAve, restaurant } = res.data
+        this.ratingAve = ratingAve
+        this.restaurant = {
+          ...this.restaurant,
+          ...restaurant
+        }
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'warning',
+          title: '無法取得餐廳資料，請稍後再試'
+        })
       }
     },
     afterCreateComment(data) {
@@ -85,7 +83,8 @@ export default {
     }
   },
   created() {
-    this.fetchRestaurant()
+    const { id: restaurantId } = this.$route.params
+    this.fetchRestaurant(restaurantId)
   }
 }
 </script>

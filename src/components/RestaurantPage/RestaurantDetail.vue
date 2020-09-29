@@ -5,7 +5,7 @@
       <p class="restaurant_detail_tag mt-1">
         <span class="rating mr-3 px-1">
           <font-awesome-icon :icon="solidIcon.faStar" />
-          {{ restaurant.rating }}
+          {{ rating }}
         </span>
         <span class="category mr-3 px-1">{{ restaurant.Category.name }}</span>
       </p>
@@ -39,13 +39,21 @@
         </div>
       </div>
       <hr />
-      <p class="m-1">
+      <p class="m-2">
         <font-awesome-icon :icon="solidIcon.faMapMarkedAlt" />
         {{ restaurant.address }}
       </p>
-      <p class="m-1">
+      <p class="m-2">
         <font-awesome-icon :icon="solidIcon.faPhone" />
         {{ restaurant.phone }}
+      </p>
+      <p class="m-2">
+        營業時間：
+        {{ restaurant.open_time }}
+      </p>
+      <p class="m-2">
+        平均消費：
+        {{ restaurant.price }}
       </p>
     </div>
   </div>
@@ -63,6 +71,9 @@ export default {
     },
     initIsFavorited: {
       type: Boolean
+    },
+    rating: {
+      type: Number
     }
   },
   data() {
