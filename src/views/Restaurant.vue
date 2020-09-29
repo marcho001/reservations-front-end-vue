@@ -2,7 +2,6 @@
   <div class="container pt-4">
     <div class="restaurant wrapper">
       <RestaurantDetail
-        :rating="ratingAve"
         :restaurant="restaurant"
         :init-is-favorited="isFavorited"
       />
@@ -52,6 +51,7 @@ export default {
       ratingAve: '',
       restaurant: {
         id: 0,
+        rating: '',
         name: '',
         address: '',
         image: '',

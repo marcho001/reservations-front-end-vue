@@ -5,7 +5,7 @@
       <p class="restaurant_detail_tag mt-1">
         <span class="rating mr-3 px-1">
           <font-awesome-icon :icon="solidIcon.faStar" />
-          {{ rating }}
+          {{ restaurant.ratingAve }}
         </span>
         <span class="category mr-3 px-1">{{ restaurant.Category.name }}</span>
       </p>
@@ -73,9 +73,6 @@ export default {
     },
     initIsFavorited: {
       type: Boolean
-    },
-    rating: {
-      type: String
     }
   },
   data() {
