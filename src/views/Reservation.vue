@@ -1,17 +1,23 @@
 <template>
   <div class="container">
     <div class="space-40"></div>
-    <input class="cart--toggle d-none" type="checkbox" :checked="showCart" />
-    <div class="cart position-fixed scroll">
-      <!--研究使用keep alive 儲存資訊 or localStorage-->
-      <CartBill />
-      <CartInfo @after-toggle-cart="afterToggleCart" />
-    </div>
+    <transition name="show">
+      <div 
+        v-show="showCart"
+        class="cart position-fixed scroll">
+        <!--研究使用keep alive 儲存資訊 or localStorage-->
+        <CartBill />
+        <CartInfo
+          @after-toggle-cart="afterToggleCart" />
+      </div> 
+    </transition>
 
     <div class="wrapper">
       <div class="position-relative">
         <h1 class="text-center">點餐定位</h1>
-        <button @click="toggleCart" class="cart_button position-absolute p-1">
+        <button 
+          @click="showCart = !showCart" 
+          class="cart_button position-absolute p-1">
           <font-awesome-icon :icon="solidIcon.faShoppingCart" />
         </button>
       </div>
@@ -44,13 +50,10 @@ export default {
   data() {
     return {
       solidIcon: solid,
-      showCart: true
+      showCart: false
     }
   },
   methods: {
-    toggleCart() {
-      this.showCart = !this.showCart
-    },
     afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = true
@@ -67,27 +70,37 @@ export default {
   @extend %lobster;
   @extend %shadow;
   color: $textColor;
-  height: 100vh;
+  top: 3.5rem;
+  bottom: 0;
   width: 90%;
   background: $background;
   z-index: 100;
-  transform: scale(1, 1);
+}
+.show-enter-active, .show-leave-active {
+  transform: scaleX(1);
   transform-origin: left;
-  transition: transform 0.2s 0.1s;
+  opacity: 1;
 }
-.cart--toggle:checked + .cart {
-  transform: scale(0, 1);
-  .info,
-  .bill {
-    opacity: 0;
-  }
+.show-enter-active {
+  transition: transform .4s, opacity .2s .2s;
 }
+.show-leave-active {
+  transition: transform .4s .2s, opacity .2s;
+}
+.show-enter, .show-leave-to {
+  transform: scaleX(0);
+  opacity: 0;
+}
+
 .cart_button {
   font-size: 1.5rem;
   top: 50%;
   right: 0;
   transform: translateY(-40%);
   color: $mask;
+  &:hover {
+    color: $buttonColor;
+  }
 }
 @media screen and (min-width: 768px) {
   .cart {
