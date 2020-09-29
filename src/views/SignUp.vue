@@ -1,8 +1,7 @@
 <template>
   <div class="container d-flex justify-content-center align-items-center">
     <div class="form-section p-4">
-      <form
-        @submit.prevent="handleSubmit">
+      <form @submit.prevent="handleSubmit">
         <div class="form-section_title mt-3 text-center">
           <h1>註冊帳號</h1>
         </div>
@@ -57,8 +56,7 @@
       <div class="footer-section mt-5 text-right">
         <p>
           已經註冊了？
-          <router-link 
-            to="/signin">
+          <router-link to="/signin">
             立即登入
           </router-link>
         </p>
@@ -68,7 +66,7 @@
 </template>
 
 <script>
-import { Toast} from '../utils/helpers'
+import { Toast } from '../utils/helpers'
 import authorization from '../api/authorization'
 export default {
   data() {
@@ -80,10 +78,15 @@ export default {
     }
   },
   methods: {
-    async handleSubmit () {
+    async handleSubmit() {
       try {
         //驗證欄位
-        if (!this.name || !this.email || !this.password || !this.passwordCheck) {
+        if (
+          !this.name ||
+          !this.email ||
+          !this.password ||
+          !this.passwordCheck
+        ) {
           Toast.fire({
             icon: 'warning',
             title: '所有欄位都要輸入！'
@@ -120,7 +123,6 @@ export default {
         }
         // 轉跳到登入頁
         this.$router.push('/signin')
-
       } catch (err) {
         console.error(err)
       }

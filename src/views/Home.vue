@@ -23,15 +23,15 @@
       </div>
       <hr />
 
-      <FilterAndSearch 
+      <FilterAndSearch
         :category-id="CategoryId"
         :city-id="CityId"
         :categories="categories"
         :cities="cities"
-        @after-search="handleAfterSearch"/>
+        @after-search="handleAfterSearch"
+      />
 
-      <RestaurantCard 
-        :restaurants="restaurants.rows"/>
+      <RestaurantCard :restaurants="restaurants.rows" />
     </section>
 
     <Footer />
@@ -58,8 +58,8 @@ export default {
       restaurants: [],
       categories: [],
       cities: [],
-      CategoryId: "",
-      CityId: "",
+      CategoryId: '',
+      CityId: '',
       page: -1,
       totalPage: [],
       prev: -1,
@@ -67,14 +67,14 @@ export default {
     }
   },
   methods: {
-    async fetchHome ({ queryPage, queryCategoryId, queryCityId }) {
+    async fetchHome({ queryPage, queryCategoryId, queryCityId }) {
       try {
         // 向 api get 資料
-        const res = await userAPI.getHome({ 
-          page: queryPage, 
+        const res = await userAPI.getHome({
+          page: queryPage,
           CategoryId: queryCategoryId,
           CityId: queryCityId
-          })
+        })
         // 驗證回應
         if (res.status !== 200) throw new Error()
         const {
@@ -86,8 +86,9 @@ export default {
           page,
           totalPage,
           prev,
-          next } = res.data
-        
+          next
+        } = res.data
+
         this.CategoryId = CategoryId
         this.restaurants = restaurants
         this.categories = categories
@@ -104,21 +105,21 @@ export default {
         })
       }
     },
-    handleAfterSearch (search) {
+    handleAfterSearch(search) {
       console.log(search)
     }
   },
-  created () {
+  created() {
     // 取得當前網址的 query, categoryId
-    const { page = "", CategoryId = "", CityId = "" } = this.$route.query
+    const { page = '', CategoryId = '', CityId = '' } = this.$route.query
     this.fetchHome({
-      queryPage: page, 
+      queryPage: page,
       queryCategoryId: CategoryId,
       queryCityId: CityId
-      })
+    })
   },
-  beforeRouteUpdate (to,from, next) {
-    const { page = "", CategoryId = "", CityId = "" } = to.query
+  beforeRouteUpdate(to, from, next) {
+    const { page = '', CategoryId = '', CityId = '' } = to.query
     this.fetchHome({
       queryPage: page,
       queryCategoryId: CategoryId,

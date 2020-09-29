@@ -1,56 +1,62 @@
 <template>
   <div class="d-flex justify-content-between mt-5">
     <div class="filter position-relative">
-      <button 
-        @click="categoryList = !categoryList" 
-        class="filter_hamburger ml-3 mt-1">
+      <button
+        @click="categoryList = !categoryList"
+        class="filter_hamburger ml-3 mt-1"
+      >
         <p class="border"></p>
       </button>
-      <div 
-        v-show="categoryList" 
+      <div
+        v-show="categoryList"
         @mouseleave="categoryList = false"
-        class="filter_list p-3 mt-1 position-absolute d-flex justify-content-around">
+        class="filter_list p-3 mt-1 position-absolute d-flex justify-content-around"
+      >
         <ul>
           <li class="filter_list_item p-1">
             <router-link
               :to="{ name: 'home' }"
               @click.native="categoryList = false"
               class="filter_list_item--link"
-              >
+            >
               全部
-              </router-link>
+            </router-link>
           </li>
-          <li 
-            v-for="category in categories" 
-            :key="category.id" 
-            class="filter_list_item p-1">
+          <li
+            v-for="category in categories"
+            :key="category.id"
+            class="filter_list_item p-1"
+          >
             <router-link
               @click.native="categoryList = false"
               class="filter_list_item--link"
-              :class="{ active: categoryId === category.id}"
-              :to="{ name: 'home', query: { CategoryId: category.id }}"
-              >{{ category.name }}</router-link>
+              :class="{ active: categoryId === category.id }"
+              :to="{ name: 'home', query: { CategoryId: category.id } }"
+              >{{ category.name }}</router-link
+            >
           </li>
-        </ul>     
-      <ul>
-          <li 
-            v-for="city in cities" 
-            :key="city.id" 
-            class="filter_list_item p-1">
+        </ul>
+        <ul>
+          <li
+            v-for="city in cities"
+            :key="city.id"
+            class="filter_list_item p-1"
+          >
             <router-link
               @click.native="categoryList = false"
               class="filter_list_item--link"
-              :class="{ active: cityId === city.id}"
-              :to="{ name: 'home', query: { CityId: city.id }}"
-              >{{ city.area }}</router-link>
+              :class="{ active: cityId === city.id }"
+              :to="{ name: 'home', query: { CityId: city.id } }"
+              >{{ city.area }}</router-link
+            >
           </li>
-          
         </ul>
       </div>
     </div>
-    <form 
+    <form
       @submit.prevent="handleSubmit"
-      class="search d-flex align-items-center">
+      class="search d-flex align-items-center"
+    >
       <input
         v-model="search"
         class="search_input"
@@ -93,7 +99,7 @@ export default {
     }
   },
   methods: {
-    handleSubmit () {
+    handleSubmit() {
       this.$emit('after-search', {
         search: this.search
       })

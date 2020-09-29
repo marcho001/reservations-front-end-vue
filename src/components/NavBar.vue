@@ -6,10 +6,7 @@
       <h1 class="">S.W.</h1>
     </div>
     <div class="nav_wrapper">
-      <router-link 
-        v-if="!currentUser.role" 
-        to="/signin">登入
-        </router-link>
+      <router-link v-if="!currentUser.role" to="/signin">登入 </router-link>
       <template v-else>
         <template v-if="currentUser.role === 'common'">
           <a href="#">訂單行事曆</a>
@@ -29,9 +26,9 @@
 <script>
 import { mapState } from 'vuex'
 export default {
-   computed: {
-     ...mapState(['currentUser', 'isAuthenticated'])
-   }
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
+  }
 }
 </script>
 

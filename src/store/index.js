@@ -15,7 +15,7 @@ export default new Vuex.Store({
     isAuthenticated: false
   },
   mutations: {
-    setCurrentUser (state, currentUser) {
+    setCurrentUser(state, currentUser) {
       state.currentUser = {
         ...state.currentUser,
         ...currentUser

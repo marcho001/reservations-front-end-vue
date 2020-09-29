@@ -1,30 +1,26 @@
 <template>
   <div class="restaurant_card mt-5">
-    <div 
-      v-for="restaurant in restaurants" 
+    <div
+      v-for="restaurant in restaurants"
       :key="restaurant.id"
-      class="restaurant_card--item">
-      <router-link 
+      class="restaurant_card--item"
+    >
+      <router-link
         :to="{
-          name: 'restaurant', 
-          params: { id: restaurant.id}
-          }"
-        class="card">
+          name: 'restaurant',
+          params: { id: restaurant.id }
+        }"
+        class="card"
+      >
         <div class="card_header">
-          <img
-            :src="restaurant.image"
-          />
+          <img :src="restaurant.image" />
         </div>
         <div class="card_body p-2">
           <h1 class="card_body--title">
             {{ restaurant.name }}
           </h1>
-          <p class="my-2">
-            營業時間：{{ restaurant.open_time }}
-          </p>
-          <p class="my-2">
-          平均價位：{{ restaurant.price}}
-          </p>
+          <p class="my-2">營業時間：{{ restaurant.open_time }}</p>
+          <p class="my-2">平均價位：{{ restaurant.price }}</p>
           <div class="card_body--detail d-flex mt-1">
             <div>
               <span class="rating mr-2 px-1">
@@ -32,7 +28,7 @@
                 {{ restaurant.ratingAve }}
               </span>
               <span class="category px-1">
-              {{ restaurant.Category.name }}
+                {{ restaurant.Category.name }}
               </span>
             </div>
             <p class="ml-2">

@@ -1,9 +1,6 @@
 <template>
   <section class="step">
-  <input 
-    type="checkbox" 
-    class="d-none turn"
-    :checked="toggle">
+    <input type="checkbox" class="d-none turn" :checked="toggle" />
     <button
       @click="toggle = !toggle"
       class="step_toggle d-flex flex-column  align-items-center py-2"
@@ -11,9 +8,7 @@
       <p>第一次進來，該如何使用？</p>
     </button>
     <transition name="show">
-      <div 
-        v-show="toggle"
-        class="step_ans d-flex justify-content-around py-2">
+      <div v-show="toggle" class="step_ans d-flex justify-content-around py-2">
         <div class="step_ans_wrapper">
           <h3 class="title">STEP.1</h3>
           <div class="step_ans_wrapper--item p-2 text-center">選擇餐廳</div>
@@ -34,14 +29,14 @@
           <h3 class="title">STEP.4</h3>
           <div class="step_ans_wrapper--item p-2 text-center">準備用餐！</div>
         </div>
-      </div> 
+      </div>
     </transition>
   </section>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       toggle: false
     }
