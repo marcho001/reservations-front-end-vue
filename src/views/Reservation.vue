@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <div class="space-40"></div>
     <input class="cart--toggle d-none" type="checkbox" :checked="showCart" />
     <div class="cart position-fixed scroll">
       <!--研究使用keep alive 儲存資訊 or localStorage-->

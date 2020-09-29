@@ -1,7 +1,7 @@
-.restaurant_comments_newComment {
+.newComment {
   flex-wrap: wrap;
   color: $textColor;
-  &--rating {
+  &_rating {
     width: 50%;
     margin: 0 auto;
     .radio {
@@ -12,7 +12,7 @@
       color: $star;
     }
   }
-  &--comment {
+  &_comment {
     .text {
       width: 90%;
       resize: none;
@@ -25,4 +25,20 @@
       @include buttonStyle($mainColor, transparent, $mainColor);
     }
   }
+}
+
+.show-enter-active {
+  transition: opacity .2s .2s,transform .2s;
+}
+.show-leave-active {
+  transition: opacity .2s,transform .2s .2s;
+}
+.show-enter-to, .show-leave {
+  transform: scaleY(1);
+  transform-origin: top;
+  opacity: 1;
+}
+.show-enter, .show-leave-to {
+  transform: scaleY(0);
+  opacity: 0;
 }

@@ -5,7 +5,7 @@
       <p class="restaurant_detail_tag mt-1">
         <span class="rating mr-3 px-1">
           <font-awesome-icon :icon="solidIcon.faStar" />
-          {{ restaurant.rating }}
+          {{ restaurant.ratingAve }}
         </span>
         <span class="category mr-3 px-1">{{ restaurant.Category.name }}</span>
       </p>
@@ -24,28 +24,38 @@
       <div class="info d-flex justify-content-between">
         <h1>餐廳資訊</h1>
         <div class="button_wrapper mb-2 align-self-end">
-          <button class="button_wrapper--reservation btn btn--blue mr-3">
+          <router-link tag="button"
+          class="button_wrapper--reservation mr-3"
+            :to="{name: 'reservation'}">
             訂位點餐
-          </button>
+          </router-link>
           <button
             v-if="isFavorited === true"
-            class="button_wrapper--remove btn btn--remove"
+            class="button_wrapper--remove"
           >
             取消蒐藏
           </button>
-          <button v-else class="button_wrapper--add btn btn--add">
+          <button v-else class="button_wrapper--add">
             加入收藏
           </button>
         </div>
       </div>
       <hr />
-      <p class="m-1">
+      <p class="m-2">
         <font-awesome-icon :icon="solidIcon.faMapMarkedAlt" />
         {{ restaurant.address }}
       </p>
-      <p class="m-1">
+      <p class="m-2">
         <font-awesome-icon :icon="solidIcon.faPhone" />
         {{ restaurant.phone }}
+      </p>
+      <p class="m-2">
+        營業時間：
+        {{ restaurant.open_time }}
+      </p>
+      <p class="m-2">
+        平均消費：
+        {{ restaurant.price }}
       </p>
     </div>
   </div>

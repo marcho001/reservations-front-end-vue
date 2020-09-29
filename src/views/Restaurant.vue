@@ -13,9 +13,11 @@
         <CreateCommentForm
           @after-create-comment="afterCreateComment"
           :restaurant-id="restaurant.id"
+          :current-user-id="currentUser.id"
         />
         <br />
-        <RestaurantComments />
+        <RestaurantComments 
+          :comments="restaurant.Comments"/>
       </div>
     </div>
     <br />
@@ -30,23 +32,12 @@ import RestaurantDetail from '../components/RestaurantPage/RestaurantDetail'
 import CreateCommentForm from '../components/RestaurantPage/CreateCommentForm'
 import RestaurantComments from '../components/RestaurantPage/RestraurantComments'
 
-const fakeRest = {
-  restaurant: {
-    id: 3,
-    name: '龍蝦吃到吐',
-    rating: 4.2,
-    address: '台北市中山區明水路3000號',
-    phone: '02-0000000',
-    image: '',
-    description: 'asfasdfasfasdfasdfa',
-    Category: {
-      id: 1,
-      name: '海鮮料理'
-    },
-    Comments: {}
-  },
-  isFavorited: false
-}
+import { Toast } from '../utils/helpers'
+import restAPI from '../api/restAPI'
+import commentAPI from '../api/commentAPI'
+import { mapState } from 'vuex'
+
+
 
 export default {
   components: {
@@ -57,35 +48,67 @@ export default {
   },
   data() {
     return {
+      ratingAve: '',
       restaurant: {
         id: 0,
+        rating: '',
         name: '',
-        rating: 0,
         address: '',
         image: '',
         description: '',
-        Category: {
-          id: 0,
-          name: ''
-        },
-        Comments: {}
+        Category: {},
+        City: {},
+        Comments: [],
+        open_time: '',
+        price: ''
       },
       isFavorited: false
     }
   },
+  computed: {
+    ...mapState(['currentUser'])
+  },
   methods: {
-    fetchRestaurant() {
-      this.restaurant = {
-        ...this.restaurant,
-        ...fakeRest.restaurant
+    async fetchRestaurant(id) {
+      try {
+        const res = await restAPI.getRest(id)
+        const { ratingAve, restaurant } = res.data
+        this.ratingAve = ratingAve
+        this.restaurant = {
+          ...this.restaurant,
+          ...restaurant
+        }
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'warning',
+          title: '無法取得餐廳資料，請稍後再試'
+        })
       }
     },
-    afterCreateComment(data) {
-      console.log(data)
+    async afterCreateComment(payload) {
+      try {
+        const { data } = await commentAPI.postComment(payload)
+        if (data.status !== 'success') throw new Error()
+        this.restaurant.Comments.push({
+          ...payload,
+          User: {
+            image: this.currentUser.image,
+            name: this.currentUser.name
+          }
+        })
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法新增評論，請稍後再試'
+        })
+      }
     }
   },
   created() {
-    this.fetchRestaurant()
+    const { id: restaurantId } = this.$route.params
+    this.fetchRestaurant(restaurantId)
   }
 }
 </script>
