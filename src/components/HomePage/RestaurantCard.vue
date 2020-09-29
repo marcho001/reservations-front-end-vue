@@ -1,7 +1,7 @@
 <template>
   <div class="restaurant_card mt-5">
     <div 
-      v-for="restaurant in restaurants.rows" 
+      v-for="restaurant in restaurants" 
       :key="restaurant.id"
       class="restaurant_card--item">
       <router-link 

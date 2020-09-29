@@ -31,7 +31,7 @@
         @after-search="handleAfterSearch"/>
 
       <RestaurantCard 
-        :restaurants="restaurants"/>
+        :restaurants="restaurants.rows"/>
     </section>
 
     <Footer />
@@ -107,8 +107,18 @@ export default {
   },
   created () {
     // 取得當前網址的 query, categoryId
-    const { page="", categoryId="" } = this.$route.query
-    this.fetchHome({queryPage: page, queryCategoryId: categoryId})
+    const { page = "", categoryId = "" } = this.$route.query
+    this.fetchHome({
+      queryPage: page, 
+      queryCategoryId: categoryId
+      })
+  },
+  beforeRouteUpdate (to) {
+    const { page = "", categoryId = "" } = to.query
+    this.fetchHome({
+      queryPage: page,
+      queryCategoryId: categoryId
+    })
   }
 }
 </script>
