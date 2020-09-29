@@ -1,6 +1,6 @@
-.restaurant_comments_allComments {
+.comments {
   max-height: 300px;
-  &--item {
+  &_item {
   border-bottom: 1px solid darken($white, 10%);
   img {
     @extend %shadow;
