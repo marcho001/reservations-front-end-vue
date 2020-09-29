@@ -24,8 +24,8 @@
       <hr />
 
       <FilterAndSearch 
-        :categoryId="categoryId"
-        :cityId="cityId"
+        :category-id="CategoryId"
+        :city-id="CityId"
         :categories="categories"
         :cities="cities"
         @after-search="handleAfterSearch"/>
@@ -58,8 +58,8 @@ export default {
       restaurants: [],
       categories: [],
       cities: [],
-      categoryId: "",
-      cityId: "",
+      CategoryId: "",
+      CityId: "",
       page: -1,
       totalPage: [],
       prev: -1,
@@ -67,12 +67,13 @@ export default {
     }
   },
   methods: {
-    async fetchHome ({ queryPage, queryCategoryId }) {
+    async fetchHome ({ queryPage, queryCategoryId, queryCityId }) {
       try {
         // 向 api get 資料
         const res = await userAPI.getHome({ 
           page: queryPage, 
-          categoryId: queryCategoryId
+          CategoryId: queryCategoryId,
+          CityId: queryCityId
           })
         // 驗證回應
         if (res.status !== 200) throw new Error()
@@ -80,16 +81,18 @@ export default {
           restaurants,
           categories,
           cities,
-          cityId,
+          CityId,
+          CategoryId,
           page,
           totalPage,
           prev,
           next } = res.data
         
+        this.CategoryId = CategoryId
         this.restaurants = restaurants
         this.categories = categories
         this.cities = cities
-        this.cityId = cityId
+        this.CityId = CityId
         this.page = page
         this.totalPage = totalPage
         this.prev = prev
@@ -107,18 +110,21 @@ export default {
   },
   created () {
     // 取得當前網址的 query, categoryId
-    const { page = "", categoryId = "" } = this.$route.query
+    const { page = "", CategoryId = "", CityId = "" } = this.$route.query
     this.fetchHome({
       queryPage: page, 
-      queryCategoryId: categoryId
+      queryCategoryId: CategoryId,
+      queryCityId: CityId
       })
   },
-  beforeRouteUpdate (to) {
-    const { page = "", categoryId = "" } = to.query
+  beforeRouteUpdate (to,from, next) {
+    const { page = "", CategoryId = "", CityId = "" } = to.query
     this.fetchHome({
       queryPage: page,
-      queryCategoryId: categoryId
+      queryCategoryId: CategoryId,
+      queryCityId: CityId
     })
+    next()
   }
 }
 </script>

@@ -8,44 +8,40 @@
       </button>
       <div 
         v-show="categoryList" 
-        @mouseleave="categoryList = !categoryList"
+        @mouseleave="categoryList = false"
         class="filter_list p-3 mt-1 position-absolute d-flex justify-content-around">
         <ul>
           <li class="filter_list_item p-1">
             <router-link
-              class="filter_list_item--link"
-              :class="{ active: categoryId === ''}"
               :to="{ name: 'home' }"
-              >全部</router-link>
+              @click.native="categoryList = false"
+              class="filter_list_item--link"
+              >
+              全部
+              </router-link>
           </li>
           <li 
             v-for="category in categories" 
             :key="category.id" 
             class="filter_list_item p-1">
             <router-link
+              @click.native="categoryList = false"
               class="filter_list_item--link"
               :class="{ active: categoryId === category.id}"
-              :to="{ name: 'home', query: { categoryId: category.id }}"
+              :to="{ name: 'home', query: { CategoryId: category.id }}"
               >{{ category.name }}</router-link>
           </li>
-        </ul>
-      
+        </ul>     
       <ul>
-          <li class="filter_list_item p-1">
-            <router-link
-              class="filter_list_item--link"
-              :class="{ active: cityId === ''}"
-              :to="{ name: 'home' }"
-              >全部</router-link>
-          </li>
           <li 
             v-for="city in cities" 
             :key="city.id" 
             class="filter_list_item p-1">
             <router-link
+              @click.native="categoryList = false"
               class="filter_list_item--link"
               :class="{ active: cityId === city.id}"
-              :to="{ name: 'home', query: { cityId: city.id }}"
+              :to="{ name: 'home', query: { CityId: city.id }}"
               >{{ city.area }}</router-link>
           </li>
           

@@ -22,19 +22,19 @@
           <p class="my-2">
             營業時間：{{ restaurant.open_time }}
           </p>
+          <p class="my-2">
+          平均價位：{{ restaurant.price}}
+          </p>
           <div class="card_body--detail d-flex mt-1">
             <div>
               <span class="rating mr-2 px-1">
                 <font-awesome-icon :icon="solidIcon.faStar" />
-                5.0
+                {{ restaurant.ratingAve }}
               </span>
               <span class="category px-1">
               {{ restaurant.Category.name }}
               </span>
             </div>
-            <p class="ml-2">
-            平均價位：{{ restaurant.price}}
-            </p>
             <p class="ml-2">
               <span>{{ restaurant.City.name }}</span> |
               <span>{{ restaurant.City.area }}</span>
