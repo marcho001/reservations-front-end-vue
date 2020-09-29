@@ -14,6 +14,7 @@
         <CreateCommentForm
           @after-create-comment="afterCreateComment"
           :restaurant-id="restaurant.id"
+          :current-user-id="currentUser.id"
         />
         <br />
         <RestaurantComments 
@@ -31,8 +32,12 @@ import Footer from '../components/Footer'
 import RestaurantDetail from '../components/RestaurantPage/RestaurantDetail'
 import CreateCommentForm from '../components/RestaurantPage/CreateCommentForm'
 import RestaurantComments from '../components/RestaurantPage/RestraurantComments'
+
 import { Toast } from '../utils/helpers'
 import restAPI from '../api/restAPI'
+import commentAPI from '../api/commentAPI'
+import { mapState } from 'vuex'
+
 
 
 export default {
@@ -44,7 +49,7 @@ export default {
   },
   data() {
     return {
-      ratingAve: -1,
+      ratingAve: '',
       restaurant: {
         id: 0,
         name: '',
@@ -59,6 +64,9 @@ export default {
       },
       isFavorited: false
     }
+  },
+  computed: {
+    ...mapState(['currentUser'])
   },
   methods: {
     async fetchRestaurant(id) {
@@ -78,8 +86,24 @@ export default {
         })
       }
     },
-    afterCreateComment(data) {
-      console.log(data)
+    async afterCreateComment(payload) {
+      try {
+        const { data } = await commentAPI.postComment(payload)
+        if (data.status !== 'success') throw new Error()
+        this.restaurant.Comments.push({
+          ...payload,
+          User: {
+            image: this.currentUser.image,
+            name: this.currentUser.name
+          }
+        })
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法新增評論，請稍後再試'
+        })
+      }
     }
   },
   created() {

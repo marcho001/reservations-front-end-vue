@@ -34,7 +34,7 @@
         class="newComment_comment w-100 "
       >
         <textarea
-          v-model.trim="comment"
+          v-model.trim="content"
           class="text"
           name="comment"
           rows="4"
@@ -61,12 +61,15 @@ export default {
   props: {
     restaurantId: {
       type: Number
+    },
+    currentUserId: {
+      type: Number
     }
   },
   data() {
     return {
       rating: 0,
-      comment: '',
+      content: '',
       solidIcon: solid,
       regularIcon: regular
     }
@@ -80,19 +83,20 @@ export default {
       }).then(res => {
         if (res.isConfirmed === true) {
           this.rating = 0
-          this.comment = ''
+          this.content = ''
         }
       })
     },
     handleSubmit() {
       this.$emit('after-create-comment', {
-        restaurantId: this.restaurantId,
-        comment: this.comment,
+        RestaurantId: this.restaurantId,
+        UserId: this.currentUserId,
+        content: this.content,
         rating: this.rating,
         createdAt: new Date()
       })
       this.rating = 0
-      this.comment = ''
+      this.content = ''
     }
   }
 }

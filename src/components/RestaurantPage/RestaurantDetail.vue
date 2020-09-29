@@ -73,7 +73,7 @@ export default {
       type: Boolean
     },
     rating: {
-      type: Number
+      type: String
     }
   },
   data() {
