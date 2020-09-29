@@ -9,5 +9,10 @@ export default {
     return apiHelper.get(`/home?${searchParams.toString()}`, {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
+  },
+  getRest (id) {
+    return apiHelper.get(`/restaurant/${id}`, {
+      headers: { Authorization: `Bearer ${getToken()}`}
+    })
   }
 }
