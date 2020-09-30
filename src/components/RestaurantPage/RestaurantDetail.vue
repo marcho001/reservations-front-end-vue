@@ -24,15 +24,14 @@
       <div class="info d-flex justify-content-between">
         <h1>餐廳資訊</h1>
         <div class="button_wrapper mb-2 align-self-end">
-          <router-link tag="button"
-          class="button_wrapper--reservation mr-3"
-            :to="{name: 'reservation'}">
+          <router-link
+            tag="button"
+            class="button_wrapper--reservation mr-3"
+            :to="{ name: 'reservation' }"
+          >
             訂位點餐
           </router-link>
-          <button
-            v-if="isFavorited === true"
-            class="button_wrapper--remove"
-          >
+          <button v-if="isFavorited === true" class="button_wrapper--remove">
             取消蒐藏
           </button>
           <button v-else class="button_wrapper--add">

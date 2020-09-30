@@ -1,13 +1,8 @@
 <template>
-  <form
-    @submit.prevent.stop="handleSubmit"
-    class="newComment"
-  >
+  <form @submit.prevent.stop="handleSubmit" class="newComment">
     <div class="d-flex align-items-center">
       <h3>留下評論</h3>
-      <div
-        class="newComment_rating d-flex justify-content-around"
-      >
+      <div class="newComment_rating d-flex justify-content-around">
         <label
           class="cursor-pointer"
           v-for="num in 5"
@@ -29,10 +24,7 @@
     </div>
     <br />
     <transition name="show">
-      <div
-        v-show="rating > 0"
-        class="newComment_comment w-100 "
-      >
+      <div v-show="rating > 0" class="newComment_comment w-100 ">
         <textarea
           v-model.trim="content"
           class="text"
@@ -46,7 +38,7 @@
             取消
           </button>
         </div>
-      </div>  
+      </div>
     </transition>
   </form>
 </template>

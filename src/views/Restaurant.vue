@@ -16,8 +16,7 @@
           :current-user-id="currentUser.id"
         />
         <br />
-        <RestaurantComments 
-          :comments="restaurant.Comments"/>
+        <RestaurantComments :comments="restaurant.Comments" />
       </div>
     </div>
     <br />
@@ -36,8 +35,6 @@ import { Toast } from '../utils/helpers'
 import restAPI from '../api/restAPI'
 import commentAPI from '../api/commentAPI'
 import { mapState } from 'vuex'
-
-
 
 export default {
   components: {
