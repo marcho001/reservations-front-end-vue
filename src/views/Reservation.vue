@@ -66,51 +66,5 @@ export default {
 // 付款後清除 傳入資料庫
 </script>
 <style lang="scss" scoped>
-.cart {
-  @extend %lobster;
-  @extend %shadow;
-  color: $textColor;
-  top: 3.5rem;
-  bottom: 0;
-  width: 90%;
-  background: $background;
-  z-index: 100;
-}
-.show-enter-active, .show-leave-active {
-  transform: scaleX(1);
-  transform-origin: left;
-  opacity: 1;
-}
-.show-enter-active {
-  transition: transform .4s, opacity .2s .2s;
-}
-.show-leave-active {
-  transition: transform .4s .2s, opacity .2s;
-}
-.show-enter, .show-leave-to {
-  transform: scaleX(0);
-  opacity: 0;
-}
-
-.cart_button {
-  font-size: 1.5rem;
-  top: 50%;
-  right: 0;
-  transform: translateY(-40%);
-  color: $mask;
-  &:hover {
-    color: $buttonColor;
-  }
-}
-@media screen and (min-width: 768px) {
-  .cart {
-    width: 40%;
-  }
-  .bill {
-    margin: 1rem auto;
-  }
-  .info_form {
-    margin: 1.5rem;
-  }
-}
+@import '@/assets/css/pages/Reservation';
 </style>
