@@ -24,7 +24,9 @@
       <hr />
       <CategoryNavTab />
       <br />
-      <MenuCard />
+      <MenuCard 
+        @after-add-item="afterAddItem"
+        @after-minus-item="afterMinusItem"/>
     </div>
   </div>
 </template>
@@ -50,13 +52,47 @@ export default {
   data() {
     return {
       solidIcon: solid,
-      showCart: false
+      showCart: false,
+      order: []
     }
   },
   methods: {
     afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = true
+    },
+    afterAddItem (data) {
+      // 找出項目的 index
+      const findItemIndex = this.order.findIndex(item => {
+        return item.id === data.id
+      })
+
+      // 如果存在 count++，如果不存在 array.push
+      if (findItemIndex >= 0) {
+        this.order[findItemIndex] = {
+          ...this.order[findItemIndex],
+          count: data.count
+        }
+      } else {
+        this.order.push(data)
+      }
+    },
+    afterMinusItem (data) {
+      // 如果 count === 0，從 array 拿掉
+      if (data.count === 0) {
+        console.log(data)
+        this.order = this.order.filter(item => item.id !== data.id)
+        return
+      }
+      // 找出項目的 index
+      const findItemIndex = this.order.findIndex(item => {
+        return item.id === data.id
+      })
+      // 將 count--
+      this.order[findItemIndex] = {
+          ...this.order[findItemIndex],
+          count: data.count
+        }
     }
   }
 }
