@@ -2,33 +2,30 @@
   <div class="container">
     <div class="space-40"></div>
     <transition name="show">
-      <div 
-        v-show="showCart"
-        class="cart position-fixed scroll">
+      <div v-show="showCart" class="cart position-fixed scroll">
         <!--研究使用keep alive 儲存資訊 or localStorage-->
-        <CartBill 
-          :total-price="totalPrice"
-          :orders="orders"/>
-        <CartInfo
-          @after-toggle-cart="afterToggleCart" />
-      </div> 
+        <CartBill :total-price="totalPrice" :orders="orders" />
+        <CartInfo @after-toggle-cart="afterToggleCart" />
+      </div>
     </transition>
 
     <div class="wrapper">
       <div class="position-relative">
         <h1 class="text-center">點餐定位</h1>
-        <button 
-          @click="showCart = !showCart" 
-          class="cart_button position-absolute p-1">
+        <button
+          @click="showCart = !showCart"
+          class="cart_button position-absolute p-1"
+        >
           <font-awesome-icon :icon="solidIcon.faShoppingCart" />
         </button>
       </div>
       <hr />
       <CategoryNavTab />
       <br />
-      <MenuCard 
+      <MenuCard
         @after-add-item="afterAddItem"
-        @after-minus-item="afterMinusItem"/>
+        @after-minus-item="afterMinusItem"
+      />
     </div>
   </div>
 </template>
@@ -64,7 +61,7 @@ export default {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = false
     },
-    afterAddItem (payload) {
+    afterAddItem(payload) {
       // 找出項目的 index
       const findItemIndex = this.orders.findIndex(item => {
         return item.id === payload.id
@@ -81,7 +78,7 @@ export default {
       }
       this.price()
     },
-    afterMinusItem (payload) {
+    afterMinusItem(payload) {
       // 如果 count === 0，從 array 拿掉
       if (payload.count === 0) {
         this.orders = this.orders.filter(item => item.id !== payload.id)
@@ -94,12 +91,12 @@ export default {
       })
       // 將 count--
       this.orders[findItemIndex] = {
-          ...this.orders[findItemIndex],
-          ...payload
-        }
+        ...this.orders[findItemIndex],
+        ...payload
+      }
       this.price()
     },
-    price () {
+    price() {
       const price = this.orders.map(item => item.price * item.count)
       this.totalPrice = price.reduce((a, b) => {
         return a + b

@@ -10,9 +10,9 @@ export default {
       headers: { Authorization: `Bearer ${getToken()}` }
     })
   },
-  getRest (id) {
+  getRest(id) {
     return apiHelper.get(`/restaurant/${id}`, {
-      headers: { Authorization: `Bearer ${getToken()}`}
+      headers: { Authorization: `Bearer ${getToken()}` }
     })
   }
 }
