@@ -7,23 +7,24 @@
 
       <div class="wrapper">
 
-        <MemberHistoryOrder />
+        <!--MemberHistoryOrder /-->
+        <MemberInfo />
 
       </div>
     </div>
-    
-    
-   
+     
   </div>
 </template>
 <script>
-import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
+// import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
 import MemberNavbar from '../components/MemberPage/MemberNavbar'
+import MemberInfo from '../components/MemberPage/MemberInfo'
 
 export default {
   components: {
     MemberNavbar,
-    MemberHistoryOrder
+    // MemberHistoryOrder,
+    MemberInfo
   }
 }
 </script>
