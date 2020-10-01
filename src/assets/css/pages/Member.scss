@@ -1,3 +1,13 @@
+.changePage-enter-active, .changePage-leave-active {
+  opacity: 1;
+  transition: all .3s;
+}
+
+.changePage-enter, .changePage-leave-to {
+  transform: translateX(-10%);
+  opacity: 0;
+}
+
 @media screen and (min-width: 768px) {
   .member_wrapper {
     display: flex;
