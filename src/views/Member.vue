@@ -2,22 +2,15 @@
   <div class="container">
     <div class="space-40"></div>
     <div class="member_wrapper">
-
-     <MemberNavbar 
-      @after-change-page="afterChangePage"/>
+      <MemberNavbar @after-change-page="afterChangePage" />
 
       <div class="wrapper">
         <transition name="changePage">
-          <MemberHistoryOrder 
-            v-if="nowPage === 'history'"/>
-          <MemberInfo 
-            v-else-if="nowPage === 'info'"/>
-        
+          <MemberHistoryOrder v-if="nowPage === 'history'" />
+          <MemberInfo v-else-if="nowPage === 'info'" />
         </transition>
-
       </div>
     </div>
-     
   </div>
 </template>
 <script>
@@ -31,13 +24,13 @@ export default {
     MemberHistoryOrder,
     MemberInfo
   },
-  data () {
+  data() {
     return {
       nowPage: 'history'
     }
   },
   methods: {
-    afterChangePage (page) {
+    afterChangePage(page) {
       this.nowPage = page
     }
   }
