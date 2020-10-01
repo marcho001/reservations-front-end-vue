@@ -147,5 +147,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import '@/assets/css/pages/Order';
+@import '@/assets/css/pages/Member';
 </style>
