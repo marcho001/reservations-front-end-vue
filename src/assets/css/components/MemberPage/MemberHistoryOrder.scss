@@ -4,7 +4,7 @@
     color: $buttonColor;
     border-bottom: 2px solid $buttonColor;
   }
-  a {
+  &_item {
     color: $textColor;
     &:hover {
       color: $buttonColor;
