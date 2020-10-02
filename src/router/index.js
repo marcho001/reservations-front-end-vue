@@ -32,7 +32,7 @@ const routes = [
     component: () => import('../views/JoinUs')
   },
   {
-    path: '/member/:id',
+    path: '/member/:id/:name',
     name: 'member',
     component: () => import('../views/Member')
   },

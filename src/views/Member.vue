@@ -2,7 +2,8 @@
   <div class="container">
     <div class="space-40"></div>
     <div class="member_wrapper">
-      <MemberNavbar @after-change-page="afterChangePage" />
+      <UserNavTab 
+        :tabs="tabs"/>
 
       <div class="wrapper">
         <transition name="changePage">
@@ -15,24 +16,38 @@
 </template>
 <script>
 import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
-import MemberNavbar from '../components/MemberPage/MemberNavbar'
+import UserNavTab from '../components/UserNavTab'
 import MemberInfo from '../components/MemberPage/MemberInfo'
 
 export default {
   components: {
-    MemberNavbar,
+    UserNavTab,
     MemberHistoryOrder,
     MemberInfo
   },
   data() {
     return {
-      nowPage: 'history'
+      nowPage: 'history',
+      tabs: [
+        {
+          name: '我的訂單',
+          pathName: 'member', 
+          paramsName: 'history'         
+        },
+        {
+          name: '修改會員資料',
+          pathName: 'member', 
+          paramsName: 'info'         
+        },
+      ]
     }
   },
-  methods: {
-    afterChangePage(page) {
-      this.nowPage = page
-    }
+  created () {
+    this.nowPage = this.$route.params.name
+  },
+  beforeRouteUpdate (to, from, next) {
+    this.nowPage = to.params.name
+    next()
   }
 }
 </script>
