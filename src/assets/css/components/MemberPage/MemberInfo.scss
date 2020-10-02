@@ -28,7 +28,7 @@
       flex-direction: column;
       border-bottom: 1px solid $mask;
       margin-bottom: 1rem;
-      background: darken($background, 10%);
+      background: $background;
       label {
         color: $textColor;
         font-weight: bold;
