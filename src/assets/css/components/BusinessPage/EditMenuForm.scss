@@ -1,0 +1,73 @@
+.menu_form {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: $mask;
+}
+
+
+.form {
+  @extend %radius;
+  width: 60%;
+  background: $white;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.form_item {
+  display: flex;
+  width: 80%;
+  border-bottom: 1px solid $mask;
+  margin: 1rem auto;
+  background: $background;
+  label {
+    color: $textColor;
+    font-weight: bold;
+    margin: 0.5rem;
+  }
+  input {
+    border: 0;
+    background: transparent;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
+    &[type="number"] {
+      -moz-appearance:textfield;
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        appearance: none;
+      }
+    }
+  }
+  #category {
+    border: 0;
+    background: transparent;
+  }
+  #description {
+    resize: none;
+    background: transparent;
+    flex-grow: 1;
+    border: 0;
+  }
+}
+
+.image {
+  @extend %radius;
+  background: transparent;
+  height: 100px;
+  overflow: hidden;
+  img {
+    position: absolute;
+    z-index: -1;
+  }
+  &_icon {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    line-height: 100px;
+    background: $mask;
+    color: $white;
+      }
+}
+.form_save {
+  @include buttonStyle($buttonColor, $buttonColor, $white)
+}
