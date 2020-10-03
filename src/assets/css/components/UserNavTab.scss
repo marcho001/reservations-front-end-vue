@@ -19,6 +19,9 @@
   .navbar {
     width: 12rem;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-right: 2px solid $mask;
     background: $navBar;
     transform: scaleY(1.1);
