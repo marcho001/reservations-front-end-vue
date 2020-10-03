@@ -1,0 +1,52 @@
+.form {
+  width: 60%;
+  margin: 0 auto;
+}
+.form_item {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid $mask;
+  margin-bottom: 1rem;
+  background: $background;
+  label {
+    color: $textColor;
+    font-weight: bold;
+    margin: 0.5rem;
+  }
+  input {
+    border: 0;
+    background: transparent;
+    padding-left: 0.5rem;
+    font-size: 1.2rem;
+  }
+  #category {
+    border: 0;
+    background: transparent;
+  }
+  #description {
+    resize: none;
+    background: transparent;
+    border: 0;
+  }
+}
+
+.image {
+  background: transparent;
+  height: 300px;
+  overflow: hidden;
+  img {
+    position: absolute;
+    z-index: -1;
+  }
+  &_icon {
+    width: 100%;
+    height: 100%;
+    font-size: 1.5rem;
+    line-height: 300px;
+    background: $mask;
+    color: $white;
+      }
+}
+.form_save {
+  @include buttonStyle($buttonColor, $buttonColor, $white)
+}

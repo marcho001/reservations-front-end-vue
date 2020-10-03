@@ -6,7 +6,7 @@
         :tabs="tabs"/>
         <div class="wrapper">
 
-        
+      <EditRestaurant />
       </div>
 
     </div>
@@ -15,9 +15,11 @@
 
 <script>
 import UserNavTab from '../components/UserNavTab'
+import EditRestaurant from '../components/BusinessPage/EditRestaurant'
 export default {
   components: {
-    UserNavTab
+    UserNavTab,
+    EditRestaurant
   },
   data () {
     return {
@@ -43,16 +45,14 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
-@media screen and (min-width: 768px) {
-  .business_wrapper {
-    display: flex;
-  }
-  .wrapper {
-    height: 100vh;
-    overflow: scroll;
-    scroll-behavior: smooth;
-  }
+<style lang="scss" scoped>
+.business_wrapper {
+  display: flex;
 }
+.wrapper {
+  height: 100vh;
+  overflow: scroll;
+  scroll-behavior: smooth;
+}
+
 </style>
