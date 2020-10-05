@@ -35,13 +35,23 @@
       }
     }
     &_list {
-      z-index: 1000;
+      z-index: 99;
       border: 1px solid $mask;
       @extend %radius, %shadow;
       background: $white;
-      width: 200px;
+      width: 320px;
       &_item {
         border-bottom: 1px solid darken($white, 10%);
+        .active {
+          color: $buttonColor;
+          border-bottom: 1px solid $buttonColor;
+        }
+        &--link {
+          color: $textColor;
+        }
+        &--link:hover {
+          color: $buttonColor;
+        }
       }
     }  
   }

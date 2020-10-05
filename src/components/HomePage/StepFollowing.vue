@@ -1,13 +1,14 @@
 <template>
   <section class="step">
-      <input type="checkbox" id="toggle" class="step_toggle d-none" />
-      <label
-        for="toggle"
-        class="step_label d-flex flex-column  align-items-center cursor-pointer py-2"
-      >
-        <p>第一次進來，該如何使用？</p>
-      </label>
-      <div class="step_ans d-flex justify-content-around">
+    <input type="checkbox" class="d-none turn" :checked="toggle" />
+    <button
+      @click="toggle = !toggle"
+      class="step_toggle d-flex flex-column  align-items-center py-2"
+    >
+      <p>第一次進來，該如何使用？</p>
+    </button>
+    <transition name="show">
+      <div v-show="toggle" class="step_ans d-flex justify-content-around py-2">
         <div class="step_ans_wrapper">
           <h3 class="title">STEP.1</h3>
           <div class="step_ans_wrapper--item p-2 text-center">選擇餐廳</div>
@@ -29,8 +30,19 @@
           <div class="step_ans_wrapper--item p-2 text-center">準備用餐！</div>
         </div>
       </div>
-    </section>
+    </transition>
+  </section>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      toggle: false
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 @import '@/assets/css/components/HomePage/StepFollowing';

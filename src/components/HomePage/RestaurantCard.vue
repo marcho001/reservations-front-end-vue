@@ -1,38 +1,47 @@
 <template>
   <div class="restaurant_card mt-5">
-    <div class="restaurant_card--item">
-      <a class="card" href="#">
+    <div
+      v-for="restaurant in restaurants"
+      :key="restaurant.id"
+      class="restaurant_card--item"
+    >
+      <router-link
+        :to="{
+          name: 'restaurant',
+          params: { id: restaurant.id }
+        }"
+        class="card"
+      >
         <div class="card_header">
-          <img
-            src="https://images.unsplash.com/photo-1593661982469-ff1e1bbbc88d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1494&q=80"
-            alt=""
-          />
+          <img :src="restaurant.image" />
         </div>
         <div class="card_body p-2">
-          <h1 class="card_body--title">龍蝦吃到吐</h1>
+          <h1 class="card_body--title">
+            {{ restaurant.name }}
+          </h1>
+          <p class="my-2">營業時間：{{ restaurant.open_time }}</p>
+          <p class="my-2">平均價位：{{ restaurant.price }}</p>
           <div class="card_body--detail d-flex mt-1">
             <div>
               <span class="rating mr-2 px-1">
                 <font-awesome-icon :icon="solidIcon.faStar" />
-                5.0
+                {{ restaurant.ratingAve }}
               </span>
-              <span class="category px-1">海鮮料理</span>
+              <span class="category px-1">
+                {{ restaurant.Category.name }}
+              </span>
             </div>
             <p class="ml-2">
-              <span>台北市</span> |
-              <span>中山區</span>
+              <span>{{ restaurant.City.name }}</span> |
+              <span>{{ restaurant.City.area }}</span>
             </p>
           </div>
           <hr />
           <p class="card_body--description mt-1">
-            aps dfjoi jfaojfaso fjajsojn vaoi vinve inapif ninanasna anvosa
-            enei fnaof naeaon avoas vja eofsaif adsjvas af apvjasif aiofnas
-            aivjaivjai a aijvasvna vajapi coia caoid cdiao caiocjaidcj
-            aoicsdij sopi sdic aoic aioc aiocj adcadj caiods caoisdcj sdaicj
-            asoic asiod jcadcj asiocd
+            {{ restaurant.description }}
           </p>
         </div>
-      </a>
+      </router-link>
     </div>
   </div>
 </template>
@@ -41,10 +50,15 @@
 import { FontAwesomeIcon, solid } from '../../utils/icon'
 
 export default {
+  props: {
+    restaurants: {
+      type: Array
+    }
+  },
   components: {
     FontAwesomeIcon
   },
-  data () {
+  data() {
     return {
       solidIcon: solid
     }

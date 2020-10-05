@@ -1,13 +1,8 @@
 <template>
-  <form
-    @submit.prevent.stop="handleSubmit"
-    class="restaurant_comments_newComment"
-  >
+  <form @submit.prevent.stop="handleSubmit" class="newComment">
     <div class="d-flex align-items-center">
       <h3>留下評論</h3>
-      <div
-        class="restaurant_comments_newComment--rating d-flex justify-content-around"
-      >
+      <div class="newComment_rating d-flex justify-content-around">
         <label
           class="cursor-pointer"
           v-for="num in 5"
@@ -28,25 +23,23 @@
       </div>
     </div>
     <br />
-    <div
-      v-if="rating > 0"
-      class="restaurant_comments_newComment--comment w-100 "
-    >
-      <textarea
-        v-model.trim="comment"
-        class="text"
-        name="comment"
-        rows="4"
-        autofocus
-        wrap="hard"
-      ></textarea>
-      <div class="d-flex">
-        <button class="submit m-3 px-2" type="submit">新增</button>
-        <button @click.prevent.stop="cancelComment" class="cancel m-3 px-2">
-          取消
-        </button>
+    <transition name="show">
+      <div v-show="rating > 0" class="newComment_comment w-100 ">
+        <textarea
+          v-model.trim="content"
+          class="text"
+          name="comment"
+          rows="4"
+          wrap="hard"
+        ></textarea>
+        <div class="d-flex">
+          <button class="submit m-3 px-2" type="submit">新增</button>
+          <button @click.prevent.stop="cancelComment" class="cancel m-3 px-2">
+            取消
+          </button>
+        </div>
       </div>
-    </div>
+    </transition>
   </form>
 </template>
 
@@ -60,12 +53,15 @@ export default {
   props: {
     restaurantId: {
       type: Number
+    },
+    currentUserId: {
+      type: Number
     }
   },
   data() {
     return {
       rating: 0,
-      comment: '',
+      content: '',
       solidIcon: solid,
       regularIcon: regular
     }
@@ -79,19 +75,20 @@ export default {
       }).then(res => {
         if (res.isConfirmed === true) {
           this.rating = 0
-          this.comment = ''
+          this.content = ''
         }
       })
     },
     handleSubmit() {
       this.$emit('after-create-comment', {
-        restaurantId: this.restaurantId,
-        comment: this.comment,
+        RestaurantId: this.restaurantId,
+        UserId: this.currentUserId,
+        content: this.content,
         rating: this.rating,
         createdAt: new Date()
       })
       this.rating = 0
-      this.comment = ''
+      this.content = ''
     }
   }
 }

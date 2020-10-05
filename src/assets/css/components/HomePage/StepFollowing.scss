@@ -1,6 +1,7 @@
 .step {
-  &_label {
+  &_toggle {
     @extend %shadow;
+    width: 100%;
     height: 80px;
     color: $textColor;
     font-weight: bold;
@@ -13,43 +14,46 @@
       border-left: 3px solid #000;
       border-bottom: 3px solid #000;
       transform: rotate(-45deg);
-      transition: transform .1s;
+      transition: transform .3s;
     }
   }
 
-  &_toggle:checked ~ &_label::after {
-    content: '';
+  .turn:checked + &_toggle::after {
     transform: rotate(135deg);
   }
 
-  &_toggle:checked ~ &_ans {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  .show-enter-active, .show-leave-active {
+    opacity: 1;
+    transform-origin: top;
+  }
+  .show-enter-active {
+    transition: opacity .2s .2s, transform .2s;
+  }
+  .show-leave-active {
+    transition: opacity .2s, transform .2s .2s;
+  }
+  .show-enter, .show-leave-to {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+  
+  .show-enter-to, .show-leave {
+    transform: scaleY(1);
+  }
+  
+  &_ans {
+    background: darken($white, 5%);
+    flex-wrap: wrap;
+    z-index: -1;
     border-bottom: 4px solid darken($white, 15%);
     border-top: 4px solid darken($white, 10%);
-    height: 100%;
-  }
-  &_toggle:checked ~ &_ans &_ans_wrapper {
-    opacity: 1;
-    transition: opacity 0.2s 0.2s;
-  }
-
-  &_ans {
-    transform-origin: top;
-    background: darken($white, 5%);
-    position: relative;
-    flex-wrap: wrap;
-    height: 0;
-    z-index: -99;
-
+    
     &_wrapper {
-      opacity: 0;
       @extend %shadow;
       margin: 0.5rem;
       background: $mainColor;
       color: $textColor;
       position: relative;
-      z-index: -9;
       border-radius: 50%;
       display: flex;
       justify-content: center;

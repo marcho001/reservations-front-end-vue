@@ -1,6 +1,7 @@
 <template>
   <div class="reservation">
     <NavBar />
+    <div class="space-40"></div>
     <main>
       <router-view />
     </main>
@@ -22,7 +23,6 @@ export default {
 .reservation {
   height: 100%;
   main {
-    // margin-top: 3.5rem;
     height: 100%;
   }
 }

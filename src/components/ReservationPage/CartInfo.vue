@@ -40,9 +40,7 @@
         <button @click="toggleCart" class="button_wrapper--back mr-2 p-1">
           繼續點餐
         </button>
-        <button
-          @click="confirmToPay"
-          class="button_wrapper--pay p-1">
+        <button @click="confirmToPay" class="button_wrapper--pay p-1">
           前往結帳
         </button>
       </div>
@@ -57,14 +55,14 @@ export default {
     toggleCart() {
       this.$emit('after-toggle-cart')
     },
-    confirmToPay () {
+    confirmToPay() {
       Confirm.fire({
         title: '即將前往付款！',
         text: '已檢查過餐點內容了嗎？',
         confirmButtonText: '前往付款',
         cancelButtonText: '再確認一次..'
-      }).then( res => {
-        if(res.isConfirmed) {
+      }).then(res => {
+        if (res.isConfirmed) {
           console.log('go pay')
         }
       })

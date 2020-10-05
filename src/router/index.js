@@ -32,6 +32,16 @@ const routes = [
     component: () => import('../views/JoinUs')
   },
   {
+    path: '/member/:id/:name',
+    name: 'member',
+    component: () => import('../views/Member')
+  },
+  {
+    path: '/business/:id/:name',
+    name: 'business',
+    component: () => import('../views/BusinessCenter')
+  },
+  {
     path: '/signin',
     name: 'signin',
     component: SignIn
@@ -49,6 +59,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  linkExactActiveClass: 'active',
   routes
 })
 

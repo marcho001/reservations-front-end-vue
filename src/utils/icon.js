@@ -6,7 +6,8 @@ import {
   faPhone,
   faShoppingCart,
   faListUl,
-  faUtensils
+  faUtensils,
+  faCameraRetro
 } from '@fortawesome/free-solid-svg-icons'
 import {
   faStar as farStar,
@@ -21,7 +22,8 @@ const solid = {
   faPhone,
   faShoppingCart,
   faListUl,
-  faUtensils
+  faUtensils,
+  faCameraRetro
 }
 
 const regular = {

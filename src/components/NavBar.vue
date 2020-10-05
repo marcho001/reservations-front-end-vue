@@ -6,13 +6,13 @@
       <h1 class="">S.W.</h1>
     </div>
     <div class="nav_wrapper">
-      <a v-if="!user.id" href="#">登入</a>
+      <router-link v-if="!currentUser.role" to="/signin">登入 </router-link>
       <template v-else>
-        <template v-if="user.role === 'user'">
+        <template v-if="currentUser.role === 'common'">
           <a href="#">訂單行事曆</a>
         </template>
 
-        <template v-if="user.role === 'owner'">
+        <template v-if="currentUser.role === 'business'">
           <a href="#">我的餐廳</a>
           <a href="#">我的菜單</a>
         </template>
@@ -24,33 +24,10 @@
 </template>
 
 <script>
-const fakeUser = {
-  id: 2,
-  name: 'marc',
-  role: 'user',
-  email: 'user@example.com'
-}
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {
-      user: {
-        id: '',
-        name: '',
-        role: '',
-        email: ''
-      }
-    }
-  },
-  methods: {
-    fetchUser() {
-      this.user = {
-        ...this.user,
-        ...fakeUser
-      }
-    }
-  },
-  created() {
-    this.fetchUser()
+  computed: {
+    ...mapState(['currentUser', 'isAuthenticated'])
   }
 }
 </script>
