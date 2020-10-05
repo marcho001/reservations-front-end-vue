@@ -7,8 +7,7 @@
 
       <div class="wrapper">
         <transition name="changePage">
-          <MemberHistoryOrder v-if="nowPage === 'history'" />
-          <MemberInfo v-else-if="nowPage === 'info'" />
+          <component :is="renderComponents"></component>
         </transition>
       </div>
     </div>
@@ -40,6 +39,17 @@ export default {
           paramsName: 'info'         
         },
       ]
+    }
+  },
+  computed: {
+    renderComponents () {
+      let ComponentName = ''
+      if (this.nowPage === 'history') {
+        ComponentName = 'MemberHistoryOrder'
+      } else if (this.nowPage === 'info') {
+        ComponentName = 'MemberInfo'
+      }
+      return ComponentName
     }
   },
   created () {

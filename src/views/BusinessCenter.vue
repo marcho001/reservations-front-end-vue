@@ -10,35 +10,19 @@
         v-if="nowPage === 'restaurant'"/>
       
       <div>
-      <button class="create m-4">新增餐點</button>
+      <button 
+        @click="toggleEditForm"
+        class="create m-4">
+        新增餐點</button>
       <hr>
 
         <div class="menu d-grid">
-          <div class="menu_item">
-          <img :src="meal.image | emptyImage" />
-          <div class="menu_item_body">
-            <h1 class="text-center">
-              eateat
-            </h1>
-            <p class="description text-center p-2">
-              apsdofiaosdfj joi j oi ijoij oj oi oijo ioj ijoj oi oijioj ojoi o joijojojojo  jojoj o
-            </p>
-          </div>
-          <div
-            class="menu_item_footer d-flex justify-content-around align-items-center my-3"
-          >
-            <h3 class="mr-3">NT$ 30</h3>
-            <button class="sale">販賣中</button>
-            <button class="stop">停售中</button>
-            
-          </div>
-        </div>
-
+          <MenuCard />
         </div>
       
-      <EditMenuForm 
-        @after-toggle-edit-form="afterToggleEditForm"
-        v-show="editMenu"/>
+        <EditMenuForm 
+          @after-toggle-edit-form="afterToggleEditForm"
+          v-show="editMenu"/> 
 
       </div>
 
@@ -50,23 +34,21 @@
 </template>
 
 <script>
-import { emptyImageFilter } from '../utils/mixin'
 import UserNavTab from '../components/UserNavTab'
 import EditRestaurant from '../components/BusinessPage/EditRestaurant'
 import EditMenuForm from '../components/BusinessPage/EditMenuForm'
+import MenuCard from '../components/BusinessPage/MenuCard'
 export default {
   components: {
     UserNavTab,
     EditRestaurant,
-    EditMenuForm
+    EditMenuForm,
+    MenuCard
   },
   data () {
     return {
       nowPage: 'menu',
       editMenu: false,
-      meal: {
-        image: ''
-      },
       tabs: [
         {
           name: '編輯餐廳',
@@ -86,10 +68,12 @@ export default {
       ]
     }
   },
-  mixins: [emptyImageFilter],
   methods: {
     afterToggleEditForm () {
       this.editMenu = false
+    },
+    toggleEditForm () {
+      this.editMenu = true
     }
   }
 }
@@ -108,22 +92,10 @@ export default {
 .menu {
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   grid-gap: 2rem;
-  &_item {
-  @extend %shadow, %radius;
-  overflow: hidden;
-  &_body {
-    border-bottom: 1px solid $mask;   
-    }
-  }
 }
+
 .create {
   @include buttonStyle($buttonColor, $buttonColor, $white)
-}
-.sale {
-  @include buttonStyle($categoryTag, $categoryTag, $white)
-}
-.stop {
-  @include buttonStyle($mainColor, $mainColor, $white)
 }
 
 
