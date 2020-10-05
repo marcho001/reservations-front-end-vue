@@ -25,10 +25,7 @@
           v-show="editMenu"/> 
 
       </div>
-
-
       </div>
-
     </div>
   </div>
 </template>
@@ -80,24 +77,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.business_wrapper {
-  display: flex;
-}
-.wrapper {
-  height: 100vh;
-  overflow: scroll;
-  scroll-behavior: smooth;
-}
-
-.menu {
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-gap: 2rem;
-}
-
-.create {
-  @include buttonStyle($buttonColor, $buttonColor, $white)
-}
-
-
-
+@import '@assets/css/pages/BusinessCenter';
 </style>
