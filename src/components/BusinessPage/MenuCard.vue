@@ -35,19 +35,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.menu_item {
-  @extend %shadow, %radius;
-  overflow: hidden;
-  &_body {
-    border-bottom: 1px solid $mask;   
-    }
-  }  
-
-.sale {
-  @include buttonStyle($categoryTag, $categoryTag, $white)
-}
-.stop {
-  @include buttonStyle($mainColor, $mainColor, $white)
-}
-
+@import '@/assets/css/components/BusinessPage/MenuCard';
 </style>
