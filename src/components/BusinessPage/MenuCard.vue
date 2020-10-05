@@ -6,7 +6,8 @@
         eateat
       </h1>
       <p class="description text-center p-2">
-        apsdofiaosdfj joi j oi ijoij oj oi oijo ioj ijoj oi oijioj ojoi o joijojojojo  jojoj o
+        apsdofiaosdfj joi j oi ijoij oj oi oijo ioj ijoj oi oijioj ojoi o
+        joijojojojo jojoj o
       </p>
     </div>
     <div
@@ -15,7 +16,6 @@
       <h3 class="mr-3">NT$ 30</h3>
       <button class="sale">販賣中</button>
       <button class="stop">停售中</button>
-      
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@
 <script>
 import { emptyImageFilter } from '../../utils/mixin'
 export default {
-  data () {
+  data() {
     return {
       meal: {
         image: ''

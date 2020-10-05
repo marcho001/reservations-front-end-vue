@@ -2,8 +2,7 @@
   <div class="container">
     <div class="space-40"></div>
     <div class="member_wrapper">
-      <UserNavTab 
-        :tabs="tabs"/>
+      <UserNavTab :tabs="tabs" />
 
       <div class="wrapper">
         <transition name="changePage">
@@ -30,19 +29,19 @@ export default {
       tabs: [
         {
           name: '我的訂單',
-          pathName: 'member', 
-          paramsName: 'history'         
+          pathName: 'member',
+          paramsName: 'history'
         },
         {
           name: '修改會員資料',
-          pathName: 'member', 
-          paramsName: 'info'         
-        },
+          pathName: 'member',
+          paramsName: 'info'
+        }
       ]
     }
   },
   computed: {
-    renderComponents () {
+    renderComponents() {
       let ComponentName = ''
       if (this.nowPage === 'history') {
         ComponentName = 'MemberHistoryOrder'
@@ -52,10 +51,10 @@ export default {
       return ComponentName
     }
   },
-  created () {
+  created() {
     this.nowPage = this.$route.params.name
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name
     next()
   }

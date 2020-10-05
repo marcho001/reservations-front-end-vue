@@ -5,7 +5,7 @@
       <input type="text" id="name" />
     </div>
     <div class="form_item">
-    <label for="category">餐廳類別：</label>
+      <label for="category">餐廳類別：</label>
       <select class="px-1" id="category">
         <option value="" disabled selected>請選擇類別</option>
         <option value="">日式料理</option>
@@ -13,8 +13,7 @@
       </select>
     </div>
     <label class="form_item image position-relative" for="image">
-      <img 
-      :src="restaurant.image | emptyImage" />
+      <img :src="restaurant.image | emptyImage" />
       <p class="image_icon text-center cursor-pointer">
         <font-awesome-icon :icon="solidIcon.faCameraRetro" />
       </p>
@@ -36,7 +35,7 @@
       <label for="open_time">營業時間：</label>
       <input type="tel" id="open_time" />
     </div>
-    
+
     <div class="d-flex justify-content-end">
       <button class="form_save mt-2">
         儲存
@@ -53,7 +52,7 @@ export default {
   components: {
     FontAwesomeIcon
   },
-  data () {
+  data() {
     return {
       solidIcon: solid,
       restaurant: {
@@ -63,7 +62,6 @@ export default {
   },
   mixins: [emptyImageFilter]
 }
-
 </script>
 
 <style lang="scss" scoped>

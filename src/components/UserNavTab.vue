@@ -4,12 +4,17 @@
       class="navbar_wrapper d-flex align-items-center justify-content-around"
     >
       <router-link
-        v-for="(tab, index) in tabs" 
+        v-for="(tab, index) in tabs"
         :key="index"
-        :to="{ name: tab.pathName, params: {
-          id: currentUser.id, name: tab.paramsName
-        }}"
-        class="navbar_wrapper_item">
+        :to="{
+          name: tab.pathName,
+          params: {
+            id: currentUser.id,
+            name: tab.paramsName
+          }
+        }"
+        class="navbar_wrapper_item"
+      >
         {{ tab.name }}
       </router-link>
     </div>
@@ -27,7 +32,7 @@ export default {
   },
   computed: {
     ...mapState(['currentUser'])
-  },
+  }
 }
 </script>
 

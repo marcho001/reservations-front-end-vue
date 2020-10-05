@@ -2,29 +2,25 @@
   <div class="container">
     <div class="space-40"></div>
     <div class="business_wrapper">
-      <UserNavTab 
-        :tabs="tabs"/>
-        <div class="wrapper">
+      <UserNavTab :tabs="tabs" />
+      <div class="wrapper">
+        <EditRestaurant v-if="nowPage === 'restaurant'" />
 
-      <EditRestaurant 
-        v-if="nowPage === 'restaurant'"/>
-      
-      <div>
-      <button 
-        @click="toggleEditForm"
-        class="create m-4">
-        新增餐點</button>
-      <hr>
+        <div>
+          <button @click="toggleEditForm" class="create m-4">
+            新增餐點
+          </button>
+          <hr />
 
-        <div class="menu d-grid">
-          <MenuCard />
+          <div class="menu d-grid">
+            <MenuCard />
+          </div>
+
+          <EditMenuForm
+            @after-toggle-edit-form="afterToggleEditForm"
+            v-show="editMenu"
+          />
         </div>
-      
-        <EditMenuForm 
-          @after-toggle-edit-form="afterToggleEditForm"
-          v-show="editMenu"/> 
-
-      </div>
       </div>
     </div>
   </div>
@@ -42,7 +38,7 @@ export default {
     EditMenuForm,
     MenuCard
   },
-  data () {
+  data() {
     return {
       nowPage: 'menu',
       editMenu: false,
@@ -66,10 +62,10 @@ export default {
     }
   },
   methods: {
-    afterToggleEditForm () {
+    afterToggleEditForm() {
       this.editMenu = false
     },
-    toggleEditForm () {
+    toggleEditForm() {
       this.editMenu = true
     }
   }
@@ -77,5 +73,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@assets/css/pages/BusinessCenter';
+@import '@/assets/css/pages/BusinessCenter';
 </style>
