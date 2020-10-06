@@ -9,6 +9,6 @@ module.exports = {
     }
   },
   publicPath: process.env.NODE_ENV === 'production'
-    ? '/reservations-front-end-vue'
+    ? '/reservations-front-end-vue/'
     : '/'
 }
