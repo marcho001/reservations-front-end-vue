@@ -121,7 +121,7 @@ export default {
   methods: {
     handleSubmit() {
       this.$emit('after-search', {
-        search: this.search
+        Search: this.search
       })
       this.search = ''
     }

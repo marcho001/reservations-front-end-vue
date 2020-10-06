@@ -106,8 +106,12 @@ export default {
         })
       }
     },
-    handleAfterSearch(search) {
-      console.log(search)
+    handleAfterSearch(payload) {
+      const { Search = '' } = payload
+      this.$router.push({ 
+        name: 'home', 
+        query: { Search }
+      })
     },
     afterQueryChange (payload) {
       const { page = '', CategoryId = '', CityId = '' } = payload
