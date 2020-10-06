@@ -45,10 +45,8 @@ export default {
   },
   data() {
     return {
-      ratingAve: '',
       restaurant: {
         id: 0,
-        rating: '',
         name: '',
         address: '',
         image: '',
@@ -56,6 +54,7 @@ export default {
         Category: {},
         City: {},
         Comments: [],
+        ratingAve: '',
         open_time: '',
         price: ''
       },
@@ -69,8 +68,7 @@ export default {
     async fetchRestaurant(id) {
       try {
         const res = await restAPI.getRest(id)
-        const { ratingAve, restaurant } = res.data
-        this.ratingAve = ratingAve
+        const { restaurant } = res.data
         this.restaurant = {
           ...this.restaurant,
           ...restaurant
@@ -94,6 +92,12 @@ export default {
             name: this.currentUser.name
           }
         })
+        //重新計算評分
+        let newRatingAve = this.restaurant.Comments.reduce((acc, current) => {
+          return acc + current.rating
+        }, 0)
+        newRatingAve = newRatingAve / this.restaurant.Comments.length
+        this.restaurant.ratingAve = newRatingAve.toFixed(1)
       } catch (err) {
         console.error(err)
         Toast.fire({
