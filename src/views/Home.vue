@@ -29,6 +29,7 @@
         :categories="categories"
         :cities="cities"
         @after-search="handleAfterSearch"
+        @query-change="afterQueryChange"
       />
 
       <RestaurantCard :restaurants="restaurants.rows" />
@@ -105,8 +106,19 @@ export default {
         })
       }
     },
-    handleAfterSearch(search) {
-      console.log(search)
+    handleAfterSearch(payload) {
+      const { Search = '' } = payload
+      this.$router.push({ 
+        name: 'home', 
+        query: { Search }
+      })
+    },
+    afterQueryChange (payload) {
+      const { page = '', CategoryId = '', CityId = '' } = payload
+      this.$router.push({ 
+        name: 'home', 
+        query: { page, CategoryId, CityId }
+      })
     }
   },
   created() {
