@@ -24,7 +24,7 @@ export default {
     MenuCard,
     EditMenuForm
   },
-  data () {
+  data() {
     return {
       editMenu: false
     }
@@ -46,6 +46,6 @@ export default {
 }
 
 .create {
-  @include buttonStyle($buttonColor, $buttonColor, $white)
+  @include buttonStyle($buttonColor, $buttonColor, $white);
 }
 </style>

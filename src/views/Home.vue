@@ -108,15 +108,15 @@ export default {
     },
     handleAfterSearch(payload) {
       const { Search = '' } = payload
-      this.$router.push({ 
-        name: 'home', 
+      this.$router.push({
+        name: 'home',
         query: { Search }
       })
     },
-    afterQueryChange (payload) {
+    afterQueryChange(payload) {
       const { page = '', CategoryId = '', CityId = '' } = payload
-      this.$router.push({ 
-        name: 'home', 
+      this.$router.push({
+        name: 'home',
         query: { page, CategoryId, CityId }
       })
     }

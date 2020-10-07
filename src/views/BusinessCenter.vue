@@ -5,7 +5,6 @@
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
         <component :is="renderComponents"></component>
-        
       </div>
     </div>
   </div>
@@ -51,7 +50,7 @@ export default {
         ComponentName = 'EditRestaurant'
       } else if (this.nowPage === 'menu') {
         ComponentName = 'Menu'
-      } 
+      }
       return ComponentName
     }
   },
