@@ -4,23 +4,7 @@
     <div class="business_wrapper">
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
-        <EditRestaurant v-if="nowPage === 'restaurant'" />
-
-        <div>
-          <button @click="toggleEditForm" class="create m-4">
-            新增餐點
-          </button>
-          <hr />
-
-          <div class="menu d-grid">
-            <MenuCard />
-          </div>
-
-          <EditMenuForm
-            @after-toggle-edit-form="afterToggleEditForm"
-            v-show="editMenu"
-          />
-        </div>
+        <component :is="renderComponents"></component>
       </div>
     </div>
   </div>
@@ -29,19 +13,17 @@
 <script>
 import UserNavTab from '../components/UserNavTab'
 import EditRestaurant from '../components/BusinessPage/EditRestaurant'
-import EditMenuForm from '../components/BusinessPage/EditMenuForm'
-import MenuCard from '../components/BusinessPage/MenuCard'
+import Menu from '../components/BusinessPage/Menu'
+
 export default {
   components: {
     UserNavTab,
     EditRestaurant,
-    EditMenuForm,
-    MenuCard
+    Menu
   },
   data() {
     return {
       nowPage: 'menu',
-      editMenu: false,
       tabs: [
         {
           name: '編輯餐廳',
@@ -61,13 +43,23 @@ export default {
       ]
     }
   },
-  methods: {
-    afterToggleEditForm() {
-      this.editMenu = false
-    },
-    toggleEditForm() {
-      this.editMenu = true
+  computed: {
+    renderComponents() {
+      let ComponentName = ''
+      if (this.nowPage === 'restaurant') {
+        ComponentName = 'EditRestaurant'
+      } else if (this.nowPage === 'menu') {
+        ComponentName = 'Menu'
+      }
+      return ComponentName
     }
+  },
+  created() {
+    this.nowPage = this.$route.params.name
+  },
+  beforeRouteUpdate(to, from, next) {
+    this.nowPage = to.params.name
+    next()
   }
 }
 </script>
