@@ -6,7 +6,6 @@
 
       <div class="wrapper">
         <transition name="changePage">
-        <MemberInfo />
           <component :is="renderComponents"></component>
         </transition>
       </div>
@@ -55,6 +54,8 @@ export default {
         ComponentName = 'MemberHistoryOrder'
       } else if (this.nowPage === 'edit') {
         ComponentName = 'EditMemberInfo'
+      } else if (this.nowPage === 'info') {
+        ComponentName = 'MemberInfo'
       }
       return ComponentName
     }
