@@ -21,7 +21,7 @@
           <input
             class="count_input text-center m-0"
             type="number"
-            :value="meal.count"
+            :value="meal.quantity"
             disabled
           />
           <button @click="addItem(meal)" class="count_button plus">
@@ -42,7 +42,7 @@ const meal = [
     description:
       '很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif',
     price: 50,
-    count: 0,
+    quantity: 0,
     image: ''
   },
   {
@@ -51,7 +51,7 @@ const meal = [
     description:
       '很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif',
     price: 100,
-    count: 0,
+    quantity: 0,
     image: ''
   },
   {
@@ -60,7 +60,7 @@ const meal = [
     description:
       '很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif',
     price: 100,
-    count: 0,
+    quantity: 0,
     image: ''
   }
 ]
@@ -74,21 +74,21 @@ export default {
   mixins: [emptyImageFilter],
   methods: {
     addItem(meal) {
-      meal.count++
+      meal.quantity++
       this.$emit('after-add-item', {
         id: meal.id,
         name: meal.name,
-        count: meal.count,
+        quantity: meal.quantity,
         price: meal.price
       })
     },
     minusItem(meal) {
-      if (meal.count === 0) return
-      meal.count--
+      if (meal.quantity === 0) return
+      meal.quantity--
       this.$emit('after-minus-item', {
         id: meal.id,
         name: meal.name,
-        count: meal.count,
+        quantity: meal.quantity,
         price: meal.price
       })
     }

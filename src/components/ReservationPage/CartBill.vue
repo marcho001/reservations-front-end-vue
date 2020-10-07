@@ -12,7 +12,7 @@
         <li class="name text-center m-1">
           {{ order.name }}
         </li>
-        <li class="m-1">x {{ order.count }}</li>
+        <li class="m-1">x {{ order.quantity }}</li>
         <li class="border mx-3"></li>
         <li class="m-1">NT$ {{ order.price }}</li>
       </ul>
