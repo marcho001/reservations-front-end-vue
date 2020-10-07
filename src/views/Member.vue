@@ -15,27 +15,32 @@
 <script>
 import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
 import UserNavTab from '../components/UserNavTab'
-import MemberInfo from '../components/MemberPage/MemberInfo'
+import EditMemberInfo from '../components/MemberPage/EditMemberInfo'
 
 export default {
   components: {
     UserNavTab,
     MemberHistoryOrder,
-    MemberInfo
+    EditMemberInfo
   },
   data() {
     return {
       nowPage: 'history',
       tabs: [
         {
-          name: '我的訂單',
+          name: '會員總覽',
+          pathName: 'member',
+          paramsName: 'info'
+        },
+        {
+          name: '所有訂單',
           pathName: 'member',
           paramsName: 'history'
         },
         {
           name: '修改會員資料',
           pathName: 'member',
-          paramsName: 'info'
+          paramsName: 'edit'
         }
       ]
     }
@@ -45,8 +50,8 @@ export default {
       let ComponentName = ''
       if (this.nowPage === 'history') {
         ComponentName = 'MemberHistoryOrder'
-      } else if (this.nowPage === 'info') {
-        ComponentName = 'MemberInfo'
+      } else if (this.nowPage === 'edit') {
+        ComponentName = 'EditMemberInfo'
       }
       return ComponentName
     }
