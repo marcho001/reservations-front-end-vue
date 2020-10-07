@@ -7,11 +7,3 @@
   scroll-behavior: smooth;
 }
 
-.menu {
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  grid-gap: 2rem;
-}
-
-.create {
-  @include buttonStyle($buttonColor, $buttonColor, $white)
-}

@@ -41,16 +41,14 @@
       background: $white;
       width: 320px;
       &_item {
-        border-bottom: 1px solid darken($white, 10%);
+        cursor: pointer;
+        color: $textColor;
+        &:hover {
+          color: $buttonColor;
+        }
         .active {
           color: $buttonColor;
           border-bottom: 1px solid $buttonColor;
-        }
-        &--link {
-          color: $textColor;
-        }
-        &--link:hover {
-          color: $buttonColor;
         }
       }
     }  

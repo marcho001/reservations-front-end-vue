@@ -80,7 +80,7 @@ export default {
     },
     afterMinusItem(payload) {
       // 如果 count === 0，從 array 拿掉
-      if (payload.count === 0) {
+      if (payload.quantity === 0) {
         this.orders = this.orders.filter(item => item.id !== payload.id)
         this.price()
         return
@@ -97,7 +97,7 @@ export default {
       this.price()
     },
     price() {
-      const price = this.orders.map(item => item.price * item.count)
+      const price = this.orders.map(item => item.price * item.quantity)
       this.totalPrice = price.reduce((a, b) => {
         return a + b
       }, 0)

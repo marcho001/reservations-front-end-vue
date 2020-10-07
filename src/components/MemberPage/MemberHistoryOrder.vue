@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div>
     <h1 class="text-center">我的訂單</h1>
     <div class="space-40"></div>
     <div class="category">

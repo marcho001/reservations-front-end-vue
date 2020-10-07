@@ -1,5 +1,5 @@
 import { apiHelper } from '../utils/helpers'
-const getToken = () => localStorage.getItem('token')
+// const getToken = () => localStorage.getItem('token')
 
 export default {
   signin({ email, password }) {
@@ -10,10 +10,10 @@ export default {
   },
   signUp(formData) {
     return apiHelper.post('/signup', formData)
-  },
+  }
   // getCurrentUser() {
   //   return apiHelper.get('/get_current_user', {
-  //     headers: { 
+  //     headers: {
   // Authorization: `Bearer ${getToken()
   //  }
   //   })
