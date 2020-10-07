@@ -6,6 +6,7 @@
 
       <div class="wrapper">
         <transition name="changePage">
+        <MemberInfo />
           <component :is="renderComponents"></component>
         </transition>
       </div>
@@ -16,12 +17,14 @@
 import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
 import UserNavTab from '../components/UserNavTab'
 import EditMemberInfo from '../components/MemberPage/EditMemberInfo'
+import MemberInfo from '../components/MemberPage/MemberInfo'
 
 export default {
   components: {
     UserNavTab,
     MemberHistoryOrder,
-    EditMemberInfo
+    EditMemberInfo,
+    MemberInfo
   },
   data() {
     return {

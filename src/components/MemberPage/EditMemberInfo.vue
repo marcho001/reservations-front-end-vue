@@ -55,5 +55,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '@/assets/css/components/MemberPage/MemberInfo';
+@import '@/assets/css/components/MemberPage/EditMemberInfo';
 </style>
