@@ -75,7 +75,11 @@ router.beforeEach(async (to, from , next) => {
     isAuthenticated = await store.dispatch('fetchCurrentUser')
   }
 
-  if (!isAuthenticated && to.name !== 'home' && to.name !== 'restaurant') {
+  if (!isAuthenticated 
+      && to.name !== 'home' 
+      && to.name !== 'restaurant'
+      && to.name !== 'signin'
+      && to.name !== 'signup') {
     next('/home')
     return
   }
