@@ -12,8 +12,6 @@ export default {
     return apiHelper.post('/signup', formData)
   },
   getCurrentUser() {
-    return apiHelper.get('/get_current_user', {
-      headers: { Authorization: `Bearer ${getToken()}` } 
-    })
+    return apiHelper.get('/get_current_user')
   }
 }
