@@ -10,12 +10,20 @@
       </router-link>
     </div>
     <div class="nav_wrapper">
+    <template
+      v-if="!currentUser.role" 
+    >
       <router-link
         class="nav_wrapper_link" 
-        v-if="!currentUser.role" 
         to="/signin">
           登入 
       </router-link>
+      <router-link 
+          class="nav_wrapper_link"
+          to="/join">
+          加入我們
+        </router-link>
+    </template>
       <template v-else>
         <template v-if="currentUser.role === 'common'">
           <router-link
@@ -26,6 +34,11 @@
               }}">
             會員中心
           </router-link>
+          <router-link 
+          class="nav_wrapper_link"
+          to="/join">
+          加入我們
+        </router-link>
         </template>
 
         <template v-if="currentUser.role === 'business'">
@@ -46,12 +59,6 @@
             餐廳後台
           </router-link>
         </template>
-        <router-link 
-          class="nav_wrapper_link"
-          v-else
-          to="/join">
-          加入我們
-        </router-link>
         <button
           class="nav_wrapper_link"
           @click="logout"
