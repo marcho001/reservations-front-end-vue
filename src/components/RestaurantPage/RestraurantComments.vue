@@ -5,7 +5,7 @@
       :key="comment.id"
       class="comments_item d-flex align-items-center py-3"
     >
-      <img :src="comment.User.image | unknownPerson" />
+      <img :src="comment.User.avatar | unknownPerson" />
       <div>
         <div class="user-info pl-3 mb-2 d-flex">
           <h3 class="mr-3">
