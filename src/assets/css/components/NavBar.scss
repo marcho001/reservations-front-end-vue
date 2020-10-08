@@ -14,7 +14,7 @@ nav {
   color: $white;
 }
 .nav_wrapper {
-  a {
+  &_link {
     font-weight: bold;
     color: darken($white, $linkBeforeHoverAmount);
     margin: 0 5px;

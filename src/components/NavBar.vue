@@ -2,22 +2,60 @@
   <nav
     class="d-flex justify-content-between p-3 align-items-center position-fixed"
   >
-    <div class="nav_brand d-flex align-items-center">
-      <h1 class="">S.W.</h1>
+    <div class="d-flex align-items-center">
+      <router-link
+        class="nav_brand" 
+        to="/home">
+          S.W.
+      </router-link>
     </div>
     <div class="nav_wrapper">
-      <router-link v-if="!currentUser.role" to="/signin">登入 </router-link>
+      <router-link
+        class="nav_wrapper_link" 
+        v-if="!currentUser.role" 
+        to="/signin">
+          登入 
+      </router-link>
       <template v-else>
         <template v-if="currentUser.role === 'common'">
-          <a href="#">訂單行事曆</a>
+          <router-link
+            class="nav_wrapper_link"
+            :to="{ 
+              name: 'member', 
+              params: { id: currentUser.id, name: 'info' 
+              }}">
+            會員中心
+          </router-link>
         </template>
 
         <template v-if="currentUser.role === 'business'">
-          <a href="#">我的餐廳</a>
-          <a href="#">我的菜單</a>
+          <router-link 
+            class="nav_wrapper_link"
+            :to="{ 
+              name: 'restaurant',
+              params: { id: currentUser.id } 
+            }">
+            我的餐廳
+          </router-link>
+          <router-link
+            class="nav_wrapper_link"
+            :to="{
+              name: 'business',
+              params: { id: currentUser.id, name: 'restaurant' }
+            }">
+            餐廳後台
+          </router-link>
         </template>
-        <a v-else href="#">加入我們</a>
-        <a href="#">通知</a>
+        <router-link 
+          class="nav_wrapper_link"
+          v-else
+          to="/join">
+          加入我們
+        </router-link>
+        <button
+          class="nav_wrapper_link"
+          @click="logout"
+          >登出</button>
       </template>
     </div>
   </nav>
@@ -28,6 +66,12 @@ import { mapState } from 'vuex'
 export default {
   computed: {
     ...mapState(['currentUser', 'isAuthenticated'])
+  },
+  methods: {
+    logout () {
+      this.$store.commit('revokeAuthentication')
+      this.$router.push('/')
+    }
   }
 }
 </script>
