@@ -15,11 +15,11 @@
         <ul class="w-50">
           <li class="filter_list_item p-1">
             <router-link
-              :to="{ name: 'home' }"
+              :to="{ name: 'home', query: { CityId: cityId } }"
               @click.native="categoryList = false"
               class="filter_list_item--link"
             >
-              全部
+              全部類別
             </router-link>
           </li>
           <li
@@ -31,11 +31,20 @@
               @click.native="categoryList = false"
               class="filter_list_item--link"
               :class="{ active: categoryId === category.id }"
-              :to="{ name: 'home', query: { CategoryId: category.id } }"
+              :to="{ name: 'home', query: { CityId: cityId, CategoryId: category.id } }"
               >{{ category.name }}</router-link>
           </li>
           </ul>
         <ul class="w-50">
+        <li class="filter_list_item p-1">
+            <router-link
+              :to="{ name: 'home', query: { CategoryId: categoryId } }"
+              @click.native="categoryList = false"
+              class="filter_list_item--link"
+            >
+              全部區域
+            </router-link>
+          </li>
           <li
              v-for="city in cities"
             :key="city.id"
@@ -45,7 +54,7 @@
               @click.native="categoryList = false"
               class="filter_list_item--link"
               :class="{ active: cityId === city.id }"
-              :to="{ name: 'home', query: { CityId: city.id } }"
+              :to="{ name: 'home', query: { CategoryId: categoryId, CityId: city.id } }"
               >{{ city.area }}</router-link
             >
           </li>
