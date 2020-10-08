@@ -1,0 +1,17 @@
+.page {
+  @extend %radius, %shadow;
+  &_item {
+    &_link {
+      color: $textColor;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    &:hover &_link {
+      color: $buttonColor;
+      }
+    .active {
+      color: $buttonColor;
+      border-bottom: 1px solid $buttonColor;
+    }
+  }
+}

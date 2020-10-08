@@ -33,7 +33,12 @@
 
       <RestaurantCard :restaurants="restaurants.rows" />
     </section>
-
+    <Pagination 
+      :category-id="CategoryId"
+      :city-id="CityId"
+      :current-page="page"
+      :total-page="totalPage"
+    />
     <Footer />
   </div>
 </template>
@@ -42,6 +47,7 @@
 import StepFollowing from '../components/HomePage/StepFollowing'
 import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
+import Pagination from '../components/Pagination'
 import Footer from '../components/Footer'
 import restAPI from '../api/restAPI'
 import { Toast } from '../utils/helpers'
@@ -51,6 +57,7 @@ export default {
     StepFollowing,
     FilterAndSearch,
     RestaurantCard,
+    Pagination,
     Footer
   },
   data() {
