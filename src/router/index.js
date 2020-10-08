@@ -66,20 +66,30 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from , next) => {
   // 取出token
-  const token = localStorage.getItem('token')
-  // 預設未驗證
-  let isAuthenticated = false
+  const tokenInLocalStorage = localStorage.getItem('token')
+  const tokenInStore = store.state.token
+  let isAuthenticated = store.state.isAuthenticated
 
-  // 有token 才驗證
-  if (token) {
+  // 比較 localStorage 和 store 中的 token 是否一樣
+  if (tokenInLocalStorage && tokenInLocalStorage !== tokenInStore) {
     isAuthenticated = await store.dispatch('fetchCurrentUser')
   }
 
-  if (!isAuthenticated && to.name !== 'home' && to.name !== 'restaurant') {
+  const pathsWithoutAuthentication = [
+    'home', 'restaurant', 'signin', 'signup', 'join-us'
+  ]
+  if (!isAuthenticated 
+      && pathsWithoutAuthentication.includes(to.name)) {
     next('/home')
     return
-  }
-  
+  } 
+
+  if (isAuthenticated 
+    && to.name !== 'signin'
+    && to.name !== 'signup') {
+      next('/')
+      return
+    }
   next()
 })
 
