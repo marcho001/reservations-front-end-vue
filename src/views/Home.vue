@@ -29,12 +29,16 @@
         :categories="categories"
         :cities="cities"
         @after-search="handleAfterSearch"
-        @query-change="afterQueryChange"
       />
 
       <RestaurantCard :restaurants="restaurants.rows" />
     </section>
-
+    <Pagination 
+      :category-id="CategoryId"
+      :city-id="CityId"
+      :current-page="page"
+      :total-page="totalPage"
+    />
     <Footer />
   </div>
 </template>
@@ -43,6 +47,7 @@
 import StepFollowing from '../components/HomePage/StepFollowing'
 import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
+import Pagination from '../components/Pagination'
 import Footer from '../components/Footer'
 import restAPI from '../api/restAPI'
 import { Toast } from '../utils/helpers'
@@ -52,6 +57,7 @@ export default {
     StepFollowing,
     FilterAndSearch,
     RestaurantCard,
+    Pagination,
     Footer
   },
   data() {
@@ -111,13 +117,6 @@ export default {
       this.$router.push({
         name: 'home',
         query: { Search }
-      })
-    },
-    afterQueryChange(payload) {
-      const { page = '', CategoryId = '', CityId = '' } = payload
-      this.$router.push({
-        name: 'home',
-        query: { page, CategoryId, CityId }
       })
     }
   },

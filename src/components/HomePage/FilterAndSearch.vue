@@ -7,71 +7,60 @@
       >
         <p class="border"></p>
       </button>
-      <form
+      <div
         v-show="categoryList"
         @mouseleave="categoryList = false"
         class="filter_list p-3 mt-1 position-absolute d-flex"
-      >
-        <div class="d-flex flex-column w-50">
-          <label class="filter_list_item p-1" for="categories"
-            >全部類別
-            <input
-              v-model="queryItem['CategoryId']"
-              class="d-none"
-              type="radio"
-              name="category"
-              value=""
-              id="categories"
-            />
-          </label>
-          <label
-            v-for="category in categories"
+        >
+        <ul class="w-50">
+          <li class="filter_list_item p-1">
+            <router-link
+              :to="{ name: 'home', query: { CityId: cityId } }"
+              @click.native="categoryList = false"
+              class="filter_list_item--link"
+            >
+              全部類別
+            </router-link>
+          </li>
+          <li
+             v-for="category in categories"
             :key="category.id"
-            :for="category.name"
-            :class="{ active: categoryId === category.id }"
             class="filter_list_item p-1"
           >
-            {{ category.name }}
-            <input
-              :id="category.name"
-              :value="category.id"
-              v-model="queryItem['CategoryId']"
-              class="d-none"
-              type="radio"
-              name="category"
-            />
-          </label>
-        </div>
-        <div class="d-flex flex-column w-50">
-          <label class="filter_list_item p-1" for="cities"
-            >全部區域
-            <input
-              v-model="queryItem['CityId']"
-              class="d-none"
-              type="radio"
-              name="city"
-              value=""
-              id="cities"
-            />
-          </label>
-          <label
-            v-for="city in cities"
+          <router-link
+              @click.native="categoryList = false"
+              class="filter_list_item--link"
+              :class="{ active: categoryId === category.id }"
+              :to="{ name: 'home', query: { CityId: cityId, CategoryId: category.id } }"
+              >{{ category.name }}</router-link>
+          </li>
+          </ul>
+        <ul class="w-50">
+        <li class="filter_list_item p-1">
+            <router-link
+              :to="{ name: 'home', query: { CategoryId: categoryId } }"
+              @click.native="categoryList = false"
+              class="filter_list_item--link"
+            >
+              全部區域
+            </router-link>
+          </li>
+          <li
+             v-for="city in cities"
             :key="city.id"
-            :for="city.area"
             class="filter_list_item p-1"
           >
-            {{ city.area }}
-            <input
-              :value="city.id"
-              :id="city.area"
-              v-model="queryItem['CityId']"
-              class="d-none"
-              type="radio"
-              name="city"
-            />
-          </label>
-        </div>
-      </form>
+            <router-link
+              @click.native="categoryList = false"
+              class="filter_list_item--link"
+              :class="{ active: cityId === city.id }"
+              :to="{ name: 'home', query: { CategoryId: categoryId, CityId: city.id } }"
+              >{{ city.area }}</router-link
+            >
+          </li>
+        </ul>
+      </div>
+      
     </div>
     <form
       @submit.prevent="handleSubmit"
@@ -116,10 +105,6 @@ export default {
       categoryList: false,
       search: '',
       solidIcon: solid,
-      queryItem: {
-        CategoryId: '',
-        CityId: ''
-      }
     }
   },
   methods: {
@@ -128,15 +113,6 @@ export default {
         Search: this.search
       })
       this.search = ''
-    }
-  },
-  watch: {
-    queryItem: {
-      handler() {
-        this.categoryList = false
-        this.$emit('query-change', this.queryItem)
-      },
-      deep: true
     }
   }
 }
