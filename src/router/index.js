@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import store from '../store'
 import NotFound from '../views/NotFound'
 import SignIn from '../views/SignIn'
 
@@ -61,6 +62,25 @@ const routes = [
 const router = new VueRouter({
   linkExactActiveClass: 'active',
   routes
+})
+
+router.beforeEach(async (to, from , next) => {
+  // 取出token
+  const token = localStorage.getItem('token')
+  // 預設未驗證
+  let isAuthenticated = false
+
+  // 有token 才驗證
+  if (token) {
+    isAuthenticated = await store.dispatch('fetchCurrentUser')
+  }
+
+  if (!isAuthenticated && to.name !== 'home' && to.name !== 'restaurant') {
+    next('/home')
+    return
+  }
+  
+  next()
 })
 
 export default router
