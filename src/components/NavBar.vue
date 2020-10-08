@@ -77,6 +77,7 @@ export default {
   methods: {
     logout () {
       this.$store.commit('revokeAuthentication')
+      if (this.$route.name === 'home') return
       this.$router.push('/')
     }
   }

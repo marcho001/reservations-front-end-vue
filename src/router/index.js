@@ -78,15 +78,16 @@ router.beforeEach(async (to, from , next) => {
   const pathsWithoutAuthentication = [
     'home', 'restaurant', 'signin', 'signup', 'join-us'
   ]
+  const pathsWithAuthentication = ['signin', 'signup']
+
   if (!isAuthenticated 
-      && pathsWithoutAuthentication.includes(to.name)) {
+      && !pathsWithoutAuthentication.includes(to.name)) {
     next('/home')
     return
   } 
 
   if (isAuthenticated 
-    && to.name !== 'signin'
-    && to.name !== 'signup') {
+    && pathsWithAuthentication.includes(to.name)) {
       next('/')
       return
     }
