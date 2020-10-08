@@ -22,6 +22,11 @@ export default new Vuex.Store({
         ...currentUser
       }
       state.isAuthenticated = true
+    },
+    revokeAuthentication (state) {
+      state.currentUser = {}
+      state.isAuthenticated = false
+      localStorage.removeItem('token')
     }
   },
   actions: {
@@ -35,8 +40,10 @@ export default new Vuex.Store({
         commit('setCurrentUser', {
           id, name, email, avatar, role
         })
+        return true
       } catch (err) {
         console.error(err)
+        return false
       }
     }
   },
