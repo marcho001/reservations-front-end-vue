@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
-const baseURL = 'https://f31b69d89cd5.ngrok.io/api'
+const baseURL = 'https://restaurant-reservation-10720.herokuapp.com/api'
 const apiHelper = axios.create({ baseURL })
 
 const Toast = Swal.mixin({
