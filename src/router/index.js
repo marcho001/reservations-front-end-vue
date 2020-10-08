@@ -64,8 +64,22 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((to, from , next) => {
-  store.dispatch('fetchCurrentUser')
+router.beforeEach(async (to, from , next) => {
+  // 取出token
+  const token = localStorage.getItem('token')
+  // 預設未驗證
+  let isAuthenticated = false
+
+  // 有token 才驗證
+  if (token) {
+    isAuthenticated = await store.dispatch('fetchCurrentUser')
+  }
+
+  if (!isAuthenticated && to.name !== 'home' && to.name !== 'restaurant') {
+    next('/home')
+    return
+  }
+  
   next()
 })
 

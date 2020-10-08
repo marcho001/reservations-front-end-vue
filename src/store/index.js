@@ -40,8 +40,10 @@ export default new Vuex.Store({
         commit('setCurrentUser', {
           id, name, email, avatar, role
         })
+        return true
       } catch (err) {
         console.error(err)
+        return false
       }
     }
   },
