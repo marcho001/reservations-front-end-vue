@@ -6,13 +6,9 @@ export default {
     // 將參數換成 params
     const searchParams = new URLSearchParams({ page, CategoryId, CityId })
     // 會變成像 "page=1&categoryId=1"
-    return apiHelper.get(`/home?${searchParams.toString()}`, {
-      headers: { Authorization: `Bearer ${getToken()}` }
-    })
+    return apiHelper.get(`/home?${searchParams.toString()}`)
   },
   getRest(id) {
-    return apiHelper.get(`/restaurant/${id}`, {
-      headers: { Authorization: `Bearer ${getToken()}` }
-    })
+    return apiHelper.get(`/restaurant/${id}`)
   }
 }
