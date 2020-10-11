@@ -20,7 +20,9 @@
         </button>
       </div>
       <hr />
-      <CategoryNavTab />
+      <CategoryNavTab 
+        :categories="mealCategory"
+      />
       <br />
       <div class="menu d-grid">
       <MenuCard
@@ -58,6 +60,10 @@ export default {
   data() {
     return {
       meals: [],
+      mealCategory: [],
+      totalPage: [],
+      prev: -1,
+      next: -1,
       solidIcon: solid,
       showCart: false,
       orders: [],
@@ -76,6 +82,10 @@ export default {
           ...item,
           quantity: 0
         }))
+        this.mealCategory = data.mealCategory
+        this.totalPage = data.totalPage
+        this.prev = data.prev
+        this.next = data.next
       } catch (err) {
         console.error(err)
         Toast.fire({
