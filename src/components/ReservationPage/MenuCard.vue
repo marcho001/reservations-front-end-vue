@@ -3,9 +3,9 @@
     class="menu_item">
       <img :src="meal.image | emptyImage" />
       <div class="menu_item_body">
-        <h1 class="text-center mb-2">
+        <h2 class="text-center mb-2">
           {{ meal.name }}
-        </h1>
+        </h2>
         <p class="description text-center m-2">
           {{ meal.description }}
           jiajosdfoov oaisjdvoi aoisdjv oaisjdv o asvjdosdi vaiodja  iasjdvoid vjasiov d
