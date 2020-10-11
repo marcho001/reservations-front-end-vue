@@ -4,8 +4,11 @@
     <transition name="show">
       <div v-show="showCart" class="cart position-fixed scroll">
         <!--研究使用keep alive 儲存資訊 or localStorage-->
-        <CartBill :total-price="totalPrice" :orders="orders" />
-        <CartInfo @after-toggle-cart="afterToggleCart" />
+        <CartBill 
+          :total-price="totalPrice" 
+          :orders="orders" />
+        <CartInfo 
+          @after-toggle-cart="afterToggleCart" />
       </div>
     </transition>
 
