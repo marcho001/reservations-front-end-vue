@@ -2,7 +2,14 @@
   <div
     class="bill d-flex flex-column justify-content-around align-items-center"
   >
-    <div class="bill_list scroll my-2 p-2">
+    <h1 
+      v-if="orders.length === 0"
+      class="mt-4">
+        尚未加入餐點...
+    </h1>
+    <div 
+      v-else
+      class="bill_list scroll my-2 p-2">
       <ul
         v-for="order in orders"
         :key="order.id"

@@ -3,15 +3,16 @@
     class="menu_item">
       <img :src="meal.image | emptyImage" />
       <div class="menu_item_body">
-        <h1 class="text-center">
+        <h1 class="text-center mb-2">
           {{ meal.name }}
         </h1>
-        <p class="description text-center px-2">
+        <p class="description text-center m-2">
           {{ meal.description }}
+          jiajosdfoov oaisjdvoi aoisdjv oaisjdv o asvjdosdi vaiodja  iasjdvoid vjasiov d
         </p>
       </div>
       <div
-        class="menu_item_footer d-flex justify-content-end align-items-center my-3"
+        class="menu_item_footer d-flex justify-content-end align-items-center p-2"
       >
         <h3 class="mr-3">NT$ {{ meal.price }}</h3>
         <div class="count mx-2 d-flex">
