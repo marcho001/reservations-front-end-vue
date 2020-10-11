@@ -9,5 +9,8 @@ export default {
   },
   getRest(id) {
     return apiHelper.get(`/restaurant/${id}`)
+  },
+  getMenu(id) {
+    return apiHelper.get(`/reservation/${id}`)
   }
 }

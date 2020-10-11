@@ -20,16 +20,25 @@
         </button>
       </div>
       <hr />
-      <CategoryNavTab />
+      <CategoryNavTab 
+        :categories="mealCategory"
+      />
       <br />
+      <div class="menu d-grid">
       <MenuCard
+        v-for="meal in meals" 
+        :key="meal.id"
+        :meal="meal"
         @after-add-item="afterAddItem"
         @after-minus-item="afterMinusItem"
       />
+      </div>
     </div>
   </div>
 </template>
 <script>
+import restAPI from '../api/restAPI'
+import { Toast } from '../utils/helpers'
 import { FontAwesomeIcon, solid } from '../utils/icon'
 import CategoryNavTab from '../components/ReservationPage/CategoryNavTab'
 import MenuCard from '../components/ReservationPage/MenuCard'
@@ -50,6 +59,11 @@ export default {
   },
   data() {
     return {
+      meals: [],
+      mealCategory: [],
+      totalPage: [],
+      prev: -1,
+      next: -1,
       solidIcon: solid,
       showCart: false,
       orders: [],
@@ -57,6 +71,29 @@ export default {
     }
   },
   methods: {
+    async fetchMenu (restaurantId) {
+      try {
+        const { data, statusText } = await restAPI.getMenu(restaurantId)
+        if (statusText !== 'OK') {
+          throw new Error()
+        }
+        //加入數量
+        this.meals = data.meals.map(item => ({
+          ...item,
+          quantity: 0
+        }))
+        this.mealCategory = data.mealCategory
+        this.totalPage = data.totalPage
+        this.prev = data.prev
+        this.next = data.next
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得餐點資料，請稍後再試！'
+        })
+      }
+    },
     afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = false
@@ -102,6 +139,10 @@ export default {
         return a + b
       }, 0)
     }
+  },
+  created () {
+    const { id: restaurantId } = this.$route.params
+    this.fetchMenu(restaurantId)
   }
 }
 
