@@ -1,6 +1,6 @@
 <template>
-  <div class="menu d-grid">
-    <div v-for="meal in meals" :key="meal.id" class="menu_item">
+    <div 
+    class="menu_item">
       <img :src="meal.image | emptyImage" />
       <div class="menu_item_body">
         <h1 class="text-center">
@@ -30,45 +30,16 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
 import { emptyImageFilter } from '../../utils/mixin'
-const meal = [
-  {
-    name: 'noodle',
-    id: 2,
-    description:
-      '很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif',
-    price: 50,
-    quantity: 0,
-    image: ''
-  },
-  {
-    name: 'rice',
-    id: 1,
-    description:
-      '很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif',
-    price: 100,
-    quantity: 0,
-    image: ''
-  },
-  {
-    name: '御飯糰',
-    id: 3,
-    description:
-      '很油很閒很好吃的滷肉飯，真的由真得閒，有夠好吃，好好吃真好吃超級好吃的ㄑosidjfsojfsidjfsoidfjsiofjspaoisdjaosidfjasodif',
-    price: 100,
-    quantity: 0,
-    image: ''
-  }
-]
+
 export default {
-  data() {
-    return {
-      meals: meal,
-      order: []
+  props: {
+    meal: {
+      type: Object,
+      required: true
     }
   },
   mixins: [emptyImageFilter],
