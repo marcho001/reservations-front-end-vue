@@ -4,8 +4,12 @@
     <transition name="show">
       <div v-show="showCart" class="cart position-fixed scroll">
         <!--研究使用keep alive 儲存資訊 or localStorage-->
-        <CartBill :total-price="totalPrice" :orders="orders" />
-        <CartInfo @after-toggle-cart="afterToggleCart" />
+        <CartBill 
+          :total-price="totalPrice" 
+          :orders="orders" />
+        <CartInfo 
+          @after-toggle-cart="afterToggleCart"
+          @after-confirm-pay="afterConfirmPay" />
       </div>
     </transition>
 
@@ -138,6 +142,22 @@ export default {
       this.totalPrice = price.reduce((a, b) => {
         return a + b
       }, 0)
+    },
+    afterConfirmPay (payload) {
+      //確認是否有餐點
+      if (this.orders.length === 0) {
+        Toast.fire({
+          icon: 'error',
+          title: '還沒有加入餐點！'
+        })
+        return
+      }
+      const bookInfo = {
+        orders: this.orders,
+        info: payload
+      }
+
+      console.log(bookInfo)
     }
   },
   created () {
