@@ -144,7 +144,20 @@ export default {
       }, 0)
     },
     afterConfirmPay (payload) {
-      console.log(payload)
+      //確認是否有餐點
+      if (this.orders.length === 0) {
+        Toast.fire({
+          icon: 'error',
+          title: '還沒有加入餐點！'
+        })
+        return
+      }
+      const bookInfo = {
+        orders: this.orders,
+        info: payload
+      }
+
+      console.log(bookInfo)
     }
   },
   created () {
