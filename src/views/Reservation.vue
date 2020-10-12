@@ -8,7 +8,8 @@
           :total-price="totalPrice" 
           :orders="orders" />
         <CartInfo 
-          @after-toggle-cart="afterToggleCart" />
+          @after-toggle-cart="afterToggleCart"
+          @after-confirm-pay="afterConfirmPay" />
       </div>
     </transition>
 
@@ -141,6 +142,9 @@ export default {
       this.totalPrice = price.reduce((a, b) => {
         return a + b
       }, 0)
+    },
+    afterConfirmPay (payload) {
+      console.log(payload)
     }
   },
   created () {
