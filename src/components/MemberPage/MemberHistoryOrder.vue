@@ -8,7 +8,7 @@
           class="category_wrapper_item m-2" 
           :to="{ 
             name: 'member',
-            params: { id: currentUser.id, name: 'orders' },
+            params: { id: userId, name: 'orders' },
             query: { type: 'coming' } }">
             即將到來
         </router-link>
@@ -16,7 +16,7 @@
           class="category_wrapper_item m-2" 
           :to="{ 
             name: 'member',
-            params: { id: currentUser.id, name: 'orders' },
+            params: { id: userId, name: 'orders' },
             query: { type: 'history' } }">
             歷史訂單
         </router-link>
@@ -24,7 +24,7 @@
           class="category_wrapper_item m-2" 
           :to="{ 
             name: 'member',
-            params: { id: currentUser.id, name: 'orders' },
+            params: { id: userId, name: 'orders' },
             query: { type: 'unpaid' } }">
             未付款訂單
         </router-link>
@@ -66,11 +66,10 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
-  computed: {
-    ...mapState(['currentUser'])
+  props: {
+    orders: Array,
+    userId: String
   }
 }
 </script>

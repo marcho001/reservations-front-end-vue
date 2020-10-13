@@ -6,7 +6,16 @@
 
       <div class="wrapper">
         <transition name="changePage">
-          <component :is="renderComponents"></component>
+          <MemberInfo 
+            v-if="nowPage === 'info'"
+            
+            />
+          <MemberHistoryOrder 
+            v-else-if="nowPage === 'orders'"
+            :orders="orders"
+            :user-id="currentUser.id"/>
+          <EditMemberInfo 
+            v-else/>
         </transition>
       </div>
     </div>
@@ -19,6 +28,7 @@ import EditMemberInfo from '../components/MemberPage/EditMemberInfo'
 import MemberInfo from '../components/MemberPage/MemberInfo'
 import { Toast } from '../utils/helpers'
 import userAPI from '../api/userAPI'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -51,17 +61,7 @@ export default {
     }
   },
   computed: {
-    renderComponents() {
-      let ComponentName = ''
-      if (this.nowPage === 'orders') {
-        ComponentName = 'MemberHistoryOrder'
-      } else if (this.nowPage === 'edit') {
-        ComponentName = 'EditMemberInfo'
-      } else if (this.nowPage === 'info') {
-        ComponentName = 'MemberInfo'
-      }
-      return ComponentName
-    }
+    ...mapState(['currentUser'])
   },
   methods: {
     async fetchOrders (userId, queryType) {
@@ -75,7 +75,7 @@ export default {
           throw new Error()
           return
         }
-
+        this.orders = data.orders
       } catch (err) {
         console.error(err)
         Toast.fire({
@@ -93,14 +93,15 @@ export default {
       const { type = 'coming' } = this.$route.query  
       const userId = params.id
       this.fetchOrders(userId, type)
-    } else if (params.name === 'info'){
-      
-    }
-    
+    }  
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name
-    console.log(this.$route.query)
+    if (to.params.name === 'orders') {
+      const { type = 'coming' } = to.query
+      const userId = to.params.id
+      this.fetchOrders(userId, type)
+    }
     next()
   }
 }
