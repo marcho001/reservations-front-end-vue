@@ -12,5 +12,8 @@ export default {
   },
   getMenu(id) {
     return apiHelper.get(`/reservation/${id}`)
+  },
+  postOrder(id, payload) {
+    return apiHelper.post(`/reservation/${id}`, payload)
   }
 }
