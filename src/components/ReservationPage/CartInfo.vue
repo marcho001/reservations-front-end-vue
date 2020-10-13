@@ -118,7 +118,8 @@ export default {
       if (this.isCurrentUser) {
         this.information = {
           ...this.information,
-          name: this.currentUser.name
+          name: this.currentUser.name,
+          phone: this.currentUser.phone
         }
       }
     }
