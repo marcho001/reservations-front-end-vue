@@ -8,14 +8,15 @@
         <transition name="changePage">
           <MemberInfo 
             v-if="nowPage === 'info'"
-            
             />
           <MemberHistoryOrder 
             v-else-if="nowPage === 'orders'"
             :orders="orders"
             :user-id="currentUser.id"/>
           <EditMemberInfo 
-            v-else/>
+            v-else
+            :init-user="currentUser"
+            @after-edit-user="afterEditUser"/>
         </transition>
       </div>
     </div>
@@ -83,12 +84,15 @@ export default {
           title: '無法取得訂單資料，請稍後再試！'
         })
       }
+    },
+    async afterEditUser (formData) {
+      const user = await userAPI.putEditUser(formData)
+      console.log(user)
     }
   },
   created() {
     const params = this.$route.params
     this.nowPage = params.name
-    
     if (params.name === 'orders') {
       const { type = 'coming' } = this.$route.query  
       const userId = params.id
