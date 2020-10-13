@@ -4,7 +4,11 @@
     <div class="business_wrapper">
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
-        <component :is="renderComponents"></component>
+        <EditRestaurant 
+          v-if="nowPage === 'restaurant'"
+          :init-restaurant="restaurant"/>
+        <Menu 
+          v-else/>
       </div>
     </div>
   </div>
@@ -14,6 +18,7 @@
 import UserNavTab from '../components/UserNavTab'
 import EditRestaurant from '../components/BusinessPage/EditRestaurant'
 import Menu from '../components/BusinessPage/Menu'
+import businessAPI from '../api/businessAPI'
 
 export default {
   components: {
@@ -40,22 +45,41 @@ export default {
           pathName: 'business',
           paramsName: 'calendar'
         }
-      ]
+      ],
+      restaurant: {
+        id: -1,
+        name: '',
+        categoryId: -1,
+        address: '',
+        description: '',
+        open_time: '',
+        phone: '',
+        image: ''
+      }
     }
   },
-  computed: {
-    renderComponents() {
-      let ComponentName = ''
-      if (this.nowPage === 'restaurant') {
-        ComponentName = 'EditRestaurant'
-      } else if (this.nowPage === 'menu') {
-        ComponentName = 'Menu'
+  methods: {
+    async fetchRestaurant () {
+      try {
+        const { data, stateText } = await businessAPI.getRestaurant()
+        if (stateText === 'error') {
+          throw new Error()
+        }
+        this.restaurant = {
+          ...this.restaurant,
+          ...data.restaurant
+        }
+
+      } catch (err) {
+        console.error(err)
       }
-      return ComponentName
     }
   },
   created() {
-    this.nowPage = this.$route.params.name
+    const params = this.$route.params
+    this.nowPage = params.name
+    this.fetchRestaurant()
+
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name

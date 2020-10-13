@@ -38,7 +38,7 @@ const routes = [
     component: () => import('../views/Member')
   },
   {
-    path: '/business/:id/:name',
+    path: '/business/:name',
     name: 'business',
     component: () => import('../views/BusinessCenter')
   },
