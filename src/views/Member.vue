@@ -76,6 +76,7 @@ export default {
           throw new Error()
           return
         }
+        console.log(data.orders)
         this.orders = data.orders
       } catch (err) {
         console.error(err)

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="order">
     <h1 class="text-center">我的訂單</h1>
     <div class="space-40"></div>
     <div class="category">
@@ -32,13 +32,20 @@
     </div>
     <hr />
     <div class="order">
-      <div class="item p-2 my-4">
+      <div 
+        v-for="order in orders"
+        :key="order.id"
+        class="item p-2 my-4">
         <div class="item_title d-flex justify-content-between">
           <div>
-            <h2 class="mb-2">龍蝦吃到吐</h2>
+            <h2 class="mb-2">
+              {{ order.RestaurantSeat.Restaurant.name }}
+            </h2>
             <p>編號：hiahifhiehaisehiashef</p>
           </div>
-          <p class="align-self-end">已付款</p>
+          <p class="align-self-end">
+            {{ order.status }}
+          </p>
         </div>
         <hr />
         <div class="item_detail">
@@ -48,16 +55,14 @@
             <li class="border mx-3"></li>
             <li class="m-1">$ 100</li>
           </ul>
-          <h3 class="text-right">總計： $200</h3>
+          <h3 class="text-right">總計： ${{ order.totalPrice }}</h3>
         </div>
         <hr />
         <div class="item_footer d-flex justify-content-around">
-          <div class="m-2">預約日期：<span>9/11</span></div>
-          <div class="m-2">預約時間：<span>18:30</span></div>
+          <div class="m-2">預約日期：<span>{{ order.data }}</span></div>
+          <div class="m-2">預約時間：<span>{{ order.time }}</span></div>
           <div class="m-2">付款方式：<span>信用卡</span></div>
-          <div class="m-2">預約日期：<span>9/11</span></div>
-          <div class="m-2">預約日期：<span>9/11</span></div>
-          <div class="m-2">預約日期：<span>9/11</span></div>
+          
         </div>
       </div>
 
