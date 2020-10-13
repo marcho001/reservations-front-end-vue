@@ -10,7 +10,7 @@
     </label>
     <input 
       @change="handleChange"
-      name="image"
+      name="avatar"
       class="d-none" 
       type="file" 
       id="image" />

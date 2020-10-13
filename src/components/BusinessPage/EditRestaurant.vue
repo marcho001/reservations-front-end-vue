@@ -17,7 +17,7 @@
         id="category">
         <option value="" disabled selected>請選擇類別</option>
         <option value="">日式料理</option>
-        <option value="">美式料理</option>
+        <option value="2">美式料理</option>
       </select>
     </div>
     <label class="form_item image position-relative" for="image">
@@ -26,7 +26,12 @@
         <font-awesome-icon :icon="solidIcon.faCameraRetro" />
       </p>
     </label>
-    <input class="d-none" type="file" id="image" />
+    <input
+      @change="handleChange" 
+      class="d-none" 
+      type="file" 
+      name="image"
+      id="image" />
     <div class="form_item">
       <label for="description">餐廳描述：</label>
       <textarea
@@ -84,6 +89,15 @@ export default {
     return {
       solidIcon: solid,
       restaurant: this.initRestaurant
+    }
+  },
+  methods: {
+    handleChange (e) {
+      const { files } = e.target
+      if (files.length !== 0) {
+        const imageURL = window.URL.createObjectURL(files[0])
+        this.restaurant.image = imageURL
+      }
     }
   },
   mixins: [emptyImageFilter],
