@@ -69,7 +69,7 @@
 export default {
   props: {
     orders: Array,
-    userId: String
+    userId: Number
   }
 }
 </script>
