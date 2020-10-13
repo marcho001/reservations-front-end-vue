@@ -17,6 +17,8 @@ import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
 import UserNavTab from '../components/UserNavTab'
 import EditMemberInfo from '../components/MemberPage/EditMemberInfo'
 import MemberInfo from '../components/MemberPage/MemberInfo'
+import { Toast } from '../utils/helpers'
+import userAPI from '../api/userAPI'
 
 export default {
   components: {
@@ -27,7 +29,7 @@ export default {
   },
   data() {
     return {
-      nowPage: 'history',
+      nowPage: 'orders',
       tabs: [
         {
           name: '會員總覽',
@@ -37,20 +39,21 @@ export default {
         {
           name: '所有訂單',
           pathName: 'member',
-          paramsName: 'history'
+          paramsName: 'orders'
         },
         {
           name: '修改會員資料',
           pathName: 'member',
           paramsName: 'edit'
         }
-      ]
+      ],
+      orders: []
     }
   },
   computed: {
     renderComponents() {
       let ComponentName = ''
-      if (this.nowPage === 'history') {
+      if (this.nowPage === 'orders') {
         ComponentName = 'MemberHistoryOrder'
       } else if (this.nowPage === 'edit') {
         ComponentName = 'EditMemberInfo'
@@ -60,11 +63,44 @@ export default {
       return ComponentName
     }
   },
+  methods: {
+    async fetchOrders (userId, queryType) {
+      try {
+        const { data, statusText } = await userAPI.getOrders({
+          userId,
+          type: queryType
+        })
+
+        if (statusText === 'error') {
+          throw new Error()
+          return
+        }
+
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得訂單資料，請稍後再試！'
+        })
+      }
+    }
+  },
   created() {
-    this.nowPage = this.$route.params.name
+    const params = this.$route.params
+    this.nowPage = params.name
+    
+    if (params.name === 'orders') {
+      const { type = 'coming' } = this.$route.query  
+      const userId = params.id
+      this.fetchOrders(userId, type)
+    } else if (params.name === 'info'){
+      
+    }
+    
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name
+    console.log(this.$route.query)
     next()
   }
 }
