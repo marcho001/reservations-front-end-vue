@@ -116,7 +116,6 @@ export default {
     },
     sameAsCurrentUser () {
       if (this.isCurrentUser) {
-        console.log(this.currentUser)
         this.information = {
           ...this.information,
           name: this.currentUser.name

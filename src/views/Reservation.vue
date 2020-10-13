@@ -78,7 +78,7 @@ export default {
     async fetchMenu (restaurantId) {
       try {
         const { data, statusText } = await restAPI.getMenu(restaurantId)
-        if (statusText !== 'OK') {
+        if (statusText === 'error') {
           throw new Error()
         }
         //加入數量
@@ -95,6 +95,18 @@ export default {
         Toast.fire({
           icon: 'error',
           title: '無法取得餐點資料，請稍後再試！'
+        })
+      }
+    },
+    async postOrder (restaurantId, payload) {
+      try {
+        const res = await restAPI.postOrder(restaurantId, payload)
+        console.log('orderInfo',res)
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '訂位失敗，請稍後再試'
         })
       }
     },
@@ -154,10 +166,13 @@ export default {
       }
       const bookInfo = {
         orders: this.orders,
-        info: payload
+        info: payload,
+        totalPrice: this.totalPrice
       }
-
-      console.log(bookInfo)
+      const restaurantId = this.$route.params.id
+      this.postOrder(restaurantId, bookInfo)
+      this.orders = []
+      this.totalPrice = 0
     }
   },
   created () {
