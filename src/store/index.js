@@ -26,7 +26,7 @@ export default new Vuex.Store({
       state.token = localStorage.getItem('token')
       state.isAuthenticated = true
     },
-    revokeAuthentication (state) {
+    revokeAuthentication(state) {
       state.currentUser = {}
       state.isAuthenticated = false
       state.token = ''
@@ -34,7 +34,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async fetchCurrentUser ({ commit }) {
+    async fetchCurrentUser({ commit }) {
       try {
         const { data, statusText } = await authorizationAPI.getCurrentUser()
         if (statusText === 'error') throw new Error(data)
@@ -42,7 +42,12 @@ export default new Vuex.Store({
         const { id, name, email, avatar, role, phone } = data.profile
 
         commit('setCurrentUser', {
-          id, name, email, avatar, role, phone
+          id,
+          name,
+          email,
+          avatar,
+          role,
+          phone
         })
         return true
       } catch (err) {

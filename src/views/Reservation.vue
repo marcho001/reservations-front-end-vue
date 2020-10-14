@@ -4,12 +4,11 @@
     <transition name="show">
       <div v-show="showCart" class="cart position-fixed scroll">
         <!--研究使用keep alive 儲存資訊 or localStorage-->
-        <CartBill 
-          :total-price="totalPrice" 
-          :orders="orders" />
-        <CartInfo 
+        <CartBill :total-price="totalPrice" :orders="orders" />
+        <CartInfo
           @after-toggle-cart="afterToggleCart"
-          @after-confirm-pay="afterConfirmPay" />
+          @after-confirm-pay="afterConfirmPay"
+        />
       </div>
     </transition>
 
@@ -24,18 +23,16 @@
         </button>
       </div>
       <hr />
-      <CategoryNavTab 
-        :categories="mealCategory"
-      />
+      <CategoryNavTab :categories="mealCategory" />
       <br />
       <div class="menu d-grid">
-      <MenuCard
-        v-for="meal in meals" 
-        :key="meal.id"
-        :meal="meal"
-        @after-add-item="afterAddItem"
-        @after-minus-item="afterMinusItem"
-      />
+        <MenuCard
+          v-for="meal in meals"
+          :key="meal.id"
+          :meal="meal"
+          @after-add-item="afterAddItem"
+          @after-minus-item="afterMinusItem"
+        />
       </div>
     </div>
   </div>
@@ -75,7 +72,7 @@ export default {
     }
   },
   methods: {
-    async fetchMenu (restaurantId) {
+    async fetchMenu(restaurantId) {
       try {
         const { data, statusText } = await restAPI.getMenu(restaurantId)
         if (statusText === 'error') {
@@ -98,10 +95,10 @@ export default {
         })
       }
     },
-    async postOrder (restaurantId, payload) {
+    async postOrder(restaurantId, payload) {
       try {
         const res = await restAPI.postOrder(restaurantId, payload)
-        console.log('orderInfo',res)
+        console.log('orderInfo', res)
       } catch (err) {
         console.error(err)
         Toast.fire({
@@ -155,7 +152,7 @@ export default {
         return a + b
       }, 0)
     },
-    afterConfirmPay (payload) {
+    afterConfirmPay(payload) {
       //確認是否有餐點
       if (this.orders.length === 0) {
         Toast.fire({
@@ -175,7 +172,7 @@ export default {
       this.totalPrice = 0
     }
   },
-  created () {
+  created() {
     const { id: restaurantId } = this.$route.params
     this.fetchMenu(restaurantId)
   }

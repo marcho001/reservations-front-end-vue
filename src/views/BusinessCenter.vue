@@ -4,11 +4,11 @@
     <div class="business_wrapper">
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
-        <EditRestaurant 
+        <EditRestaurant
           v-if="nowPage === 'restaurant'"
-          :init-restaurant="restaurant"/>
-        <Menu 
-          v-else/>
+          :init-restaurant="restaurant"
+        />
+        <Menu v-else />
       </div>
     </div>
   </div>
@@ -61,7 +61,7 @@ export default {
     }
   },
   methods: {
-    async fetchRestaurant () {
+    async fetchRestaurant() {
       try {
         const { data, stateText } = await businessAPI.getRestaurant()
         if (stateText === 'error') {
@@ -71,7 +71,6 @@ export default {
           ...this.restaurant,
           ...data.restaurant
         }
-
       } catch (err) {
         console.error(err)
         Toast.fire({
@@ -80,7 +79,7 @@ export default {
         })
       }
     },
-    async fetchMenu () {
+    async fetchMenu() {
       try {
         const { data, statusText } = await businessAPI.getMenu()
         if (statusText === 'error') {
@@ -106,7 +105,6 @@ export default {
     } else if (this.nowPage === 'menu') {
       this.fetchMenu()
     }
-
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name

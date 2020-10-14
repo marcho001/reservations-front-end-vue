@@ -2,19 +2,16 @@
   <form class="form">
     <div class="form_item">
       <label for="name">餐廳名稱：</label>
-      <input 
-        v-model="restaurant.name"
-        type="text" 
-        name="name"
-        id="name" />
+      <input v-model="restaurant.name" type="text" name="name" id="name" />
     </div>
     <div class="form_item">
       <label for="category">餐廳類別：</label>
-      <select 
+      <select
         v-model="restaurant.CategoryId"
-        class="px-1" 
+        class="px-1"
         name="category"
-        id="category">
+        id="category"
+      >
         <option value="" disabled selected>請選擇類別</option>
         <option value="">日式料理</option>
         <option value="2">美式料理</option>
@@ -27,43 +24,43 @@
       </p>
     </label>
     <input
-      @change="handleChange" 
-      class="d-none" 
-      type="file" 
+      @change="handleChange"
+      class="d-none"
+      type="file"
       name="image"
-      id="image" />
+      id="image"
+    />
     <div class="form_item">
       <label for="description">餐廳描述：</label>
       <textarea
-        v-model="restaurant.description" 
-        class="px-2" 
+        v-model="restaurant.description"
+        class="px-2"
         name="description"
-        id="description" 
-        rows="5"></textarea>
+        id="description"
+        rows="5"
+      ></textarea>
     </div>
     <div class="form_item">
       <label for="phone">電話：</label>
-      <input 
-        v-model="restaurant.phone"
-        type="tel" 
-        name="phone"
-        id="phone" />
+      <input v-model="restaurant.phone" type="tel" name="phone" id="phone" />
     </div>
     <div class="form_item">
       <label for="address">地址：</label>
-      <input 
+      <input
         v-model="restaurant.address"
-        type="text" 
+        type="text"
         name="address"
-        id="address" />
+        id="address"
+      />
     </div>
     <div class="form_item">
       <label for="open_time">營業時間：</label>
-      <input 
+      <input
         v-model="restaurant.open_time"
-        type="text" 
+        type="text"
         name="open_time"
-        id="open_time" />
+        id="open_time"
+      />
     </div>
 
     <div class="d-flex justify-content-end">
@@ -92,7 +89,7 @@ export default {
     }
   },
   methods: {
-    handleChange (e) {
+    handleChange(e) {
       const { files } = e.target
       if (files.length !== 0) {
         const imageURL = window.URL.createObjectURL(files[0])
@@ -102,7 +99,7 @@ export default {
   },
   mixins: [emptyImageFilter],
   watch: {
-    initRestaurant () {
+    initRestaurant() {
       this.restaurant = {
         ...this.restaurant,
         ...this.initRestaurant
