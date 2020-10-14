@@ -8,7 +8,25 @@
           v-if="nowPage === 'restaurant'"
           :init-restaurant="restaurant"
         />
-        <Menu v-else />
+        <template v-else>
+          <button @click="toggleEditForm" class="create m-4">
+            新增餐點
+          </button>
+          <hr />
+          <div class="menu d-grid">
+            <MenuCard 
+              :meals="menu.meals"
+              :next="menu.next"
+              :prev="menu.prev"
+              :totalPage="menu.totalPage"
+            />
+          </div>
+
+          <EditMenuForm
+            @after-toggle-edit-form="afterToggleEditForm"
+            v-show="editMenu"
+          />
+        </template>
       </div>
     </div>
   </div>
@@ -17,7 +35,8 @@
 <script>
 import UserNavTab from '../components/UserNavTab'
 import EditRestaurant from '../components/BusinessPage/EditRestaurant'
-import Menu from '../components/BusinessPage/Menu'
+import MenuCard from '../components/BusinessPage/MenuCard'
+import EditMenuForm from '../components/BusinessPage/EditMenuForm'
 import businessAPI from '../api/businessAPI'
 import { Toast } from '../utils/helpers'
 
@@ -25,11 +44,13 @@ export default {
   components: {
     UserNavTab,
     EditRestaurant,
-    Menu
+    MenuCard,
+    EditMenuForm
   },
   data() {
     return {
       nowPage: 'menu',
+      editMenu: false,
       tabs: [
         {
           name: '編輯餐廳',
@@ -57,7 +78,13 @@ export default {
         phone: '',
         image: ''
       },
-      menu: {}
+      menu: {
+        mealCategory: [],
+        meals: [],
+        next: 2,
+        prev: 1,
+        totalPage: []
+      }
     }
   },
   methods: {
@@ -95,6 +122,12 @@ export default {
           title: '無法取得菜單，請稍後再試'
         })
       }
+    },
+    afterToggleEditForm() {
+      this.editMenu = false
+    },
+    toggleEditForm() {
+      this.editMenu = true
     }
   },
   created() {
