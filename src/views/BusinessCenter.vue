@@ -13,12 +13,11 @@
             新增餐點
           </button>
           <hr />
-          <div class="menu d-grid">
-            <MenuCard 
-              :meals="menu.meals"
-              :next="menu.next"
-              :prev="menu.prev"
-              :totalPage="menu.totalPage"
+          <div class="menu d-grid p-2">
+            <MenuCard
+              v-for="meal in menu.meals"
+              :key="meal.id"  
+              :meal="meal"
             />
           </div>
 
