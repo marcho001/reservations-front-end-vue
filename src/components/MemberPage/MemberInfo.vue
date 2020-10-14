@@ -1,11 +1,11 @@
 <template>
   <div class="member">
     <div class="member_info d-flex align-items-center">
-      <img src="" />
+      <img :src="user.image | unknownPerson" />
       <div class="member_info_detail ml-6">
-        <p class="my-2">會員名稱 :</p>
-        <p class="my-2">電話：</p>
-        <p class="my-2">電子信箱：</p>
+        <p class="my-2">會員名稱 : {{ user.name }} </p>
+        <p class="my-2">電話： {{ user.phone }} </p> 
+        <p class="my-2">電子信箱：{{ user.email }}</p>
       </div>
     </div>
     <div class="space-40"></div>
@@ -49,6 +49,17 @@
     </div>
   </div>
 </template>
+
+<script>
+import { emptyImageFilter } from '../../utils/mixin'
+export default {
+  props: {
+    user: Object
+  },
+  mixins: [emptyImageFilter]
+}
+</script>
+
 <style lang="scss" scoped>
 @import '@/assets/css/components/MemberPage/MemberInfo';
 </style>

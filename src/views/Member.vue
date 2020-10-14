@@ -6,7 +6,9 @@
 
       <div class="wrapper">
         <transition name="changePage">
-          <MemberInfo v-if="nowPage === 'info'" />
+          <MemberInfo 
+            v-if="nowPage === 'info'" 
+            :user="userInfo"/>
           <MemberHistoryOrder
             v-else-if="nowPage === 'orders'"
             :orders="orders"
@@ -58,7 +60,8 @@ export default {
           paramsName: 'edit'
         }
       ],
-      orders: []
+      orders: [],
+      userInfo: {}
     }
   },
   computed: {
@@ -71,11 +74,11 @@ export default {
           userId,
           type: queryType
         })
-
+        
         if (statusText === 'error') {
           throw new Error()
         }
-        console.log(data.orders)
+        console.log(data)
         this.orders = data.orders
       } catch (err) {
         console.error(err)
@@ -88,6 +91,25 @@ export default {
     async afterEditUser(formData) {
       const user = await userAPI.putEditUser(formData)
       console.log(user)
+    },
+    async fetchUserInfo () {
+      try {
+        const { data, statusText } = await userAPI.getUserInfo()
+        
+        if (statusText === 'error') {
+          throw new Error()
+        }
+        this.userInfo = {
+          ...data.user
+        }
+
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得資料，請稍後再試'
+        })
+      }
     }
   },
   created() {
@@ -97,6 +119,8 @@ export default {
       const { type = 'coming' } = this.$route.query
       const userId = params.id
       this.fetchOrders(userId, type)
+    } else if (params.name === 'info') {
+      this.fetchUserInfo()
     }
   },
   beforeRouteUpdate(to, from, next) {
