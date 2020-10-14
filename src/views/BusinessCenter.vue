@@ -187,7 +187,7 @@ export default {
     },
     async afterSubmitUpdate (payload) {
       try {
-        const meal = await businessAPI.putMeal(payload)
+        const { data } = await businessAPI.putMeal(payload)
         if (data.status !== 'success') {
           this.editMenu = false
           throw new Error(data.message)
