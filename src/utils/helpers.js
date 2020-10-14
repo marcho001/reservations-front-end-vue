@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
-const baseURL = 'https://d39bb1f55be6.ngrok.io/api'
+const baseURL = 'https://restaurant-reservation-10720.herokuapp.com/api'
 const apiHelper = axios.create({ baseURL })
 apiHelper.interceptors.request.use(config => {
   const token = localStorage.getItem('token')

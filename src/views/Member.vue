@@ -74,7 +74,6 @@ export default {
 
         if (statusText === 'error') {
           throw new Error()
-          return
         }
         console.log(data.orders)
         this.orders = data.orders
