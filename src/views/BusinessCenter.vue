@@ -16,6 +16,7 @@
           <div class="menu d-grid p-2">
             <MenuCard
               v-for="meal in menu.meals"
+              @after-edit-meal-form="afterEditMealForm"
               :key="meal.id"  
               :meal="meal"
             />
@@ -23,6 +24,8 @@
 
           <EditMenuForm
             @after-toggle-edit-form="afterToggleEditForm"
+            :meal-category="menu.mealCategory"
+            :init-meal="meal"
             v-show="editMenu"
           />
         </template>
@@ -83,6 +86,17 @@ export default {
         next: 2,
         prev: 1,
         totalPage: []
+      },
+      meal: {
+        id: '',
+        MealCategoryId: '',
+        RestaurantId: '',
+        description: '',
+        image: '',
+        isSale: false,
+        mealCategoryId: '',
+        name: '',
+        price: '',
       }
     }
   },
@@ -126,6 +140,28 @@ export default {
       this.editMenu = false
     },
     toggleEditForm() {
+      const meal = {
+        id: '',
+        MealCategoryId: '',
+        RestaurantId: '',
+        description: '',
+        image: '',
+        isSale: false,
+        mealCategoryId: '',
+        name: '',
+        price: '',
+      }
+      this.meal = {
+        ...this.meal,
+        ...meal
+      }
+      this.editMenu = true
+    },
+    afterEditMealForm (payload) {
+      this.meal = {
+        ...this.meal,
+        ...payload
+      }
       this.editMenu = true
     }
   },

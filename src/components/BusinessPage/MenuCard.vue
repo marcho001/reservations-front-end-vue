@@ -16,6 +16,7 @@
         NT$ {{ meal.price }}
       </h3>
       <button
+        @click="editMealForm"
         class="edit">
         編輯
       </button>
@@ -34,6 +35,11 @@ import { emptyImageFilter } from '../../utils/mixin'
 export default {
   props: {
     meal: Object
+  },
+  methods: {
+    editMealForm () {
+      this.$emit('after-edit-meal-form', this.meal)
+    }
   },
   mixins: [emptyImageFilter]
 }
