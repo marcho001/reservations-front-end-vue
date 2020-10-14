@@ -6,17 +6,17 @@
 
       <div class="wrapper">
         <transition name="changePage">
-          <MemberInfo 
-            v-if="nowPage === 'info'"
-            />
-          <MemberHistoryOrder 
+          <MemberInfo v-if="nowPage === 'info'" />
+          <MemberHistoryOrder
             v-else-if="nowPage === 'orders'"
             :orders="orders"
-            :user-id="currentUser.id"/>
-          <EditMemberInfo 
+            :user-id="currentUser.id"
+          />
+          <EditMemberInfo
             v-else
             :init-user="currentUser"
-            @after-edit-user="afterEditUser"/>
+            @after-edit-user="afterEditUser"
+          />
         </transition>
       </div>
     </div>
@@ -65,7 +65,7 @@ export default {
     ...mapState(['currentUser'])
   },
   methods: {
-    async fetchOrders (userId, queryType) {
+    async fetchOrders(userId, queryType) {
       try {
         const { data, statusText } = await userAPI.getOrders({
           userId,
@@ -74,7 +74,6 @@ export default {
 
         if (statusText === 'error') {
           throw new Error()
-          return
         }
         console.log(data.orders)
         this.orders = data.orders
@@ -86,7 +85,7 @@ export default {
         })
       }
     },
-    async afterEditUser (formData) {
+    async afterEditUser(formData) {
       const user = await userAPI.putEditUser(formData)
       console.log(user)
     }
@@ -95,10 +94,10 @@ export default {
     const params = this.$route.params
     this.nowPage = params.name
     if (params.name === 'orders') {
-      const { type = 'coming' } = this.$route.query  
+      const { type = 'coming' } = this.$route.query
       const userId = params.id
       this.fetchOrders(userId, type)
-    }  
+    }
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name

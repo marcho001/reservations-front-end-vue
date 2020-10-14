@@ -33,7 +33,7 @@
 
       <RestaurantCard :restaurants="restaurants.rows" />
     </section>
-    <Pagination 
+    <Pagination
       :category-id="CategoryId"
       :city-id="CityId"
       :current-page="page"

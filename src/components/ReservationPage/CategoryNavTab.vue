@@ -13,20 +13,23 @@
         <font-awesome-icon :icon="solidIcon.faListUl" />
       </button>
       <div class="group d-flex justify-content-around p-2">
-        <router-link 
+        <router-link
           :to="{ name: 'reservation' }"
           :class="{ active: MealCategoryId === '' }"
-          class="group_item m-1">全部</router-link>
+          class="group_item m-1"
+          >全部</router-link
+        >
         <router-link
-          v-for="category in categories" 
+          v-for="category in categories"
           :key="category.id"
-          :to="{ 
-            name: 'reservation', 
-            query: { MealCategory: category.id }}"
-          :class="{ active: MealCategoryId === category.id}"
+          :to="{
+            name: 'reservation',
+            query: { MealCategory: category.id }
+          }"
+          :class="{ active: MealCategoryId === category.id }"
           class="group_item m-1"
         >
-        {{ category.name }}
+          {{ category.name }}
         </router-link>
       </div>
     </div>

@@ -1,58 +1,47 @@
 <template>
-  <form 
-    @submit.stop.prevent="handleSubmit"
-    class="info m-6">
+  <form @submit.stop.prevent="handleSubmit" class="info m-6">
     <label class="info_item image position-relative" for="image">
       <img :src="user.avatar | unknownPerson" />
       <p class="image_icon text-center cursor-pointer">
         <font-awesome-icon :icon="solidIcon.faCameraRetro" />
       </p>
     </label>
-    <input 
+    <input
       @change="handleChange"
-      name="image"
-      class="d-none" 
-      type="file" 
-      id="image" />
+      name="avatar"
+      class="d-none"
+      type="file"
+      id="image"
+    />
     <div class="info_item">
       <label for="name">名字：</label>
-      <input 
-        v-model="user.name"
-        type="text" 
-        name="name"
-        id="name" />
+      <input v-model="user.name" type="text" name="name" id="name" />
     </div>
     <div class="info_item">
       <label for="phone">電話：</label>
-      <input 
-        v-model="user.phone"
-        type="tel" 
-        name="phone" 
-        id="phone" />
+      <input v-model="user.phone" type="tel" name="phone" id="phone" />
     </div>
     <div class="info_item">
       <label for="email">電子信箱：</label>
-      <input 
-        v-model="user.email"
-        type="email" 
-        name="email"
-        id="email" />
+      <input v-model="user.email" type="email" name="email" id="email" />
     </div>
     <div class="info_item">
       <label for="password">密碼：</label>
-      <input 
+      <input
         v-model="user.password"
-        type="password" 
+        type="password"
         name="password"
-        id="password" />
+        id="password"
+      />
     </div>
     <div class="info_item">
       <label for="checkPassword">確認密碼：</label>
       <input
-        v-model="user.checkPassword" 
-        type="password" 
+        v-model="user.checkPassword"
+        type="password"
         name="checkPassword"
-        id="checkPassword" />
+        id="checkPassword"
+      />
     </div>
     <div class="d-flex justify-content-end">
       <button type="submit" class="info_save mt-2">
@@ -83,24 +72,24 @@ export default {
     }
   },
   methods: {
-    handleChange (e) {
+    handleChange(e) {
       const { files } = e.target
       if (files.length !== 0) {
         const imageURL = window.URL.createObjectURL(files[0])
         this.user.avatar = imageURL
       }
     },
-    handleSubmit (e) {
+    handleSubmit(e) {
       const form = e.target
       const formData = new FormData(form)
       for (let [name, value] of formData.entries()) {
-        console.log(name,value)
+        console.log(name, value)
       }
       this.$emit('after-edit-user', formData)
-      }
+    }
   },
   watch: {
-    initUser () {
+    initUser() {
       this.user = {
         ...this.user,
         ...this.initUser
