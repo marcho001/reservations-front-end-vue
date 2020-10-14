@@ -24,6 +24,8 @@
 
           <EditMenuForm
             @after-toggle-edit-form="afterToggleEditForm"
+            @after-submit-create="afterSubmitCreate"
+            @after-submit-update="afterSubmitUpdate"
             :meal-category="menu.mealCategory"
             :init-meal="meal"
             v-show="editMenu"
@@ -141,7 +143,7 @@ export default {
     },
     toggleEditForm() {
       const meal = {
-        id: '',
+        MealId: '',
         MealCategoryId: '',
         RestaurantId: '',
         description: '',
@@ -163,6 +165,42 @@ export default {
         ...payload
       }
       this.editMenu = true
+    },
+    async afterSubmitCreate (payload) {
+      try {
+        const { data } = await businessAPI.postMeal(payload.formData)
+
+        if (data.status !== 'success') {
+          this.editMenu = false
+          throw new Error(data.message)   
+        }
+
+        this.menu.meals.push(payload.meal)
+        this.editMenu = false
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+            icon: 'error',
+            title: '無法新增餐點，請稍後再試'
+          })
+      }
+    },
+    async afterSubmitUpdate (payload) {
+      try {
+        const meal = await businessAPI.putMeal(payload)
+        if (data.status !== 'success') {
+          this.editMenu = false
+          throw new Error(data.message)
+        }
+        const index = this.menu.meals.findIndex(item => item.id === payload.meal.id)
+        this.menu.meals[index] = payload.meal
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法更新餐點，請稍後再試'
+        })
+      }
     }
   },
   created() {
