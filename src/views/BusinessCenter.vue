@@ -6,6 +6,7 @@
       <div class="wrapper">
         <EditRestaurant
           v-if="nowPage === 'restaurant'"
+          @after-submit-update-restaurant="afterUpdateRestaurant"
           :init-restaurant="restaurant"
         />
         <template v-else>
@@ -24,8 +25,8 @@
 
           <EditMenuForm
             @after-toggle-edit-form="afterToggleEditForm"
-            @after-submit-create="afterSubmitCreate"
-            @after-submit-update="afterSubmitUpdate"
+            @after-submit-create-meal="afterSubmitCreate"
+            @after-submit-update-meal="afterSubmitUpdate"
             :meal-category="menu.mealCategory"
             :init-meal="meal"
             v-show="editMenu"
@@ -43,6 +44,7 @@ import MenuCard from '../components/BusinessPage/MenuCard'
 import EditMenuForm from '../components/BusinessPage/EditMenuForm'
 import businessAPI from '../api/businessAPI'
 import { Toast } from '../utils/helpers'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -75,7 +77,7 @@ export default {
       restaurant: {
         id: -1,
         name: '',
-        categoryId: -1,
+        CategoryId: -1,
         address: '',
         description: '',
         open_time: '',
@@ -96,11 +98,13 @@ export default {
         description: '',
         image: '',
         isSale: false,
-        mealCategoryId: '',
         name: '',
         price: ''
       }
     }
+  },
+  computed: {
+    ...mapState(['currentUser'])
   },
   methods: {
     async fetchRestaurant() {
@@ -199,6 +203,26 @@ export default {
         Toast.fire({
           icon: 'error',
           title: '無法更新餐點，請稍後再試'
+        })
+      }
+    },
+    async afterUpdateRestaurant (payload) {
+      try {
+        const { data } = await businessAPI.putRestaurant(payload)
+        console.log(data)
+        if (data.status !== 'success') {
+          throw new Error(data.message)
+        }
+
+        this.$router.push({
+          name: 'restaurant',
+          params: { id: this.currentUser.RestaurantId }
+        })
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法編輯餐廳，請稍後再試'
         })
       }
     }

@@ -1,5 +1,7 @@
 <template>
-  <form class="form">
+  <form 
+    @submit.prevent="handleSubmit"
+    class="form">
     <div class="form_item">
       <label for="name">餐廳名稱：</label>
       <input v-model="restaurant.name" type="text" name="name" id="name" />
@@ -9,7 +11,7 @@
       <select
         v-model="restaurant.CategoryId"
         class="px-1"
-        name="category"
+        name="categoryId"
         id="category"
       >
         <option value="" disabled selected>請選擇類別</option>
@@ -95,6 +97,11 @@ export default {
         const imageURL = window.URL.createObjectURL(files[0])
         this.restaurant.image = imageURL
       }
+    },
+    handleSubmit (e) {
+      const form = e.target
+      const formData = new FormData(form)
+      this.$emit('after-submit-update-restaurant', formData)
     }
   },
   mixins: [emptyImageFilter],

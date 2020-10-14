@@ -37,7 +37,7 @@
             class="nav_wrapper_link"
             :to="{
               name: 'restaurant',
-              params: { id: currentUser.id }
+              params: { id: currentUser.RestaurantId }
             }"
           >
             我的餐廳

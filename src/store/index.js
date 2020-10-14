@@ -39,7 +39,7 @@ export default new Vuex.Store({
         const { data, statusText } = await authorizationAPI.getCurrentUser()
         if (statusText === 'error') throw new Error(data)
 
-        const { id, name, email, avatar, role, phone } = data.profile
+        const { id, name, email, avatar, role, phone, Restaurants } = data.profile
 
         commit('setCurrentUser', {
           id,
@@ -47,7 +47,8 @@ export default new Vuex.Store({
           email,
           avatar,
           role,
-          phone
+          phone,
+          RestaurantId: Restaurants[0].id
         })
         return true
       } catch (err) {

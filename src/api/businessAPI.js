@@ -12,5 +12,8 @@ export default {
   },
   putMeal (formData) {
     return apiHelper.put('/business/menu', formData)
+  },
+  putRestaurant (formData) {
+    return apiHelper.put('/business/restaurant', formData)
   }
 }

@@ -123,14 +123,14 @@ export default {
       if (this.meal.id !== '') {
         formData.append('MealId', this.meal.id)
         // 修改
-        this.$emit('after-submit-update', { 
+        this.$emit('after-submit-update-meal', { 
           formData,
           meal: this.meal
           })
         return
       }
       // 新增
-      this.$emit('after-submit-create', { 
+      this.$emit('after-submit-create-meal', { 
           formData,
           meal: {
             ...this.meal,
