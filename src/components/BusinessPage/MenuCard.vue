@@ -12,20 +12,12 @@
     <div
       class="menu_item_footer d-flex justify-content-around align-items-center p-3"
     >
-      <h3 class="mr-3">
-        NT$ {{ meal.price }}
-      </h3>
-      <button
-        @click="editMealForm"
-        class="edit">
+      <h3 class="mr-3">NT$ {{ meal.price }}</h3>
+      <button @click="editMealForm" class="edit">
         編輯
       </button>
-      <button
-        v-if="meal.isSale" 
-        class="sale">販賣中</button>
-      <button 
-        v-else
-        class="stop">停售中</button>
+      <button v-if="meal.isSale" class="sale">販賣中</button>
+      <button v-else class="stop">停售中</button>
     </div>
   </div>
 </template>
@@ -37,7 +29,7 @@ export default {
     meal: Object
   },
   methods: {
-    editMealForm () {
+    editMealForm() {
       this.$emit('after-edit-meal-form', this.meal)
     }
   },

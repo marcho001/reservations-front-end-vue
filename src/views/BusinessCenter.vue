@@ -17,7 +17,7 @@
             <MenuCard
               v-for="meal in menu.meals"
               @after-edit-meal-form="afterEditMealForm"
-              :key="meal.id"  
+              :key="meal.id"
               :meal="meal"
             />
           </div>
@@ -96,7 +96,7 @@ export default {
         isSale: false,
         mealCategoryId: '',
         name: '',
-        price: '',
+        price: ''
       }
     }
   },
@@ -149,7 +149,7 @@ export default {
         isSale: false,
         mealCategoryId: '',
         name: '',
-        price: '',
+        price: ''
       }
       this.meal = {
         ...this.meal,
@@ -157,7 +157,7 @@ export default {
       }
       this.editMenu = true
     },
-    afterEditMealForm (payload) {
+    afterEditMealForm(payload) {
       this.meal = {
         ...this.meal,
         ...payload
