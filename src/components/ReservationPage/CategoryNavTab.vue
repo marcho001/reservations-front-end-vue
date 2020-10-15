@@ -13,15 +13,24 @@
         <font-awesome-icon :icon="solidIcon.faListUl" />
       </button>
       <div class="group d-flex justify-content-around p-2">
-        <a href="#" class="group_item active m-1">全部</a>
-        <a href="#" class="group_item m-1">牛肉</a>
-        <a href="#" class="group_item m-1">牛肉</a>
-        <a href="#" class="group_item m-1">牛肉</a>
-        <a href="#" class="group_item m-1">牛肉</a>
-        <a href="#" class="group_item m-1">牛肉</a>
-        <a href="#" class="group_item m-1">豬肉</a>
-        <a href="#" class="group_item m-1">羊肉</a>
-        <a href="#" class="group_item m-1">肌肉</a>
+        <router-link
+          :to="{ name: 'reservation' }"
+          :class="{ active: MealCategoryId === '' }"
+          class="group_item m-1"
+          >全部</router-link
+        >
+        <router-link
+          v-for="category in categories"
+          :key="category.id"
+          :to="{
+            name: 'reservation',
+            query: { MealCategory: category.id }
+          }"
+          :class="{ active: MealCategoryId === category.id }"
+          class="group_item m-1"
+        >
+          {{ category.name }}
+        </router-link>
       </div>
     </div>
   </div>
@@ -30,13 +39,17 @@
 <script>
 import { FontAwesomeIcon, solid } from '../../utils/icon'
 export default {
+  props: {
+    categories: Array
+  },
   components: {
     FontAwesomeIcon
   },
   data() {
     return {
       showCategory: true,
-      solidIcon: solid
+      solidIcon: solid,
+      MealCategoryId: 1
     }
   },
   methods: {

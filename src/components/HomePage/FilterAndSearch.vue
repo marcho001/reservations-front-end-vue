@@ -11,7 +11,7 @@
         v-show="categoryList"
         @mouseleave="categoryList = false"
         class="filter_list p-3 mt-1 position-absolute d-flex"
-        >
+      >
         <ul class="w-50">
           <li class="filter_list_item p-1">
             <router-link
@@ -23,20 +23,24 @@
             </router-link>
           </li>
           <li
-             v-for="category in categories"
+            v-for="category in categories"
             :key="category.id"
             class="filter_list_item p-1"
           >
-          <router-link
+            <router-link
               @click.native="categoryList = false"
               class="filter_list_item--link"
               :class="{ active: categoryId === category.id }"
-              :to="{ name: 'home', query: { CityId: cityId, CategoryId: category.id } }"
-              >{{ category.name }}</router-link>
+              :to="{
+                name: 'home',
+                query: { CityId: cityId, CategoryId: category.id }
+              }"
+              >{{ category.name }}</router-link
+            >
           </li>
-          </ul>
+        </ul>
         <ul class="w-50">
-        <li class="filter_list_item p-1">
+          <li class="filter_list_item p-1">
             <router-link
               :to="{ name: 'home', query: { CategoryId: categoryId } }"
               @click.native="categoryList = false"
@@ -46,7 +50,7 @@
             </router-link>
           </li>
           <li
-             v-for="city in cities"
+            v-for="city in cities"
             :key="city.id"
             class="filter_list_item p-1"
           >
@@ -54,13 +58,15 @@
               @click.native="categoryList = false"
               class="filter_list_item--link"
               :class="{ active: cityId === city.id }"
-              :to="{ name: 'home', query: { CategoryId: categoryId, CityId: city.id } }"
+              :to="{
+                name: 'home',
+                query: { CategoryId: categoryId, CityId: city.id }
+              }"
               >{{ city.area }}</router-link
             >
           </li>
         </ul>
       </div>
-      
     </div>
     <form
       @submit.prevent="handleSubmit"
@@ -104,7 +110,7 @@ export default {
     return {
       categoryList: false,
       search: '',
-      solidIcon: solid,
+      solidIcon: solid
     }
   },
   methods: {

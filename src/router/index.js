@@ -38,7 +38,7 @@ const routes = [
     component: () => import('../views/Member')
   },
   {
-    path: '/business/:id/:name',
+    path: '/business/:name',
     name: 'business',
     component: () => import('../views/BusinessCenter')
   },
@@ -64,7 +64,7 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach(async (to, from , next) => {
+router.beforeEach(async (to, from, next) => {
   // 取出token
   const tokenInLocalStorage = localStorage.getItem('token')
   const tokenInStore = store.state.token
@@ -76,21 +76,23 @@ router.beforeEach(async (to, from , next) => {
   }
 
   const pathsWithoutAuthentication = [
-    'home', 'restaurant', 'signin', 'signup', 'join-us'
+    'home',
+    'restaurant',
+    'signin',
+    'signup',
+    'join-us'
   ]
   const pathsWithAuthentication = ['signin', 'signup']
 
-  if (!isAuthenticated 
-      && !pathsWithoutAuthentication.includes(to.name)) {
+  if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
     next('/home')
     return
-  } 
+  }
 
-  if (isAuthenticated 
-    && pathsWithAuthentication.includes(to.name)) {
-      next('/')
-      return
-    }
+  if (isAuthenticated && pathsWithAuthentication.includes(to.name)) {
+    next('/')
+    return
+  }
   next()
 })
 

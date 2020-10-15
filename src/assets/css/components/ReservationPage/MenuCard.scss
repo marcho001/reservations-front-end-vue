@@ -1,16 +1,19 @@
-.menu {
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  grid-gap: 1.5rem;
-}
-
 .menu_item {
   @extend %shadow, %radius;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  img {
+    max-height: 150px;
+  }
   &_body {
-    border-bottom: 1px solid $mask;
     .description {
       @include textWrap(2);
     }
+  }
+  &_footer {
+    border-top: 1px solid $mask;
   }
 }
 

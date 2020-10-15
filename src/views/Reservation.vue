@@ -5,7 +5,10 @@
       <div v-show="showCart" class="cart position-fixed scroll">
         <!--研究使用keep alive 儲存資訊 or localStorage-->
         <CartBill :total-price="totalPrice" :orders="orders" />
-        <CartInfo @after-toggle-cart="afterToggleCart" />
+        <CartInfo
+          @after-toggle-cart="afterToggleCart"
+          @after-confirm-pay="afterConfirmPay"
+        />
       </div>
     </transition>
 
@@ -20,21 +23,33 @@
         </button>
       </div>
       <hr />
-      <CategoryNavTab />
+      <CategoryNavTab :categories="mealCategory" />
       <br />
-      <MenuCard
-        @after-add-item="afterAddItem"
-        @after-minus-item="afterMinusItem"
-      />
+      <div class="menu d-grid">
+        <MenuCard
+          v-for="meal in meals"
+          :key="meal.id"
+          :meal="meal"
+          @after-add-item="afterAddItem"
+          @after-minus-item="afterMinusItem"
+        />
+      </div>
     </div>
+    <Pagination 
+      :total-page="totalPage"
+      :current-page="page"
+      :name="'reservation'"/>
   </div>
 </template>
 <script>
+import restAPI from '../api/restAPI'
+import { Toast } from '../utils/helpers'
 import { FontAwesomeIcon, solid } from '../utils/icon'
 import CategoryNavTab from '../components/ReservationPage/CategoryNavTab'
 import MenuCard from '../components/ReservationPage/MenuCard'
 import CartBill from '../components/ReservationPage/CartBill'
 import CartInfo from '../components/ReservationPage/CartInfo'
+import Pagination from '../components/Pagination'
 // step 1
 // 人數 電話 時間
 // step 2
@@ -46,10 +61,17 @@ export default {
     CategoryNavTab,
     MenuCard,
     CartBill,
-    CartInfo
+    CartInfo,
+    Pagination
   },
   data() {
     return {
+      meals: [],
+      mealCategory: [],
+      totalPage: [],
+      prev: -1,
+      page: 1,
+      next: -1,
       solidIcon: solid,
       showCart: false,
       orders: [],
@@ -57,6 +79,45 @@ export default {
     }
   },
   methods: {
+    async fetchMenu({ restaurantId, queryCategory, queryPage }) {
+      try {
+        const { data, statusText } = await restAPI.getMenu({ 
+          restaurantId, 
+          MealCategoryId: queryCategory, 
+          page: queryPage })
+        console.log(data)
+        if (statusText === 'error') {
+          throw new Error()
+        }
+        //加入數量
+        this.meals = data.meals.map(item => ({
+          ...item,
+          quantity: 0
+        }))
+        this.mealCategory = data.mealCategory
+        this.totalPage = data.totalPage
+        this.prev = data.prev
+        this.next = data.next
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法取得餐點資料，請稍後再試！'
+        })
+      }
+    },
+    async postOrder(restaurantId, payload) {
+      try {
+        const res = await restAPI.postOrder(restaurantId, payload)
+        console.log('orderInfo', res)
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '訂位失敗，請稍後再試'
+        })
+      }
+    },
     afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = false
@@ -101,7 +162,50 @@ export default {
       this.totalPrice = price.reduce((a, b) => {
         return a + b
       }, 0)
+    },
+    afterConfirmPay(payload) {
+      //確認是否有餐點
+      if (this.orders.length === 0) {
+        Toast.fire({
+          icon: 'error',
+          title: '還沒有加入餐點！'
+        })
+        return
+      }
+      const bookInfo = {
+        orders: this.orders,
+        info: payload,
+        totalPrice: this.totalPrice
+      }
+      const restaurantId = this.$route.params.id
+      this.postOrder(restaurantId, bookInfo)
+      this.orders = []
+      this.totalPrice = 0
     }
+  },
+  created() {
+    const { id: restaurantId } = this.$route.params
+    const { 
+      MealCategory = '', 
+      page = '' } = this.$route.query
+
+    this.fetchMenu({
+      restaurantId,
+      queryCategory: MealCategory,
+      queryPage: page
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    const { id: restaurantId } = to.params
+    const {
+      MealCategory = '',
+      page = '' } = to.query
+    this.fetchMenu({
+      restaurantId,
+      queryCategory: MealCategory,
+      queryPage: page
+    })
+    next ()
   }
 }
 
