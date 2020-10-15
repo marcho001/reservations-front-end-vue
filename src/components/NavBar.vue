@@ -46,7 +46,7 @@
             class="nav_wrapper_link"
             :to="{
               name: 'business',
-              params: { id: currentUser.id, name: 'restaurant' }
+              params: { id: currentUser.RestaurantId, name: 'restaurant' }
             }"
           >
             餐廳後台

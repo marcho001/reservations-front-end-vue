@@ -8,7 +8,7 @@ export default {
   putEditUser(formData) {
     return apiHelper.put('/member/edit', formData)
   },
-  getUserInfo () {
+  getUserInfo() {
     return apiHelper.get('/member/info')
   }
 }

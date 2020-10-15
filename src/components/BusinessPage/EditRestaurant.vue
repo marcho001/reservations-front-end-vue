@@ -1,7 +1,5 @@
 <template>
-  <form 
-    @submit.prevent="handleSubmit"
-    class="form">
+  <form @submit.prevent="handleSubmit" class="form">
     <div class="form_item">
       <label for="name">餐廳名稱：</label>
       <input v-model="restaurant.name" type="text" name="name" id="name" />
@@ -98,7 +96,7 @@ export default {
         this.restaurant.image = imageURL
       }
     },
-    handleSubmit (e) {
+    handleSubmit(e) {
       const form = e.target
       const formData = new FormData(form)
       this.$emit('after-submit-update-restaurant', formData)

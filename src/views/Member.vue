@@ -6,9 +6,7 @@
 
       <div class="wrapper">
         <transition name="changePage">
-          <MemberInfo 
-            v-if="nowPage === 'info'" 
-            :user="userInfo"/>
+          <MemberInfo v-if="nowPage === 'info'" :user="userInfo" />
           <MemberHistoryOrder
             v-else-if="nowPage === 'orders'"
             :orders="orders"
@@ -74,7 +72,7 @@ export default {
           userId,
           type: queryType
         })
-        
+
         if (statusText === 'error') {
           throw new Error()
         }
@@ -92,17 +90,16 @@ export default {
       const user = await userAPI.putEditUser(formData)
       console.log(user)
     },
-    async fetchUserInfo () {
+    async fetchUserInfo() {
       try {
         const { data, statusText } = await userAPI.getUserInfo()
-        
+
         if (statusText === 'error') {
           throw new Error()
         }
         this.userInfo = {
           ...data.user
         }
-
       } catch (err) {
         console.error(err)
         Toast.fire({
@@ -129,6 +126,8 @@ export default {
       const { type = 'coming' } = to.query
       const userId = to.params.id
       this.fetchOrders(userId, type)
+    } else if (to.params.name === 'info') {
+      this.fetchUserInfo()
     }
     next()
   }
