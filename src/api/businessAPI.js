@@ -7,13 +7,13 @@ export default {
   getMenu() {
     return apiHelper.get('/business/menu')
   },
-  postMeal (formData) {
+  postMeal(formData) {
     return apiHelper.post('/business/meal', formData)
   },
-  putMeal (formData) {
+  putMeal(formData) {
     return apiHelper.put('/business/menu', formData)
   },
-  putRestaurant (formData) {
+  putRestaurant(formData) {
     return apiHelper.put('/business/restaurant', formData)
   }
 }

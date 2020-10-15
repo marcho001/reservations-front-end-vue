@@ -53,7 +53,6 @@
 <script>
 import { FontAwesomeIcon, solid } from '../../utils/icon'
 import { emptyImageFilter } from '../../utils/mixin'
-
 export default {
   props: {
     initUser: Object
@@ -82,9 +81,6 @@ export default {
     handleSubmit(e) {
       const form = e.target
       const formData = new FormData(form)
-      for (let [name, value] of formData.entries()) {
-        console.log(name, value)
-      }
       this.$emit('after-edit-user', formData)
     }
   },

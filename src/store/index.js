@@ -12,7 +12,8 @@ export default new Vuex.Store({
       email: '',
       avatar: '',
       phone: '',
-      role: ''
+      role: '',
+      RestaurantId: ''
     },
     isAuthenticated: false,
     token: ''
@@ -39,7 +40,21 @@ export default new Vuex.Store({
         const { data, statusText } = await authorizationAPI.getCurrentUser()
         if (statusText === 'error') throw new Error(data)
 
-        const { id, name, email, avatar, role, phone, Restaurants } = data.profile
+        const {
+          id,
+          name,
+          email,
+          avatar,
+          role,
+          phone,
+          Restaurants
+        } = data.profile
+
+        // 先預設一個廠商只有一間餐廳
+        let RestaurantId = ''
+        if (Restaurants.length > 0) {
+          RestaurantId = Restaurants[0].id
+        }
 
         commit('setCurrentUser', {
           id,
@@ -48,7 +63,7 @@ export default new Vuex.Store({
           avatar,
           role,
           phone,
-          RestaurantId: Restaurants[0].id
+          RestaurantId
         })
         return true
       } catch (err) {

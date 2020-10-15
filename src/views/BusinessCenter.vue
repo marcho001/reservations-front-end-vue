@@ -170,13 +170,13 @@ export default {
       }
       this.editMenu = true
     },
-    async afterSubmitCreate (payload) {
+    async afterSubmitCreate(payload) {
       try {
         const { data } = await businessAPI.postMeal(payload.formData)
 
         if (data.status !== 'success') {
           this.editMenu = false
-          throw new Error(data.message)   
+          throw new Error(data.message)
         }
 
         this.menu.meals.push(payload.meal)
@@ -184,19 +184,21 @@ export default {
       } catch (err) {
         console.error(err)
         Toast.fire({
-            icon: 'error',
-            title: '無法新增餐點，請稍後再試'
-          })
+          icon: 'error',
+          title: '無法新增餐點，請稍後再試'
+        })
       }
     },
-    async afterSubmitUpdate (payload) {
+    async afterSubmitUpdate(payload) {
       try {
         const { data } = await businessAPI.putMeal(payload)
         if (data.status !== 'success') {
           this.editMenu = false
           throw new Error(data.message)
         }
-        const index = this.menu.meals.findIndex(item => item.id === payload.meal.id)
+        const index = this.menu.meals.findIndex(
+          item => item.id === payload.meal.id
+        )
         this.menu.meals[index] = payload.meal
       } catch (err) {
         console.error(err)
@@ -206,7 +208,7 @@ export default {
         })
       }
     },
-    async afterUpdateRestaurant (payload) {
+    async afterUpdateRestaurant(payload) {
       try {
         const { data } = await businessAPI.putRestaurant(payload)
         console.log(data)
