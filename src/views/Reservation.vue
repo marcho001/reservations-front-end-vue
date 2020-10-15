@@ -35,6 +35,10 @@
         />
       </div>
     </div>
+    <Pagination 
+      :total-page="totalPage"
+      :current-page="page"
+      :name="'reservation'"/>
   </div>
 </template>
 <script>
@@ -45,6 +49,7 @@ import CategoryNavTab from '../components/ReservationPage/CategoryNavTab'
 import MenuCard from '../components/ReservationPage/MenuCard'
 import CartBill from '../components/ReservationPage/CartBill'
 import CartInfo from '../components/ReservationPage/CartInfo'
+import Pagination from '../components/Pagination'
 // step 1
 // 人數 電話 時間
 // step 2
@@ -56,7 +61,8 @@ export default {
     CategoryNavTab,
     MenuCard,
     CartBill,
-    CartInfo
+    CartInfo,
+    Pagination
   },
   data() {
     return {
@@ -64,6 +70,7 @@ export default {
       mealCategory: [],
       totalPage: [],
       prev: -1,
+      page: 1,
       next: -1,
       solidIcon: solid,
       showCart: false,
@@ -72,9 +79,13 @@ export default {
     }
   },
   methods: {
-    async fetchMenu(restaurantId) {
+    async fetchMenu({ restaurantId, queryCategory, queryPage }) {
       try {
-        const { data, statusText } = await restAPI.getMenu(restaurantId)
+        const { data, statusText } = await restAPI.getMenu({ 
+          restaurantId, 
+          MealCategoryId: queryCategory, 
+          page: queryPage })
+        console.log(data)
         if (statusText === 'error') {
           throw new Error()
         }
@@ -174,7 +185,27 @@ export default {
   },
   created() {
     const { id: restaurantId } = this.$route.params
-    this.fetchMenu(restaurantId)
+    const { 
+      MealCategory = '', 
+      page = '' } = this.$route.query
+
+    this.fetchMenu({
+      restaurantId,
+      queryCategory: MealCategory,
+      queryPage: page
+    })
+  },
+  beforeRouteUpdate (to, from, next) {
+    const { id: restaurantId } = to.params
+    const {
+      MealCategory = '',
+      page = '' } = to.query
+    this.fetchMenu({
+      restaurantId,
+      queryCategory: MealCategory,
+      queryPage: page
+    })
+    next ()
   }
 }
 

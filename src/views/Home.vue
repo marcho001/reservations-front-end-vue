@@ -38,6 +38,7 @@
       :city-id="CityId"
       :current-page="page"
       :total-page="totalPage"
+      :name="'home'"
     />
     <Footer />
   </div>
