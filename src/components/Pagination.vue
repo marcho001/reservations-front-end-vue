@@ -6,7 +6,7 @@
           class="page_item_link"
           v-show="previousPage"
           :to="{
-            name: 'home',
+            name: name,
             query: {
               CityId: cityId,
               CategoryId: categoryId,
@@ -26,7 +26,7 @@
         <router-link
           class="page_item_link px-2"
           :to="{
-            name: 'home',
+            name: name,
             query: { CityId: cityId, CategoryId: categoryId, page }
           }"
         >
@@ -38,7 +38,7 @@
           class="page_item_link"
           v-show="nextPage"
           :to="{
-            name: 'home',
+            name: name,
             query: {
               CityId: cityId,
               CategoryId: categoryId,
@@ -58,7 +58,8 @@ export default {
     categoryId: [String, Number],
     cityId: [String, Number],
     currentPage: Number,
-    totalPage: Array
+    totalPage: Array,
+    name: String
   },
   computed: {
     previousPage() {

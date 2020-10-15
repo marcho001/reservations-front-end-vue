@@ -10,8 +10,9 @@ export default {
   getRest(id) {
     return apiHelper.get(`/restaurant/${id}`)
   },
-  getMenu(id) {
-    return apiHelper.get(`/reservation/${id}`)
+  getMenu({ restaurantId, MealCategoryId, page }) {
+    const searchParams = new URLSearchParams({ MealCategoryId, page})
+    return apiHelper.get(`/reservation/${restaurantId}?${searchParams}`)
   },
   postOrder(id, payload) {
     return apiHelper.post(`/reservation/${id}`, payload)

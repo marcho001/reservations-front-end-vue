@@ -112,13 +112,10 @@ export default {
   created() {
     const params = this.$route.params
     this.nowPage = params.name
-    if (params.name === 'orders') {
       const { type = 'coming' } = this.$route.query
       const userId = params.id
-      this.fetchOrders(userId, type)
-    } else if (params.name === 'info') {
-      this.fetchUserInfo()
-    }
+      this.fetchOrders(userId, type) 
+      this.fetchUserInfo()  
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name

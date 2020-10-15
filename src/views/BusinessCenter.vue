@@ -10,9 +10,32 @@
           :init-restaurant="restaurant"
         />
         <template v-else>
+        <div class="d-flex">
           <button @click="toggleEditForm" class="create m-4">
             新增餐點
           </button>
+
+          <!--div class="group d-flex justify-content-around p-2">
+        <router-link
+          :to="{ name: 'business', params: { name: 'menu' } }"
+          class="group_item m-1"
+          >全部</router-link
+        >
+        <router-link
+          v-for="category in menu.mealCategory"
+          :key="category.id"
+          :to="{
+            name: 'business',
+            params: { name: 'menu' }
+            query: { MealCategory: category.id }
+          }"
+          class="group_item m-1"
+        >
+          {{ category.name }}
+        </router-link>
+      </!--div-->
+
+        </div>
           <hr />
           <div class="menu d-grid p-2">
             <MenuCard
@@ -191,7 +214,7 @@ export default {
     },
     async afterSubmitUpdate(payload) {
       try {
-        const { data } = await businessAPI.putMeal(payload)
+        const { data } = await businessAPI.putMeal(payload.formData)
         if (data.status !== 'success') {
           this.editMenu = false
           throw new Error(data.message)
@@ -200,6 +223,7 @@ export default {
           item => item.id === payload.meal.id
         )
         this.menu.meals[index] = payload.meal
+        this.editMenu = false
       } catch (err) {
         console.error(err)
         Toast.fire({
