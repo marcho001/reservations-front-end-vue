@@ -8,6 +8,7 @@
           v-if="nowPage === 'restaurant'"
           @after-submit-update-restaurant="afterUpdateRestaurant"
           :init-restaurant="restaurant"
+          :categories="category"
         />
         <template v-else>
         <div class="d-flex">
@@ -45,7 +46,9 @@
               :meal="meal"
             />
           </div>
-
+          <Pagination 
+            :current-page="menu.page"
+            :totalPage="menu.totalPage"/>
           <EditMenuForm
             @after-toggle-edit-form="afterToggleEditForm"
             @after-submit-create-meal="afterSubmitCreate"
@@ -65,6 +68,7 @@ import UserNavTab from '../components/UserNavTab'
 import EditRestaurant from '../components/BusinessPage/EditRestaurant'
 import MenuCard from '../components/BusinessPage/MenuCard'
 import EditMenuForm from '../components/BusinessPage/EditMenuForm'
+import Pagination from '../components/Pagination'
 import businessAPI from '../api/businessAPI'
 import { Toast } from '../utils/helpers'
 import { mapState } from 'vuex'
@@ -74,6 +78,7 @@ export default {
     UserNavTab,
     EditRestaurant,
     MenuCard,
+    Pagination,
     EditMenuForm
   },
   data() {
@@ -97,6 +102,7 @@ export default {
           paramsName: 'calendar'
         }
       ],
+      category: [],
       restaurant: {
         id: -1,
         name: '',
@@ -111,6 +117,7 @@ export default {
         mealCategory: [],
         meals: [],
         next: 2,
+        page: 1,
         prev: 1,
         totalPage: []
       },
@@ -140,6 +147,7 @@ export default {
           ...this.restaurant,
           ...data.restaurant
         }
+        this.category = data.category
       } catch (err) {
         console.error(err)
         Toast.fire({
