@@ -27,7 +27,7 @@
           <router-link
             tag="button"
             class="button_wrapper--reservation mr-3"
-            :to="{ name: 'reservation' }"
+            :to="{ name: 'reservation', params: { id: restaurant.id } }"
           >
             訂位點餐
           </router-link>

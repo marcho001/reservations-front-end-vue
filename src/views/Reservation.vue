@@ -45,6 +45,9 @@
 import restAPI from '../api/restAPI'
 import { Toast } from '../utils/helpers'
 import { FontAwesomeIcon, solid } from '../utils/icon'
+import NewEPay from '../utils/newepay'
+import { v4 as uuid } from 'uuid'
+
 import CategoryNavTab from '../components/ReservationPage/CategoryNavTab'
 import MenuCard from '../components/ReservationPage/MenuCard'
 import CartBill from '../components/ReservationPage/CartBill'
@@ -106,18 +109,45 @@ export default {
         })
       }
     },
-    async postOrder(restaurantId, payload) {
+    // async postOrder(restaurantId, payload) {
+    //   try {
+    //     const res = await restAPI.postOrder(restaurantId, payload)
+    //     console.log('orderInfo', res)
+    //   } catch (err) {
+    //     console.error(err)
+    //     Toast.fire({
+    //       icon: 'error',
+    //       title: '訂位失敗，請稍後再試'
+    //     })
+    //   }
+    // },
+    async postOrder (payload) {
       try {
-        const res = await restAPI.postOrder(restaurantId, payload)
-        console.log('orderInfo', res)
+        console.log(payload)
+        const Key = 'kFb6sccqjmALimU18pVkEslFTk3W1AEe'
+        const IV = 'Cz2NkRd0JxE7uVbP'
+    
+        const payData = NewEPay.getPayData(this.totalPrice, 'g40419@gmail.com', this.$route)
+        const chain = NewEPay.getChain(payData)
+        const aes = NewEPay.Encrypt(chain, Key, IV)
+        const sha = NewEPay.ShaEncrypt(chain,Key,IV)
+
+        const PayInfo = {
+          MerchantID: payData.MerchantID,
+          TradeInfo: aes,
+          TradeSha: sha,
+          Version: 1.5
+        }
+
+        const res = await restAPI.postOrder(PayInfo)
+        console.log(res)
       } catch (err) {
-        console.error(err)
-        Toast.fire({
-          icon: 'error',
-          title: '訂位失敗，請稍後再試'
-        })
+        console.log(err)
       }
     },
+
+
+
     afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
       this.showCart = false
@@ -178,7 +208,10 @@ export default {
         totalPrice: this.totalPrice
       }
       const restaurantId = this.$route.params.id
-      this.postOrder(restaurantId, bookInfo)
+      // this.postOrder(restaurantId, bookInfo)
+
+      this.postOrder(bookInfo)
+
       this.orders = []
       this.totalPrice = 0
     }
