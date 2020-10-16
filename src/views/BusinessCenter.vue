@@ -235,7 +235,6 @@ export default {
     async afterUpdateRestaurant(payload) {
       try {
         const { data } = await businessAPI.putRestaurant(payload)
-        console.log(data)
         if (data.status !== 'success') {
           throw new Error(data.message)
         }
