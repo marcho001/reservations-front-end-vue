@@ -46,7 +46,6 @@ import restAPI from '../api/restAPI'
 import { Toast } from '../utils/helpers'
 import { FontAwesomeIcon, solid } from '../utils/icon'
 import NewEPay from '../utils/newepay'
-import { v4 as uuid } from 'uuid'
 
 import CategoryNavTab from '../components/ReservationPage/CategoryNavTab'
 import MenuCard from '../components/ReservationPage/MenuCard'
@@ -207,7 +206,7 @@ export default {
         info: payload,
         totalPrice: this.totalPrice
       }
-      const restaurantId = this.$route.params.id
+      // const restaurantId = this.$route.params.id
       // this.postOrder(restaurantId, bookInfo)
 
       this.postOrder(bookInfo)
