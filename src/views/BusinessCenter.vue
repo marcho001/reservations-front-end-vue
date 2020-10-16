@@ -42,6 +42,7 @@
             <MenuCard
               v-for="meal in menu.meals"
               @after-edit-meal-form="afterEditMealForm"
+              @after-patch-sale="afterPatchSale"
               :key="meal.id"
               :meal="meal"
             />
@@ -257,6 +258,25 @@ export default {
         Toast.fire({
           icon: 'error',
           title: '無法編輯餐廳，請稍後再試'
+        })
+      }
+    },
+    async afterPatchSale (payload) {
+      try {
+        const { mealId, isSale } = payload
+        console.log(isSale)
+        const { data } = await businessAPI.patchIsSale(mealId, { isSale: isSale })
+        if (data.status !== 'success') {
+          throw new Error()
+        }
+
+        const index = this.menu.meals.findIndex(item => item.id === mealId)
+        this.menu.meals[index].isSale = isSale
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法更新狀態，請稍後再試'
         })
       }
     }

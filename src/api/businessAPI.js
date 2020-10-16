@@ -15,5 +15,8 @@ export default {
   },
   putRestaurant(formData) {
     return apiHelper.put('/business/restaurant', formData)
+  },
+  patchIsSale(mealId, data) {
+    return apiHelper.patch(`/business/isSale/${mealId}`, data)
   }
 }
