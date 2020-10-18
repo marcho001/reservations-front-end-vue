@@ -66,12 +66,9 @@ export default {
     ...mapState(['currentUser'])
   },
   methods: {
-    async fetchOrders(userId, queryType) {
+    async fetchOrders(queryType) {
       try {
-        const { data, statusText } = await userAPI.getOrders({
-          userId,
-          type: queryType
-        })
+        const { data, statusText } = await userAPI.getOrders({ type: queryType })
 
         if (statusText === 'error') {
           throw new Error()
@@ -110,11 +107,9 @@ export default {
     }
   },
   created() {
-    const params = this.$route.params
-    this.nowPage = params.name
+    this.nowPage = this.$route.params.name
       const { type = 'coming' } = this.$route.query
-      const userId = params.id
-      this.fetchOrders(userId, type) 
+      this.fetchOrders(type) 
       this.fetchUserInfo()  
   },
   beforeRouteUpdate(to, from, next) {
