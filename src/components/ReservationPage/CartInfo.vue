@@ -11,6 +11,10 @@
         <input v-model="information.phone" type="tel" name="tel" id="tel" />
       </div>
       <div class="info_form_item m-1">
+        <label for="email">電子信箱：</label>
+        <input v-model="information.email" type="email" name="email" id="email" />
+      </div>
+      <div class="info_form_item m-1">
         <label>日期：</label>
         <input v-model="information.date" type="date" name="date" />
       </div>
@@ -68,6 +72,8 @@ export default {
         phone: '',
         date: '',
         time: '',
+        email: '',
+        userId: '',
         seat: 0
       },
       isCurrentUser: false
@@ -82,14 +88,17 @@ export default {
     },
     confirmToPay() {
       //驗證表單
-      const { name, phone, date, time, seat } = this.information
-      if (!name || !phone || !date || !time || !seat) {
+      const { name, phone, date, time, seat, email } = this.information
+      if (!name || !phone || !date || !time || !seat || !email) {
         Toast.fire({
           icon: 'error',
           title: '訂位資訊所有欄位為必填！'
         })
         return
       }
+
+      this.information['userId'] = this.currentUser.id
+      
       Confirm.fire({
         title: '即將前往付款！',
         text: '已檢查過餐點內容了嗎？',
@@ -106,7 +115,8 @@ export default {
         this.information = {
           ...this.information,
           name: this.currentUser.name,
-          phone: this.currentUser.phone
+          phone: this.currentUser.phone,
+          email: this.currentUser.email
         }
       }
     }
