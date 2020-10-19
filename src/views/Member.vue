@@ -109,6 +109,7 @@ export default {
   created() {
     this.nowPage = this.$route.params.name
       const { type = 'coming' } = this.$route.query
+      console.log(type)
       this.fetchOrders(type) 
       this.fetchUserInfo()  
   },
@@ -117,7 +118,7 @@ export default {
     if (to.params.name === 'orders') {
       const { type = 'coming' } = to.query
       const userId = to.params.id
-      this.fetchOrders(userId, type)
+      this.fetchOrders(type)
     } else if (to.params.name === 'info') {
       this.fetchUserInfo()
     }
