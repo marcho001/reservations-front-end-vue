@@ -1,32 +1,32 @@
 import CryptoJS from 'crypto-js'
 import { v4 as uuid } from 'uuid'
 
-// const HashKey = 'kFb6sccqjmALimU18pVkEslFTk3W1AEe'
-// const HashIV = 'Cz2NkRd0JxE7uVbP'
-// // key iv 轉成 128 bit CryptoJs.enc.Utf8.parse(key)
+const HashKey = 'kFb6sccqjmALimU18pVkEslFTk3W1AEe'
+const HashIV = 'Cz2NkRd0JxE7uVbP'
+// key iv 轉成 128 bit CryptoJs.enc.Utf8.parse(key)
 
-// const key = CryptoJS.enc.Utf8.parse(HashKey)
-// const iv = CryptoJS.enc.Utf8.parse(HashIV)
+const key = CryptoJS.enc.Utf8.parse(HashKey)
+const iv = CryptoJS.enc.Utf8.parse(HashIV)
 
 export default {
-  getPayData(totalPrice, email, URL) {
+  getPayData(totalPrice, email, userId) {
     const payData = {
-      MerchantID: 'MS33418458',
+      MerchantID: 'MS315846711',
       Version: 1.5,
       RespondType: 'JSON',
       TimeStamp: Date.now(),
       MerchantOrderNo: uuid(),
       Amt: '',
-      ItemDesc: 'Ellen',
+      ItemDesc: 'Stop waiting 餐廳訂位網',
       Email: '',
       LoginType: 0,
       NotifyURL: 'https://restaurant-reservation-10720.herokuapp.com/api/spgateway/callback',
       ReturnURL: 'https://restaurant-reservation-10720.herokuapp.com/api/spgateway/callback',
-      ClientBackURL: ''
+      ClientBackURL: 'https://marcho001.github.io/reservations-front-end-vue/#/member/'
     }
     payData['Amt'] = totalPrice
     payData['Email'] = email
-    payData['ClientBackURL'] = URL
+    payData['ClientBackURL'] += `${userId}/orders`
     return payData
   },
   getChain(data) {
@@ -36,22 +36,18 @@ export default {
     }
     return results.join('&')
   },
-  Encrypt(data, HashKey, HashIV) {
-    const key = CryptoJS.enc.Utf8.parse(HashKey)
-    const iv = CryptoJS.enc.Utf8.parse(HashIV)
+  Encrypt(data) {
     const srcs = CryptoJS.enc.Utf8.parse(data)
     const encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv })
     return encrypted.ciphertext.toString()
   },
-  Decrypt(data, HashKey, HashIV) {
-    const key = CryptoJS.enc.Utf8.parse(HashKey)
-    const iv = CryptoJS.enc.Utf8.parse(HashIV)
+  Decrypt(data) {
     const encryptedHexStr = CryptoJS.enc.Hex.parse(data)
     const srcs = CryptoJS.enc.Base64.stringify(encryptedHexStr)
     const decrypt = CryptoJS.AES.decrypt(srcs, key, { iv: iv })
     return decrypt.toString(CryptoJS.enc.Utf8)
   },
-  ShaEncrypt(data, HashKey, HashIV) {
+  ShaEncrypt(data) {
     const plainText = `HashKey=${HashKey}&${data}&HashIV=${HashIV}`
     const sha256 = CryptoJS.SHA256(plainText)
     return sha256.toString(CryptoJS.enc.Hex).toUpperCase()
