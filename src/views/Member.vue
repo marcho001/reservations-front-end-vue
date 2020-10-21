@@ -117,7 +117,6 @@ export default {
     this.nowPage = to.params.name
     if (to.params.name === 'orders') {
       const { type = 'coming' } = to.query
-      const userId = to.params.id
       this.fetchOrders(type)
     } else if (to.params.name === 'info') {
       this.fetchUserInfo()

@@ -19,8 +19,8 @@ export default {
       ItemDesc: 'Stop waiting 餐廳訂位網',
       Email: '',
       LoginType: 0,
-      NotifyURL: 'https://600e14d3ef89.ngrok.io/api/newebpay/callback?from=NotifyURL',
-      ReturnURL: 'https://600e14d3ef89.ngrok.io/api/newebpay/callback?from=ReturnURL',
+      NotifyURL: 'https://restaurant-reservation-10720.herokuapp.com/api/newebpay/callback?from=NotifyURL',
+      ReturnURL: 'https://restaurant-reservation-10720.herokuapp.com/api/newebpay/callback?from=ReturnURL',
       ClientBackURL: 'https://marcho001.github.io/reservations-front-end-vue/#/member/orders'
     }
     payData['Amt'] = totalPrice
