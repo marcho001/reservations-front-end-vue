@@ -17,7 +17,4 @@ export default {
   postOrder(id, payload) {
     return apiHelper.post(`/order/${id}`, payload)
   }
-  // postOrder(payload) {
-  //   return axios.post(PayGateWay, payload)
-  // }
 }

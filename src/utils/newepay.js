@@ -1,5 +1,4 @@
 import CryptoJS from 'crypto-js'
-import { v4 as uuid } from 'uuid'
 
 const HashKey = 'kFb6sccqjmALimU18pVkEslFTk3W1AEe'
 const HashIV = 'Cz2NkRd0JxE7uVbP'
@@ -9,24 +8,23 @@ const key = CryptoJS.enc.Utf8.parse(HashKey)
 const iv = CryptoJS.enc.Utf8.parse(HashIV)
 
 export default {
-  getPayData(totalPrice, email, userId) {
+  getPayData(totalPrice, email) {
     const payData = {
       MerchantID: 'MS315846711',
       Version: 1.5,
       RespondType: 'JSON',
       TimeStamp: Date.now(),
-      MerchantOrderNo: uuid(),
+      MerchantOrderNo: Date.now(),
       Amt: '',
       ItemDesc: 'Stop waiting 餐廳訂位網',
       Email: '',
       LoginType: 0,
-      NotifyURL: 'https://restaurant-reservation-10720.herokuapp.com/api/spgateway/callback',
-      ReturnURL: 'https://restaurant-reservation-10720.herokuapp.com/api/spgateway/callback',
-      ClientBackURL: 'https://marcho001.github.io/reservations-front-end-vue/#/member/'
+      NotifyURL: 'https://600e14d3ef89.ngrok.io/api/newebpay/callback?from=NotifyURL',
+      ReturnURL: 'https://600e14d3ef89.ngrok.io/api/newebpay/callback?from=ReturnURL',
+      ClientBackURL: 'https://marcho001.github.io/reservations-front-end-vue/#/member/orders'
     }
     payData['Amt'] = totalPrice
     payData['Email'] = email
-    payData['ClientBackURL'] += `${userId}/orders`
     return payData
   },
   getChain(data) {

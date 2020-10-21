@@ -8,7 +8,7 @@
       </div>
       <div class="info_form_item m-1">
         <label for="tel">電話：</label>
-        <input v-model="information.phone" type="tel" name="tel" id="tel" />
+        <input v-model="information.phone" type="tel" name="phone" id="tel" />
       </div>
       <div class="info_form_item m-1">
         <label for="email">電子信箱：</label>
