@@ -77,7 +77,6 @@ export default {
           email: this.email,
           password: this.password
         })
-
         if (data.status !== 'success') {
           throw new Error(data.message)
         }

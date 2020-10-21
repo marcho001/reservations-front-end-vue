@@ -9,6 +9,23 @@
           @after-toggle-cart="afterToggleCart"
           @after-confirm-pay="afterConfirmPay"
         />
+        <form 
+          ref="newepay"
+          class="d-none" 
+          name="newepay" action="https://ccore.newebpay.com/MPG/mpg_gateway" method="post">
+          <input 
+            :value="payInfo.MerchantID"
+            type="text" name="MerchantID">
+          <input 
+            :value="payInfo.TradeInfo"
+            type="text" name="TradeInfo">
+          <input 
+            :value="payInfo.TradeSha"
+            type="text" name="TradeSha">
+          <input 
+            :value="payInfo.Version"
+            type="text" name="Version">
+        </form>
       </div>
     </transition>
 
@@ -77,6 +94,13 @@ export default {
       solidIcon: solid,
       showCart: false,
       orders: [],
+      payInfo: {
+        MerchantID: '',
+        TradeInfo: '',
+        TradeSha: '',
+        Version: 1.5,
+        MerchantOrderNo: ''
+      },
       totalPrice: 0
     }
   },
@@ -87,7 +111,6 @@ export default {
           restaurantId, 
           MealCategoryId: queryCategory, 
           page: queryPage })
-        console.log(data)
         if (statusText === 'error') {
           throw new Error()
         }
@@ -108,41 +131,28 @@ export default {
         })
       }
     },
-    // async postOrder(restaurantId, payload) {
-    //   try {
-    //     const res = await restAPI.postOrder(restaurantId, payload)
-    //     console.log('orderInfo', res)
-    //   } catch (err) {
-    //     console.error(err)
-    //     Toast.fire({
-    //       icon: 'error',
-    //       title: '訂位失敗，請稍後再試'
-    //     })
-    //   }
-    // },
-    async postOrder (payload) {
+    async postOrder(restaurantId, payload) {
       try {
-        console.log(payload)
-        const Key = 'kFb6sccqjmALimU18pVkEslFTk3W1AEe'
-        const IV = 'Cz2NkRd0JxE7uVbP'
-    
-        const payData = NewEPay.getPayData(this.totalPrice, 'g40419@gmail.com', this.$route)
-        const chain = NewEPay.getChain(payData)
-        const aes = NewEPay.Encrypt(chain, Key, IV)
-        const sha = NewEPay.ShaEncrypt(chain,Key,IV)
-
-        const PayInfo = {
-          MerchantID: payData.MerchantID,
-          TradeInfo: aes,
-          TradeSha: sha,
-          Version: 1.5
+        const { data } = await restAPI.postOrder(restaurantId, payload)
+        if (data.status !== 'success') {
+          throw new Error()
         }
-
-        const res = await restAPI.postOrder(PayInfo)
-        console.log(res)
       } catch (err) {
-        console.log(err)
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '訂位失敗，請稍後再試'
+        })
       }
+    },
+    postNewepay ({ totalPrice, email }) {    
+        const payData = NewEPay.getPayData(totalPrice, email)
+        const chain = NewEPay.getChain(payData)
+
+        this.payInfo.MerchantOrderNo = payData.MerchantOrderNo
+        this.payInfo.MerchantID = payData.MerchantID
+        this.payInfo.TradeInfo = NewEPay.Encrypt(chain)
+        this.payInfo.TradeSha = NewEPay.ShaEncrypt(this.payInfo.TradeInfo)
     },
 
 
@@ -192,27 +202,41 @@ export default {
         return a + b
       }, 0)
     },
-    afterConfirmPay(payload) {
-      //確認是否有餐點
-      if (this.orders.length === 0) {
+    async afterConfirmPay(payload) {
+      try {
+        //確認是否有餐點
+        if (this.orders.length === 0) {
+          Toast.fire({
+            icon: 'error',
+            title: '還沒有加入餐點！'
+          })
+          return
+        }
+
+        await this.postNewepay({
+          totalPrice: this.totalPrice,
+          email: payload.email
+        })
+        const bookInfo = {
+          orders: this.orders,
+          info: payload,
+          totalPrice: this.totalPrice,
+          MerchantOrderNo: this.payInfo.MerchantOrderNo
+        }
+        
+        const restaurantId = this.$route.params.id
+        await this.postOrder(restaurantId, bookInfo)
+        this.orders = []
+        this.totalPrice = 0
+        this.$refs.newepay.submit()
+
+      } catch (err) {
+        console.error(err)
         Toast.fire({
           icon: 'error',
-          title: '還沒有加入餐點！'
+          title: '錯誤，請稍後再試'
         })
-        return
       }
-      const bookInfo = {
-        orders: this.orders,
-        info: payload,
-        totalPrice: this.totalPrice
-      }
-      // const restaurantId = this.$route.params.id
-      // this.postOrder(restaurantId, bookInfo)
-
-      this.postOrder(bookInfo)
-
-      this.orders = []
-      this.totalPrice = 0
     }
   },
   created() {
