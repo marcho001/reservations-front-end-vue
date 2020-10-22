@@ -114,6 +114,7 @@ export default {
         if (statusText === 'error') {
           throw new Error()
         }
+        console.log(data)
         //加入數量
         this.meals = data.meals.map(item => ({
           ...item,

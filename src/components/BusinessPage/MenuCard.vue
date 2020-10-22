@@ -20,12 +20,14 @@
       <button 
         v-if="meal.isSale" 
         @click="patchIsSale(meal)"
+        :disabled="isProcessing"
         class="sale">
           販賣中
       </button>
       <button 
         v-else 
         @click="patchIsSale(meal)"
+        :disabled="isProcessing"
         class="stop">
           停售中
       </button>
@@ -37,7 +39,8 @@
 import { emptyImageFilter } from '../../utils/mixin'
 export default {
   props: {
-    meal: Object
+    meal: Object,
+    isProcessing: Boolean
   },
   methods: {
     editMealForm() {
