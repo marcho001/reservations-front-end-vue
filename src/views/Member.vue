@@ -68,7 +68,9 @@ export default {
   methods: {
     async fetchOrders(queryType) {
       try {
-        const { data, statusText } = await userAPI.getOrders({ type: queryType })
+        const { data, statusText } = await userAPI.getOrders({
+          type: queryType
+        })
 
         if (statusText === 'error') {
           throw new Error()
@@ -108,10 +110,10 @@ export default {
   },
   created() {
     this.nowPage = this.$route.params.name
-      const { type = 'coming' } = this.$route.query
-      console.log(type)
-      this.fetchOrders(type) 
-      this.fetchUserInfo()  
+    const { type = 'coming' } = this.$route.query
+    console.log(type)
+    this.fetchOrders(type)
+    this.fetchUserInfo()
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name

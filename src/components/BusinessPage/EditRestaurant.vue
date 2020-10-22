@@ -12,12 +12,13 @@
         name="categoryId"
         id="category"
       >
-        <option value="" disabled >請選擇類別</option>
-        <option 
+        <option value="" disabled>請選擇類別</option>
+        <option
           v-for="category in categories"
           :key="category.id"
-          :value="category.id">
-            {{ category.name }}
+          :value="category.id"
+        >
+          {{ category.name }}
         </option>
       </select>
     </div>

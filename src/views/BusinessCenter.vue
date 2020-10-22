@@ -11,11 +11,11 @@
           :categories="category"
         />
         <template v-else>
-        <div class="d-flex">
-          <button @click="toggleEditForm" class="create m-4">
-            新增餐點
-          </button>
-        </div>
+          <div class="d-flex">
+            <button @click="toggleEditForm" class="create m-4">
+              新增餐點
+            </button>
+          </div>
           <hr />
           <div class="menu d-grid p-2">
             <MenuCard
@@ -27,9 +27,7 @@
               :is-processing="isProcessing"
             />
           </div>
-          <Pagination 
-            :current-page="menu.page"
-            :totalPage="menu.totalPage"/>
+          <Pagination :current-page="menu.page" :totalPage="menu.totalPage" />
           <EditMenuForm
             @after-toggle-edit-form="afterToggleEditForm"
             @after-submit-create-meal="afterSubmitCreate"
@@ -246,11 +244,13 @@ export default {
         })
       }
     },
-    async afterPatchSale (payload) {
+    async afterPatchSale(payload) {
       try {
         this.isProcessing = true
         const { mealId, isSale } = payload
-        const { data } = await businessAPI.patchIsSale(mealId, { isSale: isSale })
+        const { data } = await businessAPI.patchIsSale(mealId, {
+          isSale: isSale
+        })
         if (data.status !== 'success') {
           throw new Error()
         }

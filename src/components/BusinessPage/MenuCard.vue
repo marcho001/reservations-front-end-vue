@@ -13,23 +13,24 @@
       class="menu_item_footer d-flex justify-content-around align-items-center p-3"
     >
       <h3 class="mr-3">NT$ {{ meal.price }}</h3>
-      <button 
-        @click="editMealForm" class="edit">
+      <button @click="editMealForm" class="edit">
         編輯
       </button>
-      <button 
-        v-if="meal.isSale" 
+      <button
+        v-if="meal.isSale"
         @click="patchIsSale(meal)"
         :disabled="isProcessing"
-        class="sale">
-          販賣中
+        class="sale"
+      >
+        販賣中
       </button>
-      <button 
-        v-else 
+      <button
+        v-else
         @click="patchIsSale(meal)"
         :disabled="isProcessing"
-        class="stop">
-          停售中
+        class="stop"
+      >
+        停售中
       </button>
     </div>
   </div>
@@ -46,7 +47,7 @@ export default {
     editMealForm() {
       this.$emit('after-edit-meal-form', this.meal)
     },
-    patchIsSale (meal) {
+    patchIsSale(meal) {
       const data = {
         mealId: meal.id,
         isSale: !meal.isSale
