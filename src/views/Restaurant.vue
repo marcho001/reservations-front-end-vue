@@ -1,6 +1,6 @@
 <template>
   <div class="container pt-4">
-    <Spinner v-if="isLoading"/>
+    <Spinner v-if="isLoading" />
     <template v-else>
       <div class="restaurant wrapper">
         <RestaurantDetail

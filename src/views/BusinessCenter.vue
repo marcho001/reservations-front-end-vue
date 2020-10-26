@@ -4,7 +4,7 @@
     <div class="business_wrapper">
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
-        <Spinner v-if="isLoading"/>
+        <Spinner v-if="isLoading" />
         <template v-else>
           <EditRestaurant
             v-if="nowPage === 'restaurant'"

@@ -5,10 +5,8 @@
       <UserNavTab :tabs="tabs" />
 
       <div class="wrapper">
-        <Spinner v-if="isLoading"/>
-        <transition 
-          v-else
-          name="changePage">
+        <Spinner v-if="isLoading" />
+        <transition v-else name="changePage">
           <MemberInfo v-if="nowPage === 'info'" :user="userInfo" />
           <MemberHistoryOrder
             v-else-if="nowPage === 'orders'"

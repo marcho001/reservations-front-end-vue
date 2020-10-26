@@ -36,7 +36,7 @@
       <hr />
       <CategoryNavTab :categories="mealCategory" />
       <br />
-      <Spinner v-if="isLoading"/>
+      <Spinner v-if="isLoading" />
       <template v-else>
         <div class="menu d-grid">
           <MenuCard
