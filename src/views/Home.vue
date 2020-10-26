@@ -31,9 +31,9 @@
         @after-search="handleAfterSearch"
       />
 
-      <Spinner v-if="isLoading"/>
+      <Spinner v-if="isLoading" />
       <template v-else>
-        <RestaurantCard :restaurants="restaurants.rows" />   
+        <RestaurantCard :restaurants="restaurants.rows" />
       </template>
     </section>
     <Pagination
