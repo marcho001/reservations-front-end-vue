@@ -4,38 +4,41 @@
     <div class="business_wrapper">
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
-        <EditRestaurant
-          v-if="nowPage === 'restaurant'"
-          @after-submit-update-restaurant="afterUpdateRestaurant"
-          :init-restaurant="restaurant"
-          :categories="category"
-        />
+        <Spinner v-if="isLoading"/>
         <template v-else>
-          <div class="d-flex">
-            <button @click="toggleEditForm" class="create m-4">
-              新增餐點
-            </button>
-          </div>
-          <hr />
-          <div class="menu d-grid p-2">
-            <MenuCard
-              v-for="meal in menu.meals"
-              @after-edit-meal-form="afterEditMealForm"
-              @after-patch-sale="afterPatchSale"
-              :key="meal.id"
-              :meal="meal"
-              :is-processing="isProcessing"
-            />
-          </div>
-          <Pagination :current-page="menu.page" :totalPage="menu.totalPage" />
-          <EditMenuForm
-            @after-toggle-edit-form="afterToggleEditForm"
-            @after-submit-create-meal="afterSubmitCreate"
-            @after-submit-update-meal="afterSubmitUpdate"
-            :meal-category="menu.mealCategory"
-            :init-meal="meal"
-            v-show="editMenu"
+          <EditRestaurant
+            v-if="nowPage === 'restaurant'"
+            @after-submit-update-restaurant="afterUpdateRestaurant"
+            :init-restaurant="restaurant"
+            :categories="category"
           />
+          <template v-else>
+            <div class="d-flex">
+              <button @click="toggleEditForm" class="create m-4">
+                新增餐點
+              </button>
+            </div>
+            <hr />
+            <div class="menu d-grid p-2">
+              <MenuCard
+                v-for="meal in menu.meals"
+                @after-edit-meal-form="afterEditMealForm"
+                @after-patch-sale="afterPatchSale"
+                :key="meal.id"
+                :meal="meal"
+                :is-processing="isProcessing"
+              />
+            </div>
+            <Pagination :current-page="menu.page" :totalPage="menu.totalPage" />
+            <EditMenuForm
+              @after-toggle-edit-form="afterToggleEditForm"
+              @after-submit-create-meal="afterSubmitCreate"
+              @after-submit-update-meal="afterSubmitUpdate"
+              :meal-category="menu.mealCategory"
+              :init-meal="meal"
+              v-show="editMenu"
+            />
+          </template>
         </template>
       </div>
     </div>
@@ -48,6 +51,7 @@ import EditRestaurant from '../components/BusinessPage/EditRestaurant'
 import MenuCard from '../components/BusinessPage/MenuCard'
 import EditMenuForm from '../components/BusinessPage/EditMenuForm'
 import Pagination from '../components/Pagination'
+import Spinner from '../components/Spinner'
 import businessAPI from '../api/businessAPI'
 import { Toast } from '../utils/helpers'
 import { mapState } from 'vuex'
@@ -58,13 +62,15 @@ export default {
     EditRestaurant,
     MenuCard,
     Pagination,
-    EditMenuForm
+    EditMenuForm,
+    Spinner
   },
   data() {
     return {
       nowPage: 'menu',
       editMenu: false,
       isProcessing: false,
+      isLoading: true,
       tabs: [
         {
           name: '編輯餐廳',
@@ -123,18 +129,19 @@ export default {
         if (stateText === 'error') {
           throw new Error()
         }
-        console.log(data)
         this.restaurant = {
           ...this.restaurant,
           ...data.restaurant
         }
         this.category = data.category
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得餐廳，請稍後再試'
         })
+        this.isLoading = false
       }
     },
     async fetchMenu({ queryPage }) {
@@ -150,12 +157,14 @@ export default {
           ...data,
           meals: data.meals.rows
         }
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得菜單，請稍後再試'
         })
+        this.isLoading = false
       }
     },
     afterToggleEditForm() {

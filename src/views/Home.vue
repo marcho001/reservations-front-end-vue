@@ -31,15 +31,20 @@
         @after-search="handleAfterSearch"
       />
 
-      <RestaurantCard :restaurants="restaurants.rows" />
+      <Spinner v-if="isLoading"/>
+      <template v-else>
+        <RestaurantCard :restaurants="restaurants.rows" />   
+      </template>
     </section>
     <Pagination
+      v-show="!isLoading"
       :category-id="CategoryId"
       :city-id="CityId"
       :current-page="page"
       :total-page="totalPage"
       :name="'home'"
     />
+
     <Footer />
   </div>
 </template>
@@ -50,6 +55,7 @@ import FilterAndSearch from '../components/HomePage/FilterAndSearch'
 import RestaurantCard from '../components/HomePage/RestaurantCard'
 import Pagination from '../components/Pagination'
 import Footer from '../components/Footer'
+import Spinner from '../components/Spinner'
 import restAPI from '../api/restAPI'
 import { Toast } from '../utils/helpers'
 
@@ -59,7 +65,8 @@ export default {
     FilterAndSearch,
     RestaurantCard,
     Pagination,
-    Footer
+    Footer,
+    Spinner
   },
   data() {
     return {
@@ -71,7 +78,8 @@ export default {
       page: -1,
       totalPage: [],
       prev: -1,
-      next: -1
+      next: -1,
+      isLoading: true
     }
   },
   methods: {
@@ -106,11 +114,13 @@ export default {
         this.totalPage = totalPage
         this.prev = prev
         this.next = next
+        this.isLoading = false
       } catch (err) {
         Toast.fire({
           icon: 'warning',
           title: '無法取得資料，請稍後再試'
         })
+        this.isLoading = false
       }
     },
     handleAfterSearch(payload) {

@@ -5,7 +5,10 @@
       <UserNavTab :tabs="tabs" />
 
       <div class="wrapper">
-        <transition name="changePage">
+        <Spinner v-if="isLoading"/>
+        <transition 
+          v-else
+          name="changePage">
           <MemberInfo v-if="nowPage === 'info'" :user="userInfo" />
           <MemberHistoryOrder
             v-else-if="nowPage === 'orders'"
@@ -27,6 +30,7 @@ import MemberHistoryOrder from '../components/MemberPage/MemberHistoryOrder'
 import UserNavTab from '../components/UserNavTab'
 import EditMemberInfo from '../components/MemberPage/EditMemberInfo'
 import MemberInfo from '../components/MemberPage/MemberInfo'
+import Spinner from '../components/Spinner'
 import { Toast } from '../utils/helpers'
 import userAPI from '../api/userAPI'
 import { mapState } from 'vuex'
@@ -36,7 +40,8 @@ export default {
     UserNavTab,
     MemberHistoryOrder,
     EditMemberInfo,
-    MemberInfo
+    MemberInfo,
+    Spinner
   },
   data() {
     return {
@@ -59,7 +64,8 @@ export default {
         }
       ],
       orders: [],
-      userInfo: {}
+      userInfo: {},
+      isLoading: true
     }
   },
   computed: {
@@ -75,14 +81,15 @@ export default {
         if (statusText === 'error') {
           throw new Error()
         }
-        console.log(data)
         this.orders = data.orders
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得訂單資料，請稍後再試！'
         })
+        this.isLoading = false
       }
     },
     async afterEditUser(formData) {
@@ -99,19 +106,20 @@ export default {
         this.userInfo = {
           ...data.user
         }
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得資料，請稍後再試'
         })
+        this.isLoading = false
       }
     }
   },
   created() {
     this.nowPage = this.$route.params.name
     const { type = 'coming' } = this.$route.query
-    console.log(type)
     this.fetchOrders(type)
     this.fetchUserInfo()
   },
