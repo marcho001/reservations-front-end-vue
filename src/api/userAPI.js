@@ -1,9 +1,9 @@
 import { apiHelper } from '../utils/helpers'
 
 export default {
-  getOrders({ userId, type }) {
+  getOrders({ type }) {
     const searchParams = new URLSearchParams({ type })
-    return apiHelper.get(`/member/${userId}/orders?${searchParams}`)
+    return apiHelper.get(`/member/orders?${searchParams.toString()}`)
   },
   putEditUser(formData) {
     return apiHelper.put('/member/edit', formData)

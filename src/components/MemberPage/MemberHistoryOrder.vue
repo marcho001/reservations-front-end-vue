@@ -42,7 +42,7 @@
         <div class="item_title d-flex justify-content-between">
           <div>
             <h2 class="mb-2">
-              {{ order.RestaurantSeat.Restaurant.name }}
+              {{ order.restaurantName }}
             </h2>
             <p>編號：hiahifhiehaisehiashef</p>
           </div>
@@ -52,18 +52,22 @@
         </div>
         <hr />
         <div class="item_detail">
-          <ul class="bill_list_item d-flex align-items-center my-2">
-            <li class="name text-center m-1">秋刀魚抹鹽梯 黃金鱸魚</li>
-            <li class="m-1">x2</li>
+          <ul
+            v-for="item in order.OrderItems"
+            :key="item.id"
+            class="bill_list_item d-flex align-items-center my-2"
+          >
+            <li class="name text-center m-1">{{ item.name }}</li>
+            <li class="m-1">x{{ item.quantity }}</li>
             <li class="border mx-3"></li>
-            <li class="m-1">$ 100</li>
+            <li class="m-1">$ {{ item.price }}</li>
           </ul>
           <h3 class="text-right">總計： ${{ order.totalPrice }}</h3>
         </div>
         <hr />
         <div class="item_footer d-flex justify-content-around">
           <div class="m-2">
-            預約日期：<span>{{ order.data }}</span>
+            預約日期：<span>{{ order.date }}</span>
           </div>
           <div class="m-2">
             預約時間：<span>{{ order.time }}</span>

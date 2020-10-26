@@ -12,9 +12,14 @@
         name="categoryId"
         id="category"
       >
-        <option value="" disabled selected>請選擇類別</option>
-        <option value="">日式料理</option>
-        <option value="2">美式料理</option>
+        <option value="" disabled>請選擇類別</option>
+        <option
+          v-for="category in categories"
+          :key="category.id"
+          :value="category.id"
+        >
+          {{ category.name }}
+        </option>
       </select>
     </div>
     <label class="form_item image position-relative" for="image">
@@ -77,7 +82,8 @@ import { FontAwesomeIcon, solid } from '../../utils/icon'
 
 export default {
   props: {
-    initRestaurant: Object
+    initRestaurant: Object,
+    categories: Array
   },
   components: {
     FontAwesomeIcon

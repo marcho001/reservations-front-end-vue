@@ -1,6 +1,4 @@
 import { apiHelper } from '../utils/helpers'
-import axios from 'axios'
-const PayGateWay = "https://ccore.spgateway.com/MPG/mpg_gateway"
 
 export default {
   getHome({ page, CategoryId, CityId }) {
@@ -13,13 +11,12 @@ export default {
     return apiHelper.get(`/restaurant/${id}`)
   },
   getMenu({ restaurantId, MealCategoryId, page }) {
-    const searchParams = new URLSearchParams({ MealCategoryId, page})
-    return apiHelper.get(`/restaurant/${restaurantId}/reservation?${searchParams}`)
+    const searchParams = new URLSearchParams({ MealCategoryId, page })
+    return apiHelper.get(
+      `/restaurant/${restaurantId}/reservation?${searchParams.toString()}`
+    )
   },
-  // postOrder(id, payload) {
-  //   return apiHelper.post(`/reservation/${id}`, payload)
-  // }
-  postOrder(payload) {
-    return axios.post(PayGateWay, payload)
+  postOrder(id, payload) {
+    return apiHelper.post(`/order/${id}`, payload)
   }
 }

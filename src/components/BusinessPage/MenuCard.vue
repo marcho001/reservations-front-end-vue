@@ -16,8 +16,22 @@
       <button @click="editMealForm" class="edit">
         編輯
       </button>
-      <button v-if="meal.isSale" class="sale">販賣中</button>
-      <button v-else class="stop">停售中</button>
+      <button
+        v-if="meal.isSale"
+        @click="patchIsSale(meal)"
+        :disabled="isProcessing"
+        class="sale"
+      >
+        販賣中
+      </button>
+      <button
+        v-else
+        @click="patchIsSale(meal)"
+        :disabled="isProcessing"
+        class="stop"
+      >
+        停售中
+      </button>
     </div>
   </div>
 </template>
@@ -26,11 +40,19 @@
 import { emptyImageFilter } from '../../utils/mixin'
 export default {
   props: {
-    meal: Object
+    meal: Object,
+    isProcessing: Boolean
   },
   methods: {
     editMealForm() {
       this.$emit('after-edit-meal-form', this.meal)
+    },
+    patchIsSale(meal) {
+      const data = {
+        mealId: meal.id,
+        isSale: !meal.isSale
+      }
+      this.$emit('after-patch-sale', data)
     }
   },
   mixins: [emptyImageFilter]

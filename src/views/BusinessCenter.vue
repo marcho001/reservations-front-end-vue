@@ -4,56 +4,41 @@
     <div class="business_wrapper">
       <UserNavTab :tabs="tabs" />
       <div class="wrapper">
-        <EditRestaurant
-          v-if="nowPage === 'restaurant'"
-          @after-submit-update-restaurant="afterUpdateRestaurant"
-          :init-restaurant="restaurant"
-        />
+        <Spinner v-if="isLoading"/>
         <template v-else>
-        <div class="d-flex">
-          <button @click="toggleEditForm" class="create m-4">
-            新增餐點
-          </button>
-
-          <!--div class="group d-flex justify-content-around p-2">
-        <router-link
-          :to="{ name: 'business', params: { name: 'menu' } }"
-          class="group_item m-1"
-          >全部</router-link
-        >
-        <router-link
-          v-for="category in menu.mealCategory"
-          :key="category.id"
-          :to="{
-            name: 'business',
-            params: { name: 'menu' }
-            query: { MealCategory: category.id }
-          }"
-          class="group_item m-1"
-        >
-          {{ category.name }}
-        </router-link>
-      </!--div-->
-
-        </div>
-          <hr />
-          <div class="menu d-grid p-2">
-            <MenuCard
-              v-for="meal in menu.meals"
-              @after-edit-meal-form="afterEditMealForm"
-              :key="meal.id"
-              :meal="meal"
-            />
-          </div>
-
-          <EditMenuForm
-            @after-toggle-edit-form="afterToggleEditForm"
-            @after-submit-create-meal="afterSubmitCreate"
-            @after-submit-update-meal="afterSubmitUpdate"
-            :meal-category="menu.mealCategory"
-            :init-meal="meal"
-            v-show="editMenu"
+          <EditRestaurant
+            v-if="nowPage === 'restaurant'"
+            @after-submit-update-restaurant="afterUpdateRestaurant"
+            :init-restaurant="restaurant"
+            :categories="category"
           />
+          <template v-else>
+            <div class="d-flex">
+              <button @click="toggleEditForm" class="create m-4">
+                新增餐點
+              </button>
+            </div>
+            <hr />
+            <div class="menu d-grid p-2">
+              <MenuCard
+                v-for="meal in menu.meals"
+                @after-edit-meal-form="afterEditMealForm"
+                @after-patch-sale="afterPatchSale"
+                :key="meal.id"
+                :meal="meal"
+                :is-processing="isProcessing"
+              />
+            </div>
+            <Pagination :current-page="menu.page" :totalPage="menu.totalPage" />
+            <EditMenuForm
+              @after-toggle-edit-form="afterToggleEditForm"
+              @after-submit-create-meal="afterSubmitCreate"
+              @after-submit-update-meal="afterSubmitUpdate"
+              :meal-category="menu.mealCategory"
+              :init-meal="meal"
+              v-show="editMenu"
+            />
+          </template>
         </template>
       </div>
     </div>
@@ -65,6 +50,8 @@ import UserNavTab from '../components/UserNavTab'
 import EditRestaurant from '../components/BusinessPage/EditRestaurant'
 import MenuCard from '../components/BusinessPage/MenuCard'
 import EditMenuForm from '../components/BusinessPage/EditMenuForm'
+import Pagination from '../components/Pagination'
+import Spinner from '../components/Spinner'
 import businessAPI from '../api/businessAPI'
 import { Toast } from '../utils/helpers'
 import { mapState } from 'vuex'
@@ -74,12 +61,16 @@ export default {
     UserNavTab,
     EditRestaurant,
     MenuCard,
-    EditMenuForm
+    Pagination,
+    EditMenuForm,
+    Spinner
   },
   data() {
     return {
       nowPage: 'menu',
       editMenu: false,
+      isProcessing: false,
+      isLoading: true,
       tabs: [
         {
           name: '編輯餐廳',
@@ -97,6 +88,7 @@ export default {
           paramsName: 'calendar'
         }
       ],
+      category: [],
       restaurant: {
         id: -1,
         name: '',
@@ -111,6 +103,7 @@ export default {
         mealCategory: [],
         meals: [],
         next: 2,
+        page: 1,
         prev: 1,
         totalPage: []
       },
@@ -140,29 +133,38 @@ export default {
           ...this.restaurant,
           ...data.restaurant
         }
+        this.category = data.category
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得餐廳，請稍後再試'
         })
+        this.isLoading = false
       }
     },
-    async fetchMenu() {
+    async fetchMenu({ queryPage }) {
       try {
-        const { data, statusText } = await businessAPI.getMenu()
+        const { data, statusText } = await businessAPI.getMenu({
+          page: queryPage
+        })
         if (statusText === 'error') {
           throw new Error()
         }
         this.menu = {
-          ...data
+          ...this.menu,
+          ...data,
+          meals: data.meals.rows
         }
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得菜單，請稍後再試'
         })
+        this.isLoading = false
       }
     },
     afterToggleEditForm() {
@@ -235,7 +237,6 @@ export default {
     async afterUpdateRestaurant(payload) {
       try {
         const { data } = await businessAPI.putRestaurant(payload)
-        console.log(data)
         if (data.status !== 'success') {
           throw new Error(data.message)
         }
@@ -251,23 +252,48 @@ export default {
           title: '無法編輯餐廳，請稍後再試'
         })
       }
+    },
+    async afterPatchSale(payload) {
+      try {
+        this.isProcessing = true
+        const { mealId, isSale } = payload
+        const { data } = await businessAPI.patchIsSale(mealId, {
+          isSale: isSale
+        })
+        if (data.status !== 'success') {
+          throw new Error()
+        }
+
+        const index = this.menu.meals.findIndex(item => item.id === mealId)
+        this.menu.meals[index].isSale = isSale
+        this.isProcessing = false
+      } catch (err) {
+        console.error(err)
+        Toast.fire({
+          icon: 'error',
+          title: '無法更新狀態，請稍後再試'
+        })
+        this.isProcessing = false
+      }
     }
   },
   created() {
     const params = this.$route.params
+    const { page = '' } = this.$route.query
     this.nowPage = params.name
     if (this.nowPage === 'restaurant') {
       this.fetchRestaurant()
     } else if (this.nowPage === 'menu') {
-      this.fetchMenu()
+      this.fetchMenu({ queryPage: page })
     }
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name
+    const { page = '' } = to.query
     if (this.nowPage === 'restaurant') {
       this.fetchRestaurant()
     } else if (this.nowPage === 'menu') {
-      this.fetchMenu()
+      this.fetchMenu({ queryPage: page })
     }
     next()
   }

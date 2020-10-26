@@ -4,8 +4,9 @@ export default {
   getRestaurant() {
     return apiHelper.get('/business/restaurant')
   },
-  getMenu() {
-    return apiHelper.get('/business/menu')
+  getMenu({ page }) {
+    const searchParams = new URLSearchParams({ page })
+    return apiHelper.get(`/business/menu?${searchParams.toString()}`)
   },
   postMeal(formData) {
     return apiHelper.post('/business/meal', formData)
@@ -15,5 +16,8 @@ export default {
   },
   putRestaurant(formData) {
     return apiHelper.put('/business/restaurant', formData)
+  },
+  patchIsSale(mealId, data) {
+    return apiHelper.patch(`/business/isSale/${mealId}`, data)
   }
 }
