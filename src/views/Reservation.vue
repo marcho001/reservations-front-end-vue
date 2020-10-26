@@ -36,17 +36,21 @@
       <hr />
       <CategoryNavTab :categories="mealCategory" />
       <br />
-      <div class="menu d-grid">
-        <MenuCard
-          v-for="meal in meals"
-          :key="meal.id"
-          :meal="meal"
-          @after-add-item="afterAddItem"
-          @after-minus-item="afterMinusItem"
-        />
-      </div>
+      <Spinner v-if="isLoading"/>
+      <template v-else>
+        <div class="menu d-grid">
+          <MenuCard
+            v-for="meal in meals"
+            :key="meal.id"
+            :meal="meal"
+            @after-add-item="afterAddItem"
+            @after-minus-item="afterMinusItem"
+          />
+        </div>
+      </template>
     </div>
     <Pagination
+      v-show="!isLoading"
       :total-page="totalPage"
       :current-page="page"
       :name="'reservation'"
@@ -64,6 +68,7 @@ import MenuCard from '../components/ReservationPage/MenuCard'
 import CartBill from '../components/ReservationPage/CartBill'
 import CartInfo from '../components/ReservationPage/CartInfo'
 import Pagination from '../components/Pagination'
+import Spinner from '../components/Spinner'
 // step 1
 // 人數 電話 時間
 // step 2
@@ -76,7 +81,8 @@ export default {
     MenuCard,
     CartBill,
     CartInfo,
-    Pagination
+    Pagination,
+    Spinner
   },
   data() {
     return {
@@ -96,7 +102,8 @@ export default {
         Version: 1.5,
         MerchantOrderNo: ''
       },
-      totalPrice: 0
+      totalPrice: 0,
+      isLoading: true
     }
   },
   methods: {
@@ -119,12 +126,14 @@ export default {
         this.totalPage = data.totalPage
         this.prev = data.prev
         this.next = data.next
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法取得餐點資料，請稍後再試！'
         })
+        this.isLoading = false
       }
     },
     async postOrder(restaurantId, payload) {

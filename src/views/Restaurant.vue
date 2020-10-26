@@ -1,24 +1,27 @@
 <template>
   <div class="container pt-4">
-    <div class="restaurant wrapper">
-      <RestaurantDetail
-        :restaurant="restaurant"
-        :init-is-favorited="isFavorited"
-      />
-      <br />
-      <br />
-      <div class="restaurant_comments">
-        <h1>評論</h1>
-        <hr />
-        <CreateCommentForm
-          @after-create-comment="afterCreateComment"
-          :restaurant-id="restaurant.id"
-          :current-user-id="currentUser.id"
+    <Spinner v-if="isLoading"/>
+    <template v-else>
+      <div class="restaurant wrapper">
+        <RestaurantDetail
+          :restaurant="restaurant"
+          :init-is-favorited="isFavorited"
         />
         <br />
-        <RestaurantComments :comments="restaurant.Comments" />
+        <br />
+        <div class="restaurant_comments">
+          <h1>評論</h1>
+          <hr />
+          <CreateCommentForm
+            @after-create-comment="afterCreateComment"
+            :restaurant-id="restaurant.id"
+            :current-user-id="currentUser.id"
+          />
+          <br />
+          <RestaurantComments :comments="restaurant.Comments" />
+        </div>
       </div>
-    </div>
+    </template>
     <br />
     <Footer />
   </div>
@@ -30,6 +33,7 @@ import Footer from '../components/Footer'
 import RestaurantDetail from '../components/RestaurantPage/RestaurantDetail'
 import CreateCommentForm from '../components/RestaurantPage/CreateCommentForm'
 import RestaurantComments from '../components/RestaurantPage/RestraurantComments'
+import Spinner from '../components/Spinner'
 
 import { Toast } from '../utils/helpers'
 import restAPI from '../api/restAPI'
@@ -41,7 +45,8 @@ export default {
     RestaurantDetail,
     CreateCommentForm,
     RestaurantComments,
-    Footer
+    Footer,
+    Spinner
   },
   data() {
     return {
@@ -58,7 +63,8 @@ export default {
         open_time: '',
         price: ''
       },
-      isFavorited: false
+      isFavorited: false,
+      isLoading: true
     }
   },
   computed: {
@@ -73,6 +79,7 @@ export default {
           ...this.restaurant,
           ...restaurant
         }
+        this.isLoading = false
       } catch (err) {
         console.error(err)
         Toast.fire({
