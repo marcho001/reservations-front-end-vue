@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import store from '../store'
 import NotFound from '../views/NotFound'
 import SignIn from '../views/SignIn'
+import { Toast } from '../utils/helpers'
 
 Vue.use(VueRouter)
 
@@ -85,6 +86,10 @@ router.beforeEach(async (to, from, next) => {
   const pathsWithAuthentication = ['signin', 'signup']
 
   if (!isAuthenticated && !pathsWithoutAuthentication.includes(to.name)) {
+    Toast.fire({
+      icon: 'error',
+      title: '請先登入才能使用'
+    })
     next('/home')
     return
   }

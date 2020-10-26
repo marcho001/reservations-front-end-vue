@@ -16,6 +16,7 @@
             @after-create-comment="afterCreateComment"
             :restaurant-id="restaurant.id"
             :current-user-id="currentUser.id"
+            :is-authenticated="isAuthenticated"
           />
           <br />
           <RestaurantComments :comments="restaurant.Comments" />
@@ -68,7 +69,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['currentUser'])
+    ...mapState(['currentUser', 'isAuthenticated'])
   },
   methods: {
     async fetchRestaurant(id) {
@@ -95,7 +96,7 @@ export default {
         this.restaurant.Comments.push({
           ...payload,
           User: {
-            image: this.currentUser.image,
+            avatar: this.currentUser.avatar,
             name: this.currentUser.name
           }
         })
