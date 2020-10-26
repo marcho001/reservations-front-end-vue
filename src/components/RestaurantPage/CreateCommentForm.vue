@@ -2,7 +2,9 @@
   <form @submit.prevent.stop="handleSubmit" class="newComment">
     <div class="d-flex align-items-center">
       <h3>留下評論</h3>
-      <div class="newComment_rating d-flex justify-content-around">
+      <div 
+        @change="checkAuthenticated"
+        class="newComment_rating d-flex justify-content-around">
         <label
           class="cursor-pointer"
           v-for="num in 5"
@@ -44,7 +46,7 @@
 </template>
 
 <script>
-import { Confirm } from '../../utils/helpers'
+import { Confirm, Toast } from '../../utils/helpers'
 import { FontAwesomeIcon, solid, regular } from '../../utils/icon'
 export default {
   components: {
@@ -56,7 +58,8 @@ export default {
     },
     currentUserId: {
       type: Number
-    }
+    },
+    isAuthenticated: Boolean
   },
   data() {
     return {
@@ -89,6 +92,16 @@ export default {
       })
       this.rating = 0
       this.content = ''
+    },
+    checkAuthenticated (e) {
+      console.log(e.target.className)
+      if (!this.isAuthenticated) {
+        this.rating = 0
+        Toast.fire({
+          icon: 'error',
+          title: '請先登錄才能評論'
+        })
+      }
     }
   }
 }
