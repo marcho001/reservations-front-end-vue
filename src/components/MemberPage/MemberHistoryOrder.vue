@@ -52,10 +52,11 @@
         </div>
         <hr />
         <div class="item_detail">
-          <ul 
+          <ul
             v-for="item in order.OrderItems"
             :key="item.id"
-            class="bill_list_item d-flex align-items-center my-2">
+            class="bill_list_item d-flex align-items-center my-2"
+          >
             <li class="name text-center m-1">{{ item.name }}</li>
             <li class="m-1">x{{ item.quantity }}</li>
             <li class="border mx-3"></li>

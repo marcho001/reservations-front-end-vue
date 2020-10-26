@@ -12,7 +12,12 @@
       </div>
       <div class="info_form_item m-1">
         <label for="email">電子信箱：</label>
-        <input v-model="information.email" type="email" name="email" id="email" />
+        <input
+          v-model="information.email"
+          type="email"
+          name="email"
+          id="email"
+        />
       </div>
       <div class="info_form_item m-1">
         <label>日期：</label>
@@ -98,7 +103,7 @@ export default {
       }
 
       this.information['userId'] = this.currentUser.id
-      
+
       Confirm.fire({
         title: '即將前往付款！',
         text: '已檢查過餐點內容了嗎？',

@@ -11,32 +11,11 @@
           :categories="category"
         />
         <template v-else>
-        <div class="d-flex">
-          <button @click="toggleEditForm" class="create m-4">
-            新增餐點
-          </button>
-
-          <!--div class="group d-flex justify-content-around p-2">
-        <router-link
-          :to="{ name: 'business', params: { name: 'menu' } }"
-          class="group_item m-1"
-          >全部</router-link
-        >
-        <router-link
-          v-for="category in menu.mealCategory"
-          :key="category.id"
-          :to="{
-            name: 'business',
-            params: { name: 'menu' }
-            query: { MealCategory: category.id }
-          }"
-          class="group_item m-1"
-        >
-          {{ category.name }}
-        </router-link>
-      </!--div-->
-
-        </div>
+          <div class="d-flex">
+            <button @click="toggleEditForm" class="create m-4">
+              新增餐點
+            </button>
+          </div>
           <hr />
           <div class="menu d-grid p-2">
             <MenuCard
@@ -45,11 +24,10 @@
               @after-patch-sale="afterPatchSale"
               :key="meal.id"
               :meal="meal"
+              :is-processing="isProcessing"
             />
           </div>
-          <Pagination 
-            :current-page="menu.page"
-            :totalPage="menu.totalPage"/>
+          <Pagination :current-page="menu.page" :totalPage="menu.totalPage" />
           <EditMenuForm
             @after-toggle-edit-form="afterToggleEditForm"
             @after-submit-create-meal="afterSubmitCreate"
@@ -86,6 +64,7 @@ export default {
     return {
       nowPage: 'menu',
       editMenu: false,
+      isProcessing: false,
       tabs: [
         {
           name: '編輯餐廳',
@@ -144,6 +123,7 @@ export default {
         if (stateText === 'error') {
           throw new Error()
         }
+        console.log(data)
         this.restaurant = {
           ...this.restaurant,
           ...data.restaurant
@@ -157,14 +137,18 @@ export default {
         })
       }
     },
-    async fetchMenu() {
+    async fetchMenu({ queryPage }) {
       try {
-        const { data, statusText } = await businessAPI.getMenu()
+        const { data, statusText } = await businessAPI.getMenu({
+          page: queryPage
+        })
         if (statusText === 'error') {
           throw new Error()
         }
         this.menu = {
-          ...data
+          ...this.menu,
+          ...data,
+          meals: data.meals.rows
         }
       } catch (err) {
         console.error(err)
@@ -260,41 +244,47 @@ export default {
         })
       }
     },
-    async afterPatchSale (payload) {
+    async afterPatchSale(payload) {
       try {
+        this.isProcessing = true
         const { mealId, isSale } = payload
-        console.log(isSale)
-        const { data } = await businessAPI.patchIsSale(mealId, { isSale: isSale })
+        const { data } = await businessAPI.patchIsSale(mealId, {
+          isSale: isSale
+        })
         if (data.status !== 'success') {
           throw new Error()
         }
 
         const index = this.menu.meals.findIndex(item => item.id === mealId)
         this.menu.meals[index].isSale = isSale
+        this.isProcessing = false
       } catch (err) {
         console.error(err)
         Toast.fire({
           icon: 'error',
           title: '無法更新狀態，請稍後再試'
         })
+        this.isProcessing = false
       }
     }
   },
   created() {
     const params = this.$route.params
+    const { page = '' } = this.$route.query
     this.nowPage = params.name
     if (this.nowPage === 'restaurant') {
       this.fetchRestaurant()
     } else if (this.nowPage === 'menu') {
-      this.fetchMenu()
+      this.fetchMenu({ queryPage: page })
     }
   },
   beforeRouteUpdate(to, from, next) {
     this.nowPage = to.params.name
+    const { page = '' } = to.query
     if (this.nowPage === 'restaurant') {
       this.fetchRestaurant()
     } else if (this.nowPage === 'menu') {
-      this.fetchMenu()
+      this.fetchMenu({ queryPage: page })
     }
     next()
   }

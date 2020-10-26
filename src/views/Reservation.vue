@@ -3,28 +3,22 @@
     <div class="space-40"></div>
     <transition name="show">
       <div v-show="showCart" class="cart position-fixed scroll">
-        <!--研究使用keep alive 儲存資訊 or localStorage-->
         <CartBill :total-price="totalPrice" :orders="orders" />
         <CartInfo
           @after-toggle-cart="afterToggleCart"
           @after-confirm-pay="afterConfirmPay"
         />
-        <form 
+        <form
           ref="newepay"
-          class="d-none" 
-          name="newepay" action="https://ccore.newebpay.com/MPG/mpg_gateway" method="post">
-          <input 
-            :value="payInfo.MerchantID"
-            type="text" name="MerchantID">
-          <input 
-            :value="payInfo.TradeInfo"
-            type="text" name="TradeInfo">
-          <input 
-            :value="payInfo.TradeSha"
-            type="text" name="TradeSha">
-          <input 
-            :value="payInfo.Version"
-            type="text" name="Version">
+          class="d-none"
+          name="newepay"
+          action="https://ccore.newebpay.com/MPG/mpg_gateway"
+          method="post"
+        >
+          <input :value="payInfo.MerchantID" type="text" name="MerchantID" />
+          <input :value="payInfo.TradeInfo" type="text" name="TradeInfo" />
+          <input :value="payInfo.TradeSha" type="text" name="TradeSha" />
+          <input :value="payInfo.Version" type="text" name="Version" />
         </form>
       </div>
     </transition>
@@ -52,10 +46,11 @@
         />
       </div>
     </div>
-    <Pagination 
+    <Pagination
       :total-page="totalPage"
       :current-page="page"
-      :name="'reservation'"/>
+      :name="'reservation'"
+    />
   </div>
 </template>
 <script>
@@ -107,10 +102,11 @@ export default {
   methods: {
     async fetchMenu({ restaurantId, queryCategory, queryPage }) {
       try {
-        const { data, statusText } = await restAPI.getMenu({ 
-          restaurantId, 
-          MealCategoryId: queryCategory, 
-          page: queryPage })
+        const { data, statusText } = await restAPI.getMenu({
+          restaurantId,
+          MealCategoryId: queryCategory,
+          page: queryPage
+        })
         if (statusText === 'error') {
           throw new Error()
         }
@@ -145,17 +141,15 @@ export default {
         })
       }
     },
-    postNewepay ({ totalPrice, email }) {    
-        const payData = NewEPay.getPayData(totalPrice, email)
-        const chain = NewEPay.getChain(payData)
+    postNewepay({ totalPrice, email }) {
+      const payData = NewEPay.getPayData(totalPrice, email)
+      const chain = NewEPay.getChain(payData)
 
-        this.payInfo.MerchantOrderNo = payData.MerchantOrderNo
-        this.payInfo.MerchantID = payData.MerchantID
-        this.payInfo.TradeInfo = NewEPay.Encrypt(chain)
-        this.payInfo.TradeSha = NewEPay.ShaEncrypt(this.payInfo.TradeInfo)
+      this.payInfo.MerchantOrderNo = payData.MerchantOrderNo
+      this.payInfo.MerchantID = payData.MerchantID
+      this.payInfo.TradeInfo = NewEPay.Encrypt(chain)
+      this.payInfo.TradeSha = NewEPay.ShaEncrypt(this.payInfo.TradeInfo)
     },
-
-
 
     afterToggleCart() {
       // 從 component 裡面關掉 Cart 的事件
@@ -223,13 +217,12 @@ export default {
           totalPrice: this.totalPrice,
           MerchantOrderNo: this.payInfo.MerchantOrderNo
         }
-        
+
         const restaurantId = this.$route.params.id
         await this.postOrder(restaurantId, bookInfo)
         this.orders = []
         this.totalPrice = 0
         this.$refs.newepay.submit()
-
       } catch (err) {
         console.error(err)
         Toast.fire({
@@ -241,9 +234,7 @@ export default {
   },
   created() {
     const { id: restaurantId } = this.$route.params
-    const { 
-      MealCategory = '', 
-      page = '' } = this.$route.query
+    const { MealCategory = '', page = '' } = this.$route.query
 
     this.fetchMenu({
       restaurantId,
@@ -251,17 +242,15 @@ export default {
       queryPage: page
     })
   },
-  beforeRouteUpdate (to, from, next) {
+  beforeRouteUpdate(to, from, next) {
     const { id: restaurantId } = to.params
-    const {
-      MealCategory = '',
-      page = '' } = to.query
+    const { MealCategory = '', page = '' } = to.query
     this.fetchMenu({
       restaurantId,
       queryCategory: MealCategory,
       queryPage: page
     })
-    next ()
+    next()
   }
 }
 
