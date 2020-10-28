@@ -83,13 +83,14 @@ export default {
     }
   },
   methods: {
-    async fetchHome({ queryPage, queryCategoryId, queryCityId }) {
+    async fetchHome({ queryPage, queryCategoryId, queryCityId, querySearch }) {
       try {
         // 向 api get 資料
         const res = await restAPI.getHome({
           page: queryPage,
           CategoryId: queryCategoryId,
-          CityId: queryCityId
+          CityId: queryCityId,
+          searchContent: querySearch
         })
         // 驗證回應
         if (res.status !== 200) throw new Error()
@@ -127,25 +128,27 @@ export default {
       const { Search = '' } = payload
       this.$router.push({
         name: 'home',
-        query: { Search }
+        query: { search: Search }
       })
     }
   },
   created() {
     // 取得當前網址的 query, categoryId
-    const { page = '', CategoryId = '', CityId = '' } = this.$route.query
+    const { page = '', CategoryId = '', CityId = '', searchContent = '' } = this.$route.query
     this.fetchHome({
       queryPage: page,
       queryCategoryId: CategoryId,
-      queryCityId: CityId
+      queryCityId: CityId,
+      querySearch: searchContent
     })
   },
   beforeRouteUpdate(to, from, next) {
-    const { page = '', CategoryId = '', CityId = '' } = to.query
+    const { page = '', CategoryId = '', CityId = '', searchContent = '' } = to.query
     this.fetchHome({
       queryPage: page,
       queryCategoryId: CategoryId,
-      queryCityId: CityId
+      queryCityId: CityId,
+      querySearch: searchContent
     })
     next()
   }
