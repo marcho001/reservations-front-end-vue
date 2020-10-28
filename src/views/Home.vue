@@ -33,7 +33,7 @@
 
       <Spinner v-if="isLoading" />
       <template v-else>
-        <RestaurantCard :restaurants="restaurants.rows" />
+        <RestaurantCard :restaurants="restaurants" />
       </template>
     </section>
     <Pagination
