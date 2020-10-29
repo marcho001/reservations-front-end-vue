@@ -90,7 +90,7 @@ export default {
           page: queryPage,
           CategoryId: queryCategoryId,
           CityId: queryCityId,
-          searchContent: querySearch
+          search: querySearch
         })
         // 驗證回應
         if (res.status !== 200) throw new Error()
@@ -134,21 +134,21 @@ export default {
   },
   created() {
     // 取得當前網址的 query, categoryId
-    const { page = '', CategoryId = '', CityId = '', searchContent = '' } = this.$route.query
+    const { page = '', CategoryId = '', CityId = '', search = '' } = this.$route.query
     this.fetchHome({
       queryPage: page,
       queryCategoryId: CategoryId,
       queryCityId: CityId,
-      querySearch: searchContent
+      querySearch: search
     })
   },
   beforeRouteUpdate(to, from, next) {
-    const { page = '', CategoryId = '', CityId = '', searchContent = '' } = to.query
+    const { page = '', CategoryId = '', CityId = '', search = '' } = to.query
     this.fetchHome({
       queryPage: page,
       queryCategoryId: CategoryId,
       queryCityId: CityId,
-      querySearch: searchContent
+      querySearch: search
     })
     next()
   }
