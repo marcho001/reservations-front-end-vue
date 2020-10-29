@@ -3,7 +3,12 @@ import { apiHelper } from '../utils/helpers'
 export default {
   getHome({ page, CategoryId, CityId, search }) {
     // 將參數換成 params
-    const searchParams = new URLSearchParams({ page, CategoryId, CityId, search })
+    const searchParams = new URLSearchParams({
+      page,
+      CategoryId,
+      CityId,
+      search
+    })
     // 會變成像 "page=1&categoryId=1"
     return apiHelper.get(`/home?${searchParams.toString()}`)
   },

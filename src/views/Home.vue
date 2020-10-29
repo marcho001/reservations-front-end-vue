@@ -134,7 +134,12 @@ export default {
   },
   created() {
     // 取得當前網址的 query, categoryId
-    const { page = '', CategoryId = '', CityId = '', search = '' } = this.$route.query
+    const {
+      page = '',
+      CategoryId = '',
+      CityId = '',
+      search = ''
+    } = this.$route.query
     this.fetchHome({
       queryPage: page,
       queryCategoryId: CategoryId,

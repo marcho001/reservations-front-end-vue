@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 import axios from 'axios'
 
-const baseURL = 'https://8f43608ac60c.ngrok.io/api'
+const baseURL = 'https://restaurant-reservation-10720.herokuapp.com/api'
 const apiHelper = axios.create({ baseURL })
 apiHelper.interceptors.request.use(
   config => {
